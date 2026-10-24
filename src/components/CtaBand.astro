@@ -1,0 +1,22 @@
+---
+import Button from './Button.astro';
+interface Props {
+  headline: string;
+  primary: { label: string; href: string };
+  secondary?: { label: string; href: string };
+  id?: string;
+}
+const { headline, primary, secondary, id = 'final-cta' } = Astro.props;
+---
+<section class="section section--dark cta-band" aria-labelledby={`${id}-title`}>
+  <div class="container cta-band__inner">
+    <div class="cta-band__copy">
+      <h2 id={`${id}-title`}>{headline}</h2>
+      <p><slot /></p>
+    </div>
+    <div class="cta-band__actions">
+      <Button href={primary.href} variant="primary" location="final-cta">{primary.label}</Button>
+      {secondary && <Button href={secondary.href} variant="onDark" location="final-cta">{secondary.label}</Button>}
+    </div>
+  </div>
+</section>

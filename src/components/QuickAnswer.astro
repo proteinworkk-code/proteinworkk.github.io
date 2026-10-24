@@ -1,0 +1,21 @@
+---
+/**
+ * Answer-first block for answer engines: a self-contained 40-70 word answer placed directly
+ * under the hero. Server-rendered text, always visible (never hidden behind a click).
+ */
+import { BRAND } from '../config/site';
+interface Props {
+  label?: string;
+  updated?: boolean;
+}
+const { label = 'Quick answer', updated = true } = Astro.props;
+---
+<section class="quick" aria-label="Quick answer">
+  <div class="container">
+    <div class="quick__box">
+      <p class="quick__label">{label}</p>
+      <p class="quick__text"><slot /></p>
+    </div>
+    {updated && <p class="updated">Last updated: {BRAND.lastUpdated}</p>}
+  </div>
+</section>

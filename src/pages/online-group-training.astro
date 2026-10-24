@@ -1,0 +1,196 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import QuickAnswer from '../components/QuickAnswer.astro';
+import Section from '../components/Section.astro';
+import DataTable from '../components/DataTable.astro';
+import FAQ from '../components/FAQ.astro';
+import CtaBand from '../components/CtaBand.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import Button from '../components/Button.astro';
+import { ROUTES, crumbsFor } from '../config/routes';
+import { programs, PRICES, GROUP_CAP, enquiryHref } from '../data/programs';
+import { breadcrumbs, faqPage, service, type FaqItem } from '../lib/schema';
+
+const p = programs.group;
+
+const faqs: FaqItem[] = [
+  {
+    q: 'How does online group training work?',
+    a: `You join a small trainer-led group and follow a structured program together. Each Proteinworkk group has a maximum of ${GROUP_CAP} members. Ask the team for current details on session format, schedule and platform.`,
+  },
+  { q: 'How many people are in each group?', a: `A maximum of ${GROUP_CAP} members per group.` },
+  {
+    q: 'How much does online group training cost?',
+    a: `${PRICES.group.label} at Proteinworkk. Ask the team to confirm what is included.`,
+  },
+  {
+    q: 'Is online group training worth it?',
+    a: 'It can be, if you value structure, a regular routine and the motivation of training with others at a lower cost than one-to-one coaching. If you need an individual plan or hands-on rehabilitation, one-to-one coaching or a physiotherapist may suit you better.',
+  },
+  {
+    q: 'Can beginners join?',
+    a: 'Yes. Beginners are welcome. Tell us your experience level so we can suggest the most suitable starting point.',
+  },
+  {
+    q: 'Is this the same as one-to-one training?',
+    a: 'No. Group training uses a shared program and a shared trainer, while one-to-one coaching is built around you individually.',
+  },
+  {
+    q: 'Can I join from outside Bengaluru?',
+    a: 'Yes. Proteinworkk is based in Bengaluru, but training is online. If you are outside India, contact the team to check availability and time-zone fit.',
+  },
+];
+
+const schema = [
+  service({
+    program: p,
+    serviceType: 'Online group fitness training',
+    description: `Trainer-guided online group training in groups of up to ${GROUP_CAP} members, delivered online by Proteinworkk.`,
+  }),
+  breadcrumbs(crumbsFor(ROUTES.group)),
+  faqPage(faqs),
+];
+---
+<BaseLayout route={ROUTES.group} schema={schema}>
+  <PageHero
+    title="Online Group Training: Structured Workouts, Real Community"
+    crumbs={crumbsFor(ROUTES.group)}
+    primary={{ label: 'Join Online Group Training', href: enquiryHref('group') }}
+    secondary={{ label: 'See How Groups Work', href: '#how-groups-work' }}
+    trust={[PRICES.group.label, `Maximum ${GROUP_CAP} members`, 'Trainer-guided']}
+  >
+    Trainer-guided online group fitness classes with a clear plan, a steady rhythm and no more than {GROUP_CAP} members in a group.
+  </PageHero>
+
+  <QuickAnswer>
+    <strong>Online group training at Proteinworkk</strong> is a trainer-guided, structured workout program for a small group of up
+    to {GROUP_CAP} members, delivered online. It costs {PRICES.group.label}. It is not one-to-one coaching: the group follows a
+    shared program with community accountability.
+  </QuickAnswer>
+
+  <Section id="how-groups-work" labelledby="how-title">
+    <div class="two-col two-col--wide-left">
+      <div>
+        <h2 id="how-title">How does online group training work?</h2>
+        <p>
+          You join a small group led by a trainer and follow a structured program alongside other members. You train at home or in
+          any suitable space, with a regular rhythm that helps turn good intentions into a routine. Each group has a maximum of
+          {GROUP_CAP} members.
+        </p>
+        <p>Ask the team for current details on session format, schedule and platform.</p>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="what-you-get" tone="white" labelledby="get-title">
+    <div class="section__lead">
+      <h2 id="get-title">What do you get with online group training?</h2>
+      <p class="lede">You get trainer guidance, structured workouts, community motivation and a small group at an accessible price.</p>
+    </div>
+    <DataTable
+      caption="What you get with online group training"
+      headers={['What you get', 'Why it matters']}
+      rows={[
+        ['Trainer guidance', 'A trainer leads the program and guides how you perform it.'],
+        ['Structured workouts', 'Each session sits within a plan with progression, so effort builds on itself.'],
+        ['Community motivation', 'Training with others makes showing up easier, especially on low-motivation days.'],
+        ['Small group size', `A cap of ${GROUP_CAP} keeps the experience personal rather than crowded.`],
+        ['Accessible pricing', `At ${PRICES.group.label}, it is a lower-cost route to structured coaching.`],
+      ]}
+    />
+  </Section>
+
+  <Section id="group-vs-one" labelledby="vs-title">
+    <div class="section__lead">
+      <h2 id="vs-title">How is group training different from one-to-one training?</h2>
+      <p class="lede">
+        Group training follows a shared program with shared attention, while one-to-one training is built around you alone.
+      </p>
+    </div>
+    <DataTable
+      caption="Online group training compared with online one-to-one training"
+      headers={['', 'Online group training', 'Online one-to-one training']}
+      rows={[
+        ['Plan', 'A shared, structured program followed by the group', 'A program built for your goals and level'],
+        ['Attention', `Shared among a maximum of ${GROUP_CAP} members`, 'Fully focused on you'],
+        ['Motivation', 'Community energy and group accountability', 'Direct, individual accountability'],
+        ['Price', PRICES.group.label, `${PRICES.oneToOneSession.label} or ${PRICES.oneToOneMonth.label}`],
+        ['Best for', 'People who enjoy structure and company', 'People who want an individual plan or private coaching'],
+      ]}
+    />
+    <p style="margin-top:1.25rem">
+      Online group training is not one-to-one personal training. If you need an individually designed plan, our
+      <a href={programs['one-to-one'].href}>one-to-one program</a> may be a better fit.
+    </p>
+  </Section>
+
+  <Section id="who-for" tone="tint" labelledby="who-title">
+    <div class="two-col">
+      <div>
+        <h2 id="who-title">Who does online group training suit?</h2>
+        <p>It suits people who like structure, company and a regular training slot.</p>
+        <ul class="checklist">
+          <li>People who stay consistent when they train with others.</li>
+          <li>Beginners who want structure without private-coaching intensity.</li>
+          <li>Busy professionals who want a regular training slot.</li>
+          <li>People who want coaching at a more accessible monthly cost.</li>
+          <li>Anyone returning to training who likes group accountability.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Who might prefer something else?</h3>
+        <p>
+          If you want a plan built individually around your goals or injuries, choose
+          <a href={programs['one-to-one'].href}>one-to-one training</a>. If you would prefer a women-only space, see
+          <a href={programs['girl-power'].href}>Girl Power</a>. If you want a group focused on strength and muscle, see the
+          <a href={programs.mens.href}>men’s program</a>.
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="goals" tone="white" labelledby="goals-title">
+    <div class="two-col two-col--wide-left">
+      <div>
+        <h2 id="goals-title">What goals does online group training support?</h2>
+        <p>
+          Our online group workouts support fitness, strength, endurance and general conditioning, and sustainable weight
+          management when paired with sensible nutrition. Progress depends on consistency, nutrition, recovery and personal
+          circumstances. Results vary and are not guaranteed.
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="cost" labelledby="cost-title">
+    <div class="two-col two-col--wide-left">
+      <div>
+        <h2 id="cost-title">How much does online group training cost?</h2>
+        <p>Online group training at Proteinworkk costs {PRICES.group.label}, with a maximum of {GROUP_CAP} members per group.</p>
+        <p>Session counts, session length, frequency and other plan details are confirmed when you enquire. Ask the team before you commit.</p>
+        <Button href={enquiryHref('group')} variant="primary" location="pricing">Join Online Group Training</Button>
+      </div>
+    </div>
+  </Section>
+
+  <FAQ items={faqs} tone="white" />
+
+  <CtaBand
+    headline="Train with a plan. Show up with a group."
+    primary={{ label: 'Join Online Group Training', href: enquiryHref('group') }}
+    secondary={{ label: 'Help Me Choose a Program', href: enquiryHref('not-sure') }}
+  >
+    If you do your best work with structure and company, online group training could be the right fit. Join a small group, follow
+    a clear plan and build a routine you can keep.
+  </CtaBand>
+
+  <RelatedLinks
+    items={[
+      { href: programs['one-to-one'].href, text: 'Online one-to-one personal training', desc: `Private coaching for ${PRICES.oneToOneSession.label} or ${PRICES.oneToOneMonth.label}.` },
+      { href: programs['girl-power'].href, text: 'Girl Power women’s online training', desc: 'A women-only, beginner-friendly group.' },
+      { href: programs.mens.href, text: 'Men’s online group training', desc: 'Strength, muscle and conditioning in a group.' },
+      { href: ROUTES.contact.path, text: 'Contact the Proteinworkk team', desc: 'Ask a question or request a consultation.' },
+    ]}
+  />
+</BaseLayout>

@@ -1,0 +1,33 @@
+---
+import Brand from './Brand.astro';
+import Button from './Button.astro';
+import { NAV_ITEMS } from '../config/routes';
+
+const current = Astro.url.pathname;
+const isCurrent = (p: string) => (p === '/' ? current === '/' : current.startsWith(p));
+---
+<header class="site-header">
+  <div class="container site-header__inner">
+    <Brand />
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="nav-toggle__icon" aria-hidden="true"><span></span><span></span><span></span></span>
+      <span class="nav-toggle__label">Menu</span>
+    </button>
+    <nav id="site-nav" class="nav" aria-label="Main navigation">
+      <ul class="nav__list">
+        {NAV_ITEMS.map((item) => (
+          <li>
+            <a class="nav__link" href={item.path} aria-current={isCurrent(item.path) ? 'page' : undefined}>{item.label}</a>
+          </li>
+        ))}
+      </ul>
+      <div class="nav__cta">
+        <Button href="/contact/#enquiry" variant="primary" location="header">Get Started</Button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  import '../scripts/menu.ts';
+</script>

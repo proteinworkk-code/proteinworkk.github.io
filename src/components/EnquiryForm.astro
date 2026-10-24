@@ -1,0 +1,115 @@
+---
+/**
+ * Enquiry form. Works with any form backend that accepts a multipart POST and answers JSON
+ * (Formspree is the documented default). Configure PUBLIC_FORM_ENDPOINT; see README.
+ * If it is not configured the form says so honestly and offers an email fallback; it never
+ * reports a successful send unless the server really accepted the submission.
+ */
+import { BRAND, FORM_ENDPOINT, CONTACT_METHODS } from '../config/site';
+import { FORM_PROGRAMS, FORM_GOALS } from '../data/programs';
+import { ROUTES } from '../config/routes';
+const configured = FORM_ENDPOINT !== '';
+---
+<div class="form-card">
+  {!configured && (
+    <p class="notice" id="form-config-notice">
+      <strong>The online enquiry form is not connected yet.</strong> Please email
+      <a href={`mailto:${BRAND.email}`}>{BRAND.email}</a> with your goals and preferred program and the team will reply.
+    </p>
+  )}
+
+  <div class="form-result form-result--success" id="form-success" role="status" tabindex="-1" hidden>
+    <h3>Thank you</h3>
+    <p>We have received your enquiry and will reply by email.</p>
+  </div>
+
+  <form
+    id="enquiry-form"
+    class="form"
+    novalidate
+    method="post"
+    data-endpoint={configured ? FORM_ENDPOINT : undefined}
+    data-email={BRAND.email}
+  >
+    <div class="form__grid">
+      <div class="field">
+        <label for="f-name">Full name <span class="req">(required)</span></label>
+        <input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="f-name-error" />
+        <p class="field__error" id="f-name-error" hidden></p>
+      </div>
+      <div class="field">
+        <label for="f-email">Email address <span class="req">(required)</span></label>
+        <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="f-email-error" />
+        <p class="field__error" id="f-email-error" hidden></p>
+      </div>
+      <div class="field">
+        <label for="f-phone">Phone number <span class="opt">(optional)</span></label>
+        <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" aria-describedby="f-phone-error" />
+        <p class="field__error" id="f-phone-error" hidden></p>
+      </div>
+      <div class="field">
+        <label for="f-city">City <span class="opt">(optional)</span></label>
+        <input id="f-city" name="city" type="text" autocomplete="address-level2" />
+      </div>
+      <div class="field">
+        <label for="f-program">Preferred program</label>
+        <select id="f-program" name="program">
+          {FORM_PROGRAMS.map((p) => (
+            <option value={p.value} selected={p.value === 'not-sure'}>{p.label}</option>
+          ))}
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-goal">Primary fitness goal</label>
+        <select id="f-goal" name="goal">
+          <option value="">Select a goal</option>
+          {FORM_GOALS.map((g) => <option value={g}>{g}</option>)}
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-method">Preferred contact method</label>
+        <select id="f-method" name="contact_method">
+          {CONTACT_METHODS.map((m) => <option value={m}>{m}</option>)}
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="f-message">Message <span class="opt">(optional)</span></label>
+      <textarea id="f-message" name="message" rows="5" placeholder="Tell us about your goals, experience and questions."></textarea>
+    </div>
+
+    <!-- Honeypot for simple spam bots (also understood by Formspree as _gotcha). Hidden from people and assistive tech. -->
+    <div class="hp" aria-hidden="true">
+      <label for="f-gotcha">Leave this field empty</label>
+      <input id="f-gotcha" name="_gotcha" type="text" tabindex="-1" autocomplete="off" />
+    </div>
+    <input type="hidden" name="_subject" value="Proteinworkk website enquiry" />
+
+    <div class="field field--check">
+      <input id="f-consent" name="consent" type="checkbox" value="yes" required aria-describedby="f-consent-error" />
+      <label for="f-consent">
+        I agree to Proteinworkk using my details to respond to my enquiry, as described in the
+        <a href={ROUTES.privacy.path}>Privacy Policy</a>. <span class="req">(required)</span>
+      </label>
+      <p class="field__error" id="f-consent-error" hidden></p>
+    </div>
+
+    <div class="form-result form-result--error" id="form-error" role="alert" hidden>
+      <p id="form-error-text"></p>
+      <p><a id="form-mailto" class="btn btn--secondary" href={`mailto:${BRAND.email}`}>Email us instead</a></p>
+    </div>
+
+    <div class="form__submit">
+      <button class="btn btn--primary" type="submit" id="form-submit">Request a Consultation</button>
+      <p class="muted form__reassure">
+        We will use your details only to respond to your enquiry and help you choose a program.
+        There is no obligation to join.
+      </p>
+    </div>
+  </form>
+</div>
+
+<script>
+  import '../scripts/enquiry-form.ts';
+</script>

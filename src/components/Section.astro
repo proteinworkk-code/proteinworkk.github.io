@@ -1,0 +1,15 @@
+---
+/**
+ * Page section wrapper. tone: light (page background), white, tint (theme tint), dark (forest).
+ */
+interface Props {
+  id?: string;
+  tone?: 'light' | 'white' | 'tint' | 'dark';
+  labelledby?: string;
+  class?: string;
+}
+const { id, tone = 'light', labelledby, class: extra = '' } = Astro.props;
+---
+<section id={id} class:list={['section', `section--${tone}`, extra]} aria-labelledby={labelledby}>
+  <div class="container"><slot /></div>
+</section>

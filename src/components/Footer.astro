@@ -1,0 +1,46 @@
+---
+import Brand from './Brand.astro';
+import { BRAND, MEDICAL_DISCLAIMER, SOCIAL_LINKS } from '../config/site';
+import { ROUTES } from '../config/routes';
+import { programList } from '../data/programs';
+
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <Brand variant="footer" tagline />
+        <p>
+          Proteinworkk is an online fitness coaching and nutrition support brand based in Bengaluru, India.
+          Fitness, made accessible.
+        </p>
+      </div>
+      <nav class="footer__col" aria-label="Programs">
+        <h2 class="footer__title">Programs</h2>
+        <ul>
+          {programList.map((p) => <li><a href={p.href}>{p.name}</a></li>)}
+        </ul>
+      </nav>
+      <nav class="footer__col" aria-label="Company">
+        <h2 class="footer__title">Company</h2>
+        <ul>
+          <li><a href={ROUTES.home.path}>Home</a></li>
+          <li><a href={ROUTES.about.path}>About Proteinworkk</a></li>
+          <li><a href={ROUTES.contact.path}>Contact Us</a></li>
+          <li><a href={ROUTES.privacy.path}>Privacy Policy</a></li>
+        </ul>
+      </nav>
+      <div class="footer__col">
+        <h2 class="footer__title">Get in touch</h2>
+        <ul>
+          <li><a href={`mailto:${BRAND.email}`} data-cta-location="footer">{BRAND.email}</a></li>
+          <li>{BRAND.locality}, {BRAND.region}, {BRAND.country}</li>
+          {SOCIAL_LINKS.map((s) => <li><a href={s.href} rel="noopener">{s.label}</a></li>)}
+        </ul>
+      </div>
+    </div>
+    <p class="footer__disclaimer"><strong>Health and safety.</strong> {MEDICAL_DISCLAIMER}</p>
+    <p class="footer__legal">© {year} {BRAND.name}. {BRAND.tagline}</p>
+  </div>
+</footer>

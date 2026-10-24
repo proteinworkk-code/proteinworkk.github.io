@@ -1,0 +1,409 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import Section from '../components/Section.astro';
+import QuickAnswer from '../components/QuickAnswer.astro';
+import DataTable from '../components/DataTable.astro';
+import ProgramCard from '../components/ProgramCard.astro';
+import MedicalNote from '../components/MedicalNote.astro';
+import FAQ from '../components/FAQ.astro';
+import CtaBand from '../components/CtaBand.astro';
+import TrainerProfiles from '../components/TrainerProfiles.astro';
+import Testimonials from '../components/Testimonials.astro';
+import { ROUTES } from '../config/routes';
+import { BRAND } from '../config/site';
+import { programs, programList, PRICES, GROUP_CAP, enquiryHref } from '../data/programs';
+import { organization, website, faqPage, type FaqItem } from '../lib/schema';
+
+const faqs: FaqItem[] = [
+  {
+    q: 'What is online personal training?',
+    a: 'Online personal training is one-to-one fitness coaching delivered over the internet instead of in a gym. A trainer plans your workouts, guides your sessions and tracks your progress remotely, so you can train at home or in any suitable space. At Proteinworkk, it is built around your goals, schedule and experience.',
+  },
+  {
+    q: 'How much does online personal training cost in India?',
+    a: `At Proteinworkk, one-to-one online personal training costs ${PRICES.oneToOneSession.label} or ${PRICES.oneToOneMonth.label}, and online group training costs ${PRICES.group.label}. Prices across India vary by coach, number of sessions and what is included, so always check what a fee covers. Ask the team to confirm what is included in the plan you are considering.`,
+  },
+  {
+    q: 'Is online personal training effective?',
+    a: 'It can be, when the plan is structured, the trainer provides real guidance and you stay consistent. Online coaching suits people who can train at home or in a suitable space. Results depend on consistency, nutrition, recovery and individual health, and no coach can guarantee outcomes.',
+  },
+  {
+    q: 'What is the difference between personal and group training?',
+    a: `In one-to-one training, the plan and the trainer’s attention are focused on you alone. In group training, members follow a shared structured program with community accountability, at a lower monthly price. Proteinworkk groups are capped at ${GROUP_CAP} members, and group training is not one-to-one coaching.`,
+  },
+  {
+    q: 'How many members are in a Proteinworkk group?',
+    a: `Each Proteinworkk group has a maximum of ${GROUP_CAP} members. This is a cap, not a target, and it helps the trainer give meaningful attention.`,
+  },
+  {
+    q: 'Can beginners join?',
+    a: 'Yes. Beginners are welcome in every Proteinworkk program. Tell us your experience level when you get in touch and we will help you choose a starting point. If you have an injury or medical condition, please speak to your doctor first.',
+  },
+  {
+    q: 'Does Proteinworkk offer in-person training in Bangalore?',
+    a: 'No. Proteinworkk is based in Bengaluru, Karnataka, but all training is delivered online. This means you can train from home or any suitable space. If you are outside India, contact the team to check availability and time-zone fit.',
+  },
+  {
+    q: 'Is there a women-only group?',
+    a: `Yes. Girl Power is Proteinworkk’s women-only online group training program, with a maximum of ${GROUP_CAP} women per group.`,
+  },
+  {
+    q: 'Can online training help with fat loss and muscle building?',
+    a: 'Yes, our programs are designed to support both through structured training, practical nutrition guidance and consistency. Outcomes vary and are not guaranteed, because they depend on consistency, nutrition, recovery and personal circumstances.',
+  },
+  {
+    q: 'Do I need equipment?',
+    a: 'Your trainer plans around what you have. Tell us what equipment you have when you get in touch.',
+  },
+  {
+    q: 'Does Proteinworkk support people with PCOS or thyroid conditions?',
+    a: 'People with PCOS, PCOD or thyroid conditions are welcome to train with Proteinworkk. We provide fitness coaching, not medical care, and we do not diagnose or treat any condition. Please consult your doctor first and share their guidance with your trainer.',
+  },
+  {
+    q: 'How do I get started or contact Proteinworkk?',
+    a: `Use the contact form or email ${BRAND.email} with your goals and preferred program. The team will help you choose the right format.`,
+  },
+];
+
+const challenges = [
+  ['Losing body fat', 'Progress is rarely a straight line. We combine structured training, practical nutrition guidance and realistic expectations.'],
+  ['Building muscle and strength', 'Strength grows from progressive training done consistently. You get a clear plan and guidance on how to perform it.'],
+  ['Staying consistent', 'Starting is easy. Showing up in week six is the hard part. Coaching, structure and accountability make it easier.'],
+  ['Having very little time', 'Online training removes travel time, and a well-planned session can fit into a demanding day.'],
+  ['Feeling unsure about nutrition', 'We keep it practical: protein, balance, portions and habits that fit your life.'],
+  ['Women’s fitness needs', 'Our women-only Girl Power program offers a supportive space to train at your own pace.'],
+  ['Energy, endurance and mobility', 'Fitness is about more than appearance. Many members want to feel stronger, move better and have more energy.'],
+];
+
+const whyChoose = [
+  ['Structured coaching', 'Every session has a purpose, and your effort builds on itself.'],
+  ['Guidance that responds to you', 'We consider your experience, schedule, preferences and goals, then adjust as you progress.'],
+  ['Small groups, real attention', `Group training is capped at ${GROUP_CAP} members, so you get community energy without disappearing into a crowd.`],
+  ['Nutrition alongside training', 'Practical guidance on protein, balance and habits that fit your training goals.'],
+  ['Accountability', 'A coach, or a group, that notices when you show up and when you do not.'],
+  ['Planned around real life', 'Work, travel and family are part of life. Your plan should be, too.'],
+];
+
+const steps = [
+  ['Choose a program.', 'One-to-one, group, Girl Power or men’s training. Not sure? Ask our team.'],
+  ['Share your goals.', 'Tell us about your goals, schedule, experience and preferences.'],
+  ['Begin training.', 'Start your structured online program with a trainer guiding the way.'],
+  ['Track, review, adjust.', 'Review your consistency and progress, and adjust the plan when appropriate.'],
+];
+
+const g = programs['girl-power'];
+const m = programs.mens;
+
+const schema = [organization(), website(), faqPage(faqs)];
+---
+<BaseLayout route={ROUTES.home} schema={schema}>
+  <!-- Hero -->
+  <section class="hero hero--home" aria-labelledby="home-title">
+    <div class="container hero__grid">
+      <div class="hero__copy">
+        <h1 id="home-title" class="hero__title">Online Personal Training and Fitness Coaching, Built Around Your Life</h1>
+        <p class="hero__sub">
+          Proteinworkk is a Bengaluru-based online coaching brand. Train one-to-one or in a small group of up to {GROUP_CAP},
+          with structured programs, trainer guidance and practical nutrition support.
+        </p>
+        <div class="hero__actions">
+          <Button href={enquiryHref('not-sure')} variant="primary" location="hero">Start Your Fitness Journey</Button>
+          <Button href="#programs" variant="onDark" location="hero">Explore Training Programs</Button>
+        </div>
+        <ul class="facts">
+          <li>Prices from {PRICES.oneToOneSession.label}</li>
+          <li>Groups capped at {GROUP_CAP}</li>
+          <li>Training delivered online</li>
+        </ul>
+      </div>
+
+      <aside class="finder" aria-labelledby="finder-title">
+        <p class="finder__title" id="finder-title">Four ways to train</p>
+        <ul class="finder__list">
+          {programList.map((p) => (
+            <li>
+              <a class="finder__item" href={p.href}>
+                <span class="finder__name">{p.name}</span>
+                <span class="finder__meta">{p.audience}</span>
+                <span class="finder__price">{p.priceLabel}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <QuickAnswer label="Quick answer: what is Proteinworkk?">
+    <strong>Proteinworkk</strong> is an online fitness coaching and nutrition support brand based in Bengaluru, Karnataka, India.
+    It offers one-to-one online personal training ({PRICES.oneToOneSession.label} or {PRICES.oneToOneMonth.label}) and online group
+    training ({PRICES.group.label}, maximum {GROUP_CAP} members per group), including Girl Power, a women-only program, and a
+    men’s group program. All training is delivered online.
+  </QuickAnswer>
+
+  <!-- The Proteinworkk approach -->
+  <Section id="approach" labelledby="approach-title">
+    <div class="two-col two-col--wide-left">
+      <div>
+        <h2 id="approach-title">Fitness that fits the person, not the other way around</h2>
+        <p>
+          Proteinworkk exists to make fitness accessible to everyone. We start from a simple idea: two people with the same goal
+          rarely need the same plan. Your experience, schedule, stress levels and starting point all shape what good training looks
+          like for you.
+        </p>
+        <p>
+          Online coaching makes this practical. There is no commute, no waiting for equipment and no need to plan your day around a
+          gym. You train at home or in any suitable space, a trainer guides the structure, and the plan progresses as you do. We
+          focus on guidance and accountability, not quick fixes.
+        </p>
+      </div>
+      <div>
+        <h3>Five foundations of our coaching</h3>
+        <ul class="checklist">
+          <li><strong>Strength</strong> builds capability.</li>
+          <li><strong>Consistency</strong> makes progress repeatable.</li>
+          <li><strong>Endurance</strong> lifts everyday stamina.</li>
+          <li><strong>Recovery</strong> lets your body adapt.</li>
+          <li><strong>Nutrition</strong> supports the work you put in.</li>
+        </ul>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Common challenges -->
+  <Section id="challenges" tone="white" labelledby="challenges-title">
+    <div class="section__lead">
+      <h2 id="challenges-title">Where do most fitness journeys get stuck?</h2>
+      <p class="lede">Most journeys stall on a handful of familiar challenges. Here is how Proteinworkk approaches each one.</p>
+    </div>
+    <ul class="ruled ruled--2">
+      {challenges.map(([title, body]) => (
+        <li class="ruled__item"><h3>{title}</h3><p>{body}</p></li>
+      ))}
+    </ul>
+    <MedicalNote />
+  </Section>
+
+  <!-- Programs -->
+  <Section id="programs" tone="tint" labelledby="programs-title">
+    <div class="section__lead">
+      <h2 id="programs-title">Which online training program is right for me?</h2>
+      <p class="lede">Proteinworkk offers four ways to train. Pick the format that matches how you like to work.</p>
+    </div>
+    <div class="program-grid">
+      {programList.map((p) => <ProgramCard program={p} />)}
+    </div>
+  </Section>
+
+  <!-- One-to-one vs group -->
+  <Section id="choose-format" labelledby="format-title">
+    <div class="section__lead">
+      <h2 id="format-title">Which is right for me: one-to-one or online group training?</h2>
+      <p class="lede">
+        Choose one-to-one if you want an individual plan and a trainer’s full attention. Choose group training if you enjoy
+        structure and company at a lower monthly cost.
+      </p>
+    </div>
+    <DataTable
+      caption="Online group training compared with online one-to-one training"
+      headers={['', 'Online group training', 'Online one-to-one training']}
+      rows={[
+        ['Plan', 'A shared, structured program followed by the group', 'A program built for your goals and level'],
+        ['Attention', `Shared among a maximum of ${GROUP_CAP} members`, 'Fully focused on you'],
+        ['Motivation', 'Community energy and group accountability', 'Direct, individual accountability'],
+        ['Price', PRICES.group.label, `${PRICES.oneToOneSession.label} or ${PRICES.oneToOneMonth.label}`],
+        ['Best for', 'People who enjoy structure and company', 'People who want an individual plan or private coaching'],
+      ]}
+    />
+    <p style="margin-top:1.25rem">
+      Online group training is not one-to-one personal training. Read more about
+      <a href={programs['one-to-one'].href}>online one-to-one personal training</a> or
+      <a href={programs.group.href}>online group training</a>.
+    </p>
+  </Section>
+
+  <!-- How to choose a trainer -->
+  <Section id="choose-trainer" tone="white" labelledby="trainer-title">
+    <div class="section__lead">
+      <h2 id="trainer-title">How do you choose an online personal trainer?</h2>
+      <p class="lede">
+        A reliable online coach should be able to answer yes to most of the checks below. A few simple questions can help you avoid
+        disappointment, whichever coach you choose.
+      </p>
+    </div>
+    <DataTable
+      caption="What to check when choosing an online personal trainer"
+      headers={['What to check', 'Why it matters']}
+      rows={[
+        ['Is the price clear?', 'You should know what a session or month costs and what it includes before you commit.'],
+        ['Is there a plan with progression?', 'Random workouts rarely build strength. Look for a structured plan that gets gradually harder.'],
+        ['Does the coach explain who it is not for?', 'Honest limits are a sign of care. Online coaching cannot replace medical care or hands-on physiotherapy.'],
+        ['Are group sizes stated?', 'A group of 12 and a group of 80 are very different experiences.'],
+        ['Are credentials real and checkable?', 'Ask who your trainer is and what qualifications they hold.'],
+        ['Do claims sound realistic?', 'Be wary of guaranteed results or very fast transformations.'],
+        ['Is nutrition guidance included or clearly separate?', 'Training and nutrition work best together, so know what you are getting.'],
+      ]}
+    />
+    <p style="margin-top:1.25rem">
+      Proteinworkk is built around these principles: stated prices, a stated group cap, structured progression and honest limits.
+    </p>
+  </Section>
+
+  <!-- Why choose -->
+  <Section id="why" tone="dark" labelledby="why-title">
+    <div class="section__lead">
+      <h2 id="why-title">Why choose Proteinworkk for online fitness coaching?</h2>
+      <p class="lede">Proteinworkk combines structure, honest guidance and small groups, planned around real life.</p>
+    </div>
+    <ul class="ruled ruled--3">
+      {whyChoose.map(([title, body]) => (
+        <li class="ruled__item"><h3>{title}</h3><p>{body}</p></li>
+      ))}
+    </ul>
+  </Section>
+
+  <!-- Goals supported -->
+  <Section id="goals" labelledby="goals-title">
+    <div class="section__lead">
+      <h2 id="goals-title">What fitness goals can Proteinworkk support?</h2>
+      <p class="lede">Our programs support fat loss, muscle building, strength, endurance and mobility.</p>
+    </div>
+    <ul class="ruled ruled--3">
+      <li class="ruled__item">
+        <h3>Can online coaching help with fat loss?</h3>
+        <p>
+          Yes, when it combines structured training, practical nutrition guidance and consistency over time. Proteinworkk’s online
+          fat loss coaching focuses on habits you can keep and weight management training that fits your routine. Results vary and
+          cannot be guaranteed.
+        </p>
+      </li>
+      <li class="ruled__item">
+        <h3>Can online coaching help with muscle building?</h3>
+        <p>
+          Yes. Muscle building workouts rely on progressive resistance training, enough protein and recovery. Our programs build
+          these into a structured plan, with technique guidance and progression.
+        </p>
+      </li>
+      <li class="ruled__item">
+        <h3>What about strength, endurance and mobility?</h3>
+        <p>
+          Online strength training teaches fundamental movement patterns and builds capability step by step. Conditioning work
+          supports stamina, and mobility work supports everyday movement, especially if you sit for long hours.
+        </p>
+      </li>
+    </ul>
+    <MedicalNote>
+      Individual outcomes vary according to training consistency, nutrition, recovery, health history and personal circumstances.
+      Proteinworkk does not guarantee specific results.
+    </MedicalNote>
+  </Section>
+
+  <!-- Girl Power -->
+  <div data-theme="women">
+    <Section id="girl-power" tone="tint" labelledby="gp-title">
+      <div class="two-col two-col--wide-left">
+        <div>
+          <h2 id="gp-title">Strong is a skill. Learn it with women who get it.</h2>
+          <p>
+            Girl Power is Proteinworkk’s women-only online group training program. It is a supportive space to build strength,
+            confidence and consistency, with a trainer guiding the structure and a group of up to {GROUP_CAP} women that celebrates
+            your progress. Beginners are welcome.
+          </p>
+          <p>
+            Many women ask about PCOS, PCOD and hormonal health. Regular exercise and healthy habits may support general health,
+            but these conditions need individualized medical care. Proteinworkk is a fitness service, not a medical provider, and
+            we do not diagnose, treat or promise to resolve any condition. Please talk to your doctor and share their guidance with
+            your trainer.
+          </p>
+          <Button href={g.href} variant="primary" location="girl-power-section">Explore Girl Power Training</Button>
+        </div>
+        <ul class="checklist">
+          <li>Women-only and beginner-friendly</li>
+          <li>Groups of up to {GROUP_CAP} women</li>
+          <li>Progressive strength and conditioning</li>
+          <li>Practical habits you can maintain</li>
+        </ul>
+      </div>
+    </Section>
+  </div>
+
+  <!-- Nutrition support -->
+  <Section id="nutrition" tone="white" labelledby="nutrition-title">
+    <div class="two-col two-col--wide-left">
+      <div>
+        <h2 id="nutrition-title">What does nutrition support at Proteinworkk involve?</h2>
+        <p>
+          Proteinworkk’s nutrition support complements your workouts with practical meal-planning guidance, protein and
+          balanced-nutrition education, and sustainable eating habits aligned with your goals. Training provides the signal for your
+          body to adapt. Nutrition provides the material.
+        </p>
+        <p>
+          We take a food-first approach, and we do not promote supplements, testosterone boosters or hormone-related products as
+          treatments or guaranteed solutions. What nutrition support comes with each program is confirmed when you enquire.
+        </p>
+        <Button href={enquiryHref('nutrition')} variant="primary" location="nutrition-section">Ask About Nutrition Support</Button>
+      </div>
+      <MedicalNote>
+        Nutrition support is education and habit guidance, not medical advice. If you have a medical condition or are considering
+        a supplement, speak to your doctor.
+      </MedicalNote>
+    </div>
+  </Section>
+
+  <!-- How it works -->
+  <Section id="how-it-works" tone="light" labelledby="how-title">
+    <div class="section__lead">
+      <h2 id="how-title">How does Proteinworkk work?</h2>
+      <p class="lede">You choose a program, share your goals, start training online and review your progress as you go.</p>
+    </div>
+    <ol class="steps steps--4">
+      {steps.map(([title, body]) => (
+        <li><strong>{title}</strong><span>{body}</span></li>
+      ))}
+    </ol>
+    <p style="margin-top:2rem">
+      <Button href={enquiryHref('not-sure')} variant="primary" location="how-it-works">Find Your Training Program</Button>
+    </p>
+  </Section>
+
+  <TrainerProfiles />
+  <Testimonials />
+
+  <!-- Pricing -->
+  <Section id="pricing" tone="white" labelledby="pricing-title">
+    <div class="section__lead">
+      <h2 id="pricing-title">How much does online coaching cost at Proteinworkk?</h2>
+      <p class="lede">
+        One-to-one online personal training costs {PRICES.oneToOneSession.label} or {PRICES.oneToOneMonth.label}, and online group
+        training costs {PRICES.group.label}.
+      </p>
+    </div>
+    <DataTable
+      caption="Proteinworkk programs, prices and group sizes"
+      headers={['Program', 'Price', 'Group size']}
+      rows={[
+        [{ text: programs['one-to-one'].name, href: programs['one-to-one'].href }, programs['one-to-one'].priceLabel, 'One-to-one'],
+        [{ text: programs.group.name, href: programs.group.href }, programs.group.priceLabel, `Maximum ${GROUP_CAP} members`],
+        [{ text: g.name, href: g.href }, g.priceLabel, `Maximum ${GROUP_CAP} women`],
+        [{ text: m.name, href: m.href }, m.priceLabel, `Maximum ${GROUP_CAP} men`],
+      ]}
+    />
+    <p style="margin-top:1.25rem">
+      Session counts, session length, schedules and other plan details are confirmed when you enquire. Ask the team before you
+      commit.
+    </p>
+    <Button href={enquiryHref('not-sure')} variant="primary" location="pricing">Request a Consultation</Button>
+  </Section>
+
+  <FAQ items={faqs} tone="light" />
+
+  <CtaBand
+    headline="Start where you are. We’ll build from there."
+    primary={{ label: 'Get Started with Proteinworkk', href: enquiryHref('not-sure') }}
+    secondary={{ label: 'Contact Our Team', href: ROUTES.contact.path }}
+  >
+    You do not need to be fit to begin, and you do not need a perfect schedule. You need a clear plan, a coach who pays attention
+    and a routine you can keep. Proteinworkk helps you build all three, one session at a time.
+  </CtaBand>
+</BaseLayout>

@@ -1,0 +1,24 @@
+---
+import Button from './Button.astro';
+import type { Program } from '../data/programs';
+interface Props {
+  program: Program;
+}
+const { program: p } = Astro.props;
+---
+<article class={`program-card program-card--${p.tone}`}>
+  <h3 class="program-card__title">{p.name}</h3>
+  <dl class="program-card__meta">
+    <div><dt>Best for</dt><dd>{p.audience}</dd></div>
+    <div><dt>Format</dt><dd>{p.format}</dd></div>
+  </dl>
+  <p class="program-card__summary">{p.summary}</p>
+  <ul class="checklist">
+    {p.benefits.map((b) => <li>{b}</li>)}
+  </ul>
+  <p class="program-card__price">
+    <span class="program-card__price-label">{p.priceConfirmed ? 'Price' : 'Pricing'}</span>
+    <strong>{p.priceLabel}</strong>
+  </p>
+  <Button href={p.href} variant="primary" location={`card-${p.id}`}>{p.cta}</Button>
+</article>

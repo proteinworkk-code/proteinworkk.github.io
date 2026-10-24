@@ -1,0 +1,17 @@
+---
+interface Props {
+  items: { href: string; text: string; desc: string }[];
+  title?: string;
+}
+const { items, title = 'Keep exploring' } = Astro.props;
+---
+<section class="section section--light related" aria-labelledby="related-title">
+  <div class="container">
+    <h2 id="related-title">{title}</h2>
+    <ul class="related__list">
+      {items.map((i) => (
+        <li><a href={i.href}>{i.text}</a><span>{i.desc}</span></li>
+      ))}
+    </ul>
+  </div>
+</section>

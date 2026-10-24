@@ -1,0 +1,19 @@
+---
+/**
+ * One consistent button/link style. `primary` is the main action (orange); the others are quieter.
+ * data attributes feed the optional, privacy-safe analytics click tracking.
+ */
+interface Props {
+  href: string;
+  variant?: 'primary' | 'secondary' | 'onDark' | 'text';
+  location?: string;
+  class?: string;
+}
+const { href, variant = 'primary', location = '', class: extra = '' } = Astro.props;
+---
+<a
+  class:list={['btn', `btn--${variant}`, extra]}
+  href={href}
+  data-cta={variant === 'primary' ? 'primary' : 'secondary'}
+  data-cta-location={location || undefined}
+><slot /></a>

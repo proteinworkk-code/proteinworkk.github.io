@@ -1,0 +1,249 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import QuickAnswer from '../components/QuickAnswer.astro';
+import Section from '../components/Section.astro';
+import DataTable from '../components/DataTable.astro';
+import MedicalNote from '../components/MedicalNote.astro';
+import FAQ from '../components/FAQ.astro';
+import CtaBand from '../components/CtaBand.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import Button from '../components/Button.astro';
+import { ROUTES, crumbsFor } from '../config/routes';
+import { BRAND } from '../config/site';
+import { programs, PRICES, GROUP_CAP, enquiryHref } from '../data/programs';
+import { breadcrumbs, faqPage, service, type FaqItem } from '../lib/schema';
+
+const p = programs['girl-power'];
+const priced = p.priceConfirmed;
+
+const priceFaq = priced
+  ? `${p.priceLabel}, with a maximum of ${GROUP_CAP} women per group.`
+  : `Girl Power pricing is being finalised. Send an enquiry or email ${BRAND.email} and the team will share current pricing and what is included.`;
+
+const faqs: FaqItem[] = [
+  {
+    q: 'Is Girl Power only for women?',
+    a: `Yes. Girl Power is a women-only online group training program, with a maximum of ${GROUP_CAP} women per group.`,
+  },
+  {
+    q: 'I am a complete beginner. Can I join?',
+    a: 'Yes. Beginners are welcome, and workouts progress gradually. Share your experience level when you contact us.',
+  },
+  {
+    q: 'Can Girl Power help with PCOS or PCOD?',
+    a: 'Exercise and healthy habits may support general health, but PCOS and PCOD are medical conditions that need individualized medical care. Proteinworkk offers fitness coaching only and does not diagnose, treat or promise to resolve any condition. Please consult your doctor before joining.',
+  },
+  {
+    q: 'Is there support for thyroid conditions?',
+    a: 'Women with thyroid conditions are welcome. We do not treat the condition, so please follow your doctor’s guidance and share it with your trainer.',
+  },
+  {
+    q: 'Will I lose weight in Girl Power?',
+    a: 'Weight change depends on consistency, nutrition, sleep and health history. We support weight management through structured training and practical nutrition guidance, but cannot guarantee a specific result.',
+  },
+  { q: 'How much does Girl Power cost?', a: priceFaq },
+  {
+    q: 'Do I need a gym or equipment?',
+    a: 'Girl Power is delivered online, so you train at home or in any suitable space. Tell us what equipment you have when you get in touch.',
+  },
+];
+
+const schema = [
+  service({
+    program: p,
+    serviceType: 'Women’s online group fitness training',
+    description: `Girl Power is Proteinworkk’s women-only online group training program, with trainer-led workouts in groups of up to ${GROUP_CAP} women.`,
+  }),
+  breadcrumbs(crumbsFor(ROUTES.girlPower)),
+  faqPage(faqs),
+];
+---
+<BaseLayout route={ROUTES.girlPower} schema={schema} theme="women">
+  <PageHero
+    title="Girl Power: Women’s Online Fitness Classes That Build Real Strength"
+    tag="Women-only online group training"
+    crumbs={crumbsFor(ROUTES.girlPower)}
+    primary={{ label: 'Join Girl Power', href: enquiryHref('girl-power') }}
+    secondary={{ label: 'Ask a Question First', href: enquiryHref('girl-power') }}
+    trust={['Women-only', 'Beginner-friendly', `Max ${GROUP_CAP} members`, ...(priced ? [p.priceLabel] : [])]}
+  >
+    A women-only online group training program with trainer-led workouts, small groups of up to {GROUP_CAP} and a community that
+    backs your progress.
+  </PageHero>
+
+  <QuickAnswer>
+    <strong>Girl Power</strong> is Proteinworkk’s women-only online group training program. Women train in small, trainer-led groups
+    of up to {GROUP_CAP}, with progressive strength and conditioning workouts and practical nutrition guidance. Beginners are welcome.
+    {priced ? ` It costs ${p.priceLabel}.` : ' Ask the team for current pricing.'}
+  </QuickAnswer>
+
+  <Section id="stands-for" labelledby="stands-title">
+    <div class="two-col two-col--wide-left">
+      <div>
+        <h2 id="stands-title">Strong is a skill. Anyone can learn it.</h2>
+        <p>
+          Girl Power is a space where women can train with confidence, without comparison, intimidation or pressure to look a
+          certain way. We believe strength builds more than muscle: it builds energy, capability and self-belief that carry into the
+          rest of your day.
+        </p>
+      </div>
+      <ul class="ruled">
+        <li class="ruled__item"><h3>Strong, not small.</h3><p>We celebrate what your body can do.</p></li>
+        <li class="ruled__item"><h3>Progress, not perfection.</h3><p>A missed session is a pause, not a failure.</p></li>
+        <li class="ruled__item"><h3>Together, not alone.</h3><p>Accountability that feels like support.</p></li>
+      </ul>
+    </div>
+  </Section>
+
+  <Section id="why-women-only" tone="white" labelledby="why-title">
+    <div class="two-col two-col--wide-left">
+      <div>
+        <h2 id="why-title">Why choose women-only online training?</h2>
+        <p>
+          Many women feel more comfortable and consistent training in a women-only setting, especially when starting out. A small
+          online group removes the gym floor, the commute and the sense of being watched, while keeping the accountability of
+          training with others.
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="philosophy" tone="tint" labelledby="phil-title">
+    <div class="section__lead">
+      <h2 id="phil-title">What is our women’s training philosophy?</h2>
+      <p class="lede">We build strength first, progress at your pace, condition the engine, respect recovery and fuel the work.</p>
+    </div>
+    <DataTable
+      caption="Girl Power training principles"
+      headers={['Principle', 'In practice']}
+      rows={[
+        ['Lift to build strength', 'Resistance training sits at the center of the program because strength supports capability and long-term fitness.'],
+        ['Progress at your pace', 'Workouts progress gradually, building confidence and skill.'],
+        ['Condition the engine', 'Cardiovascular work builds stamina and endurance alongside strength.'],
+        ['Respect recovery', 'Rest, sleep and stress affect training, so we treat them as part of the program.'],
+        ['Fuel the work', 'Practical nutrition education supports your training and your life.'],
+      ]}
+    />
+  </Section>
+
+  <Section id="beginners" labelledby="beginner-title">
+    <div class="two-col two-col--wide-left">
+      <div>
+        <h2 id="beginner-title">Is Girl Power beginner-friendly?</h2>
+        <p>
+          Yes. If you have never trained, or have not trained in years, this program is for you. Sessions are trainer-guided, and
+          workouts progress from foundations to more challenging work as you grow stronger. You do not need to be fit to begin.
+          Experienced exercisers benefit from structured progression that helps move past plateaus.
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="goals" tone="white" labelledby="goals-title">
+    <div class="section__lead">
+      <h2 id="goals-title">What goals can Girl Power support?</h2>
+      <p class="lede">Girl Power supports strength, conditioning, weight management, fat loss and a confident routine.</p>
+    </div>
+    <DataTable
+      caption="Goals Girl Power can support"
+      headers={['Goal', 'What to expect']}
+      rows={[
+        ['Strength', 'Progressive resistance training that builds capability and confidence.'],
+        ['Conditioning and endurance', 'Better stamina so everyday tasks feel easier.'],
+        ['Weight management', 'Structured training combined with practical nutrition education and sustainable habits.'],
+        ['Fat loss', 'Depends on many factors, and no program can guarantee it. We support it through consistent training, nutrition guidance and realistic expectations.'],
+        ['Routine and confidence', 'A regular practice that makes you feel capable and consistent.'],
+      ]}
+    />
+    <p class="muted" style="margin-top:1rem"><em>Results vary and are not guaranteed.</em></p>
+  </Section>
+
+  <Section id="health" tone="tint" labelledby="health-title">
+    <div class="two-col two-col--wide-left">
+      <div>
+        <h2 id="health-title">Can exercise help with PCOS, PCOD, thyroid, stress and sleep?</h2>
+        <p>
+          Regular physical activity and healthy habits may support general health and wellbeing for many people, but PCOS, PCOD
+          and thyroid conditions are medical conditions that need individualized care from a doctor. Exercise does not replace
+          medical treatment.
+        </p>
+        <ul class="checklist">
+          <li>Proteinworkk provides fitness coaching. We do not diagnose, treat or claim to cure any condition.</li>
+          <li>We do not promise to regulate hormones or guarantee weight loss.</li>
+          <li>Please talk to your doctor before starting and share their guidance with your trainer.</li>
+          <li>If you are pregnant or postpartum, seek medical clearance before joining.</li>
+        </ul>
+        <p>
+          What we can offer is a supportive, structured environment that respects your circumstances and helps you build a
+          sustainable routine alongside your healthcare.
+        </p>
+      </div>
+      <MedicalNote />
+    </div>
+  </Section>
+
+  <Section id="nutrition" tone="white" labelledby="nutrition-title">
+    <div class="two-col two-col--wide-left">
+      <div>
+        <h2 id="nutrition-title">What nutrition and habit education does Girl Power offer?</h2>
+        <p>
+          Nutrition and habit education is part of Proteinworkk’s approach to women’s training: practical guidance on protein,
+          balanced meals and sustainable eating habits, with an emphasis on food that works with your culture, schedule and taste.
+          We do not promote crash diets, extreme restriction or unproven supplements.
+        </p>
+        <p>Ask the team what nutrition support is included with Girl Power.</p>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="who-for" labelledby="who-title">
+    <div class="two-col two-col--wide-left">
+      <div>
+        <h2 id="who-title">Who should consider Girl Power?</h2>
+        <p>Girl Power suits women who want a supportive, women-only space to build strength and consistency online.</p>
+        <ul class="checklist">
+          <li>Women who want to build strength and feel more confident.</li>
+          <li>Beginners who prefer a women-only environment.</li>
+          <li>Working professionals who need a flexible, online format.</li>
+          <li>Women returning to exercise after a break.</li>
+          <li>Women who stay consistent when they train alongside others.</li>
+        </ul>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="cost" tone="tint" labelledby="cost-title">
+    <div class="two-col two-col--wide-left">
+      <div>
+        <h2 id="cost-title">How much does Girl Power cost?</h2>
+        <p>
+          {priced
+            ? `Girl Power costs ${p.priceLabel}, with a maximum of ${GROUP_CAP} women per group.`
+            : `Girl Power pricing is being finalised. Send an enquiry and the team will share current pricing and what is included. Each group has a maximum of ${GROUP_CAP} women.`}
+        </p>
+        <p>Session counts, session length, frequency and other plan details are confirmed when you enquire.</p>
+        <Button href={enquiryHref('girl-power')} variant="primary" location="pricing">{priced ? 'Join Girl Power' : 'Ask About Girl Power Pricing'}</Button>
+      </div>
+    </div>
+  </Section>
+
+  <FAQ items={faqs} tone="white" />
+
+  <CtaBand
+    headline="Find your strength. Find your people."
+    primary={{ label: 'Join Girl Power', href: enquiryHref('girl-power') }}
+    secondary={{ label: 'Ask Our Team a Question', href: ROUTES.contact.path }}
+  >
+    Join a women-only community that makes it easier to train, easier to stay consistent and easier to believe in what you can do.
+  </CtaBand>
+
+  <RelatedLinks
+    items={[
+      { href: programs.group.href, text: 'Online group training', desc: `Mixed trainer-guided groups of up to ${GROUP_CAP}.` },
+      { href: programs['one-to-one'].href, text: 'Online one-to-one personal training', desc: `Private coaching for ${PRICES.oneToOneSession.label} or ${PRICES.oneToOneMonth.label}.` },
+      { href: ROUTES.contact.path, text: 'Contact the Proteinworkk team', desc: 'Ask a question or request a consultation.' },
+      { href: ROUTES.about.path, text: 'About Proteinworkk', desc: 'Who we are and how training works.' },
+    ]}
+  />
+</BaseLayout>

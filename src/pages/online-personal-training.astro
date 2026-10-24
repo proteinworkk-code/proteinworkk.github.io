@@ -1,0 +1,250 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import QuickAnswer from '../components/QuickAnswer.astro';
+import Section from '../components/Section.astro';
+import DataTable from '../components/DataTable.astro';
+import MedicalNote from '../components/MedicalNote.astro';
+import FAQ from '../components/FAQ.astro';
+import CtaBand from '../components/CtaBand.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import Button from '../components/Button.astro';
+import { ROUTES, crumbsFor } from '../config/routes';
+import { programs, PRICES, enquiryHref } from '../data/programs';
+import { breadcrumbs, faqPage, service, type FaqItem } from '../lib/schema';
+
+const p = programs['one-to-one'];
+
+const faqs: FaqItem[] = [
+  {
+    q: 'What does Proteinworkk’s monthly membership include?',
+    a: `The monthly membership costs ${PRICES.oneToOneMonth.label}. Contact the team to confirm what is included for your goals and schedule.`,
+  },
+  {
+    q: 'Should I pay per session or monthly?',
+    a: `Pay per session (${PRICES.oneToOneSession.label.replace(' per session', '')}) for occasional or flexible coaching. Choose monthly (${PRICES.oneToOneMonth.label.replace(' per month', '')}) if you want ongoing structure and accountability. The team can help you decide based on your goals and schedule.`,
+  },
+  {
+    q: 'Is online personal training as good as training in a gym?',
+    a: 'It depends on what you need. Online training offers flexibility, no commute and a structured plan. A gym offers heavy equipment and hands-on adjustment. Many people with good basic technique and a suitable space do well online.',
+  },
+  {
+    q: 'Can beginners start with one-to-one training?',
+    a: 'Yes. One-to-one coaching is especially useful for beginners, because your trainer can build the basics at your pace and answer questions as you learn.',
+  },
+  {
+    q: 'Is this only for people in Bangalore?',
+    a: 'No. Proteinworkk is based in Bengaluru but delivers training online, so you can work with the team from anywhere you can train. If you are outside India, contact the team to check availability and time-zone fit.',
+  },
+  {
+    q: 'Do I need equipment?',
+    a: 'Your trainer plans around what you have. Tell us what equipment you have when you get in touch.',
+  },
+  {
+    q: 'Can I train with an injury or health condition?',
+    a: 'Please speak to your doctor before starting any new program and share their advice with your trainer. Proteinworkk provides fitness coaching, not medical care.',
+  },
+  {
+    q: 'How quickly will I see results?',
+    a: 'It depends on your starting point, consistency, nutrition, sleep and recovery. We focus on steady, sustainable progress and do not promise specific timelines or outcomes.',
+  },
+];
+
+const steps = [
+  ['Talk about your goals.', 'Share your goals, experience, schedule, equipment and any injuries or health considerations your doctor has advised on.'],
+  ['Get a plan built for you.', 'Your trainer designs a structured program matched to your starting point.'],
+  ['Train with guidance.', 'You complete your sessions online, with your trainer guiding the work.'],
+  ['Review and adjust.', 'Your progress and consistency are reviewed, and the plan evolves as you improve.'],
+];
+
+const schema = [
+  service({
+    program: p,
+    serviceType: 'Online personal training',
+    description:
+      'One-to-one online personal training delivered online by Proteinworkk, with a plan built around your goals, trainer guidance and accountability.',
+  }),
+  breadcrumbs(crumbsFor(ROUTES.oneToOne)),
+  faqPage(faqs),
+];
+---
+<BaseLayout route={ROUTES.oneToOne} schema={schema}>
+  <PageHero
+    title="Online Personal Training in India, Built Around You"
+    crumbs={crumbsFor(ROUTES.oneToOne)}
+    primary={{ label: 'Choose Personal Training', href: enquiryHref('one-to-one') }}
+    secondary={{ label: 'Talk to Our Team First', href: enquiryHref('not-sure') }}
+    trust={[PRICES.oneToOneSession.label, PRICES.oneToOneMonth.label, 'Fully online']}
+  >
+    One-to-one coaching from Proteinworkk in Bengaluru: a trainer who knows your goals, plans your progression and keeps you
+    consistent, wherever you train.
+  </PageHero>
+
+  <QuickAnswer>
+    <strong>Online one-to-one personal training at Proteinworkk</strong> is private coaching delivered online. A trainer builds a
+    plan around your goals, guides your sessions and tracks your progress. It costs {PRICES.oneToOneSession.label} or
+    {PRICES.oneToOneMonth.label}, and there is no need to travel to a gym.
+  </QuickAnswer>
+
+  <Section id="what-is" labelledby="what-title">
+    <div class="two-col two-col--wide-left">
+      <div>
+        <h2 id="what-title">What is online personal training?</h2>
+        <p>
+          Online personal training is one-to-one coaching delivered over the internet. Instead of meeting a trainer at a gym, you
+          train at home or in any suitable space while a trainer plans, guides and reviews your work.
+        </p>
+        <p>
+          At Proteinworkk, the plan starts with you: your goals, current fitness, schedule and preferences. Your trainer guides your
+          sessions, monitors your consistency and adjusts your program as you get stronger.
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="online-vs-gym" tone="white" labelledby="vs-title">
+    <div class="section__lead">
+      <h2 id="vs-title">Online vs gym personal training: an honest comparison</h2>
+      <p class="lede">
+        Online training suits people who can train safely at home and value flexibility, while gym training suits people who want
+        hands-on supervision or heavy equipment.
+      </p>
+    </div>
+    <DataTable
+      caption="Online personal training compared with gym personal training"
+      headers={['', 'Online personal training', 'Gym personal training']}
+      rows={[
+        ['Location', 'Anywhere you can train', 'At the gym'],
+        ['Travel time', 'None', 'Commute to and from the gym'],
+        ['Scheduling', 'Not tied to gym opening hours. Ask the team how scheduling works.', 'Tied to gym hours and trainer availability'],
+        ['Equipment', 'What you have at home, or what your plan uses', 'Full gym equipment'],
+        ['Hands-on help', 'Visual guidance and verbal cues; a trainer cannot physically adjust or spot you', 'Trainer can adjust your position and spot heavy lifts'],
+        ['Privacy', 'Train in your own space', 'Shared gym floor'],
+        ['Best for', 'People who can train safely at home and value flexibility', 'People who want hands-on supervision or heavy equipment'],
+      ]}
+    />
+    <MedicalNote>
+      If you have an injury or a condition that needs hands-on rehabilitation, please consult your doctor or physiotherapist first.
+      Online coaching is not a replacement for medical care.
+    </MedicalNote>
+  </Section>
+
+  <Section id="who-for" labelledby="who-title">
+    <div class="two-col">
+      <div>
+        <h2 id="who-title">Who is one-to-one coaching for?</h2>
+        <p>One-to-one coaching suits beginners, busy professionals, people with specific goals, returning exercisers and anyone who prefers private coaching.</p>
+        <ul class="checklist">
+          <li><strong>Beginners</strong> who want clear guidance and a trainer to answer questions as they learn.</li>
+          <li><strong>Busy professionals</strong> who need a plan that fits an unpredictable schedule.</li>
+          <li><strong>People with specific goals,</strong> such as fat loss, building muscle, getting stronger or improving endurance.</li>
+          <li><strong>Returning exercisers</strong> who want a structured restart after a break.</li>
+          <li><strong>Anyone who prefers private coaching</strong> to training in a group.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Who might prefer something else?</h3>
+        <p>
+          If you enjoy training with others and want a lower monthly cost, Proteinworkk’s
+          <a href={programs.group.href}>online group training</a> ({PRICES.group.label}) may suit you better. If you need hands-on
+          rehabilitation, a physiotherapist is the right first step.
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="goals" tone="tint" labelledby="goals-title">
+    <div class="section__lead">
+      <h2 id="goals-title">What can you work on with a one-to-one trainer?</h2>
+      <p class="lede">You can work on fat loss, muscle building, strength, endurance, mobility and general fitness.</p>
+    </div>
+    <DataTable
+      caption="Goals and how one-to-one coaching helps"
+      headers={['Goal', 'How one-to-one coaching helps']}
+      rows={[
+        ['Fat loss and weight management', 'Training, nutrition guidance and habit-building are planned around your lifestyle.'],
+        ['Muscle building', 'Progressive resistance training with sensible volume, exercise selection and recovery.'],
+        ['Strength', 'Structured strength progression with technique guidance on key movements.'],
+        ['Endurance and conditioning', 'Conditioning that supports stamina alongside strength work.'],
+        ['Mobility and general fitness', 'Movement quality and everyday capability, especially for long hours of sitting.'],
+      ]}
+    />
+    <p class="muted" style="margin-top:1rem"><em>Outcomes vary with consistency, nutrition, recovery and personal circumstances. Results are not guaranteed.</em></p>
+  </Section>
+
+  <Section id="how-it-works" tone="white" labelledby="how-title">
+    <div class="section__lead">
+      <h2 id="how-title">How does online personal training work?</h2>
+      <p class="lede">You talk through your goals, get a plan built for you, train online with guidance and review progress as you go.</p>
+    </div>
+    <ol class="steps steps--4">
+      {steps.map(([title, body]) => <li><strong>{title}</strong><span>{body}</span></li>)}
+    </ol>
+  </Section>
+
+  <Section id="progress" labelledby="progress-title">
+    <div class="two-col">
+      <div>
+        <h2 id="progress-title">Progress and accountability</h2>
+        <p>
+          Progress means more than the number on a scale. Depending on your goals it can include strength improvements, workout
+          consistency, endurance, movement quality and how you feel. Your trainer reviews this with you and adjusts the plan when
+          appropriate.
+        </p>
+        <p>Accountability is a real advantage of one-to-one coaching: someone expects to see you and notices when you do not.</p>
+      </div>
+      <div id="nutrition">
+        <h2>Nutrition support and lifestyle guidance</h2>
+        <p>
+          Proteinworkk offers nutrition support alongside your coaching, including practical guidance on protein, balanced meals and
+          sustainable eating habits. We also take a practical view of sleep, stress and recovery, since they shape how well you
+          train. This is education and habit support, not medical advice.
+        </p>
+        <p>Ask the team what nutrition support comes with your plan.</p>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="cost" tone="white" labelledby="cost-title">
+    <div class="section__lead">
+      <h2 id="cost-title">How much does online personal training cost at Proteinworkk?</h2>
+      <p class="lede">
+        One-to-one online personal training costs {PRICES.oneToOneSession.label} or {PRICES.oneToOneMonth.label}. Choose
+        pay-per-session if you want flexibility or want to try coaching, and choose monthly if you want ongoing structure and
+        accountability.
+      </p>
+    </div>
+    <DataTable
+      caption="One-to-one personal training pricing options"
+      headers={['Option', 'Price', 'Best for']}
+      rows={[
+        ['Pay per session', PRICES.oneToOneSession.label, 'Trying one-to-one coaching or flexible needs'],
+        ['Monthly membership', PRICES.oneToOneMonth.label, 'Consistent, ongoing coaching with a structured plan'],
+      ]}
+    />
+    <p style="margin-top:1.25rem">
+      Session length, scheduling and exactly what each option includes are confirmed when you enquire. Ask the team before you commit.
+    </p>
+    <Button href={enquiryHref('one-to-one')} variant="primary" location="pricing">Choose Personal Training</Button>
+  </Section>
+
+  <FAQ items={faqs} tone="light" />
+
+  <CtaBand
+    headline="The best time to start is with a plan."
+    primary={{ label: 'Choose Personal Training', href: enquiryHref('one-to-one') }}
+    secondary={{ label: 'Contact Our Team', href: ROUTES.contact.path }}
+  >
+    Tell us your goals and we will help you decide whether one-to-one coaching is the right fit. If it is, you will start with a
+    program built around you.
+  </CtaBand>
+
+  <RelatedLinks
+    items={[
+      { href: programs.group.href, text: 'Online group training', desc: `Trainer-guided groups of up to 12 for ${PRICES.group.label}.` },
+      { href: enquiryHref('nutrition'), text: 'Ask about nutrition support', desc: 'Practical guidance on protein, meals and habits.' },
+      { href: ROUTES.contact.path, text: 'Contact the Proteinworkk team', desc: 'Ask a question or request a consultation.' },
+      { href: ROUTES.home.path, text: 'Proteinworkk home', desc: 'See all four ways to train.' },
+    ]}
+  />
+</BaseLayout>

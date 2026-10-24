@@ -1,0 +1,141 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import QuickAnswer from '../components/QuickAnswer.astro';
+import Section from '../components/Section.astro';
+import DataTable from '../components/DataTable.astro';
+import EnquiryForm from '../components/EnquiryForm.astro';
+import FAQ from '../components/FAQ.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { ROUTES, crumbsFor } from '../config/routes';
+import { BRAND } from '../config/site';
+import { programs, PRICES, GROUP_CAP } from '../data/programs';
+import { breadcrumbs, contactPage, type FaqItem } from '../lib/schema';
+
+const g = programs['girl-power'];
+const m = programs.mens;
+
+const faqs: FaqItem[] = [
+  {
+    q: 'How do I contact Proteinworkk?',
+    a: `You can contact Proteinworkk by emailing ${BRAND.email} or by sending the enquiry form on this page. Proteinworkk is based in Bengaluru, Karnataka, and delivers training online.`,
+  },
+  {
+    q: 'Where is Proteinworkk located?',
+    a: 'Proteinworkk is based in Bengaluru, Karnataka, India. All training is delivered online, so members do not need to travel to a gym or studio.',
+  },
+  {
+    q: 'How much does online coaching cost?',
+    a:
+      `One-to-one online personal training is ${PRICES.oneToOneSession.label} or ${PRICES.oneToOneMonth.label}. Online group training is ${PRICES.group.label}. ` +
+      (g.priceConfirmed && m.priceConfirmed
+        ? `Girl Power and the men’s program are ${g.priceLabel}.`
+        : 'Pricing for Girl Power and the men’s program is shared on enquiry.'),
+  },
+  {
+    q: 'Do you have a women-only program?',
+    a: `Yes. Girl Power is a women-only online group training program with a maximum of ${GROUP_CAP} women per group.`,
+  },
+  {
+    q: 'How many people are in a group?',
+    a: `Each Proteinworkk group has a maximum of ${GROUP_CAP} members.`,
+  },
+  {
+    q: 'Do you offer nutrition support?',
+    a: 'Proteinworkk offers nutrition support alongside training, focused on practical guidance and sustainable habits. Ask the team what comes with the program you choose.',
+  },
+  {
+    q: 'How do I get started?',
+    a: `Send the enquiry form or email ${BRAND.email} with your goals and preferred program. The team will help you choose the right option and next step.`,
+  },
+];
+
+const schema = [
+  contactPage(ROUTES.contact.path, ROUTES.contact.description),
+  breadcrumbs(crumbsFor(ROUTES.contact)),
+];
+---
+<BaseLayout route={ROUTES.contact} schema={schema}>
+  <PageHero
+    title="Contact Proteinworkk: Let’s Find the Right Way for You to Start"
+    crumbs={crumbsFor(ROUTES.contact)}
+    primary={{ label: 'Request a Consultation', href: '#enquiry' }}
+  >
+    Have a question about online personal training, group workouts or nutrition support? Tell us your goals and the team will help
+    you choose a program that suits you.
+  </PageHero>
+
+  <QuickAnswer>
+    You can contact <strong>Proteinworkk</strong> by emailing <strong><a href={`mailto:${BRAND.email}`}>{BRAND.email}</a></strong>
+    or by sending the enquiry form on this page. Proteinworkk is based in Bengaluru, Karnataka, India, and delivers all training online.
+    Tell us your goals and the team will help you choose between one-to-one, group, Girl Power, men’s or nutrition support.
+  </QuickAnswer>
+
+  <Section id="contact-details" labelledby="details-title">
+    <div class="section__lead">
+      <h2 id="details-title">How can I reach Proteinworkk?</h2>
+      <p class="lede">The quickest ways are the enquiry form below or an email to {BRAND.email}.</p>
+    </div>
+    <DataTable
+      caption="Proteinworkk contact information"
+      headers={['Detail', 'Information']}
+      rows={[
+        ['Brand', BRAND.name],
+        ['Email', { text: BRAND.email, href: `mailto:${BRAND.email}` }],
+        ['Location', `${BRAND.locality}, ${BRAND.region}, ${BRAND.country}`],
+        ['Services', 'Online one-to-one personal training, online group training (including Girl Power for women and a men’s program), and nutrition support'],
+        ['Format', 'Online only. All training is delivered online.'],
+      ]}
+    />
+  </Section>
+
+  <Section id="enquiry" tone="tint" labelledby="enquiry-title">
+    <div class="section__lead">
+      <h2 id="enquiry-title">Tell us a little about your goals</h2>
+      <p class="lede">Share a few details and we will help you find a suitable program. The more you tell us, the better we can guide you.</p>
+    </div>
+    <EnquiryForm />
+  </Section>
+
+  <Section id="which-program" tone="white" labelledby="which-title">
+    <div class="section__lead">
+      <h2 id="which-title">Which program should I ask about?</h2>
+      <p class="lede">If you are not sure where to start, this quick guide shows the most common matches. The team can confirm the best fit with you.</p>
+    </div>
+    <DataTable
+      caption="Which program to ask about"
+      headers={['If you…', 'Consider', 'Price']}
+      rows={[
+        ['Want an individual plan and a trainer’s full attention', { text: 'One-to-One Personal Training', href: programs['one-to-one'].href }, programs['one-to-one'].priceLabel],
+        ['Like structure and training with others', { text: 'Online Group Training', href: programs.group.href }, programs.group.priceLabel],
+        ['Prefer a women-only, beginner-friendly space', { text: 'Girl Power', href: g.href }, g.priceLabel],
+        ['Want a group focused on strength, muscle and conditioning', { text: 'Men’s Online Group Training', href: m.href }, m.priceLabel],
+        ['Want help with eating habits alongside training', 'Nutrition Support', 'Ask the team'],
+      ]}
+    />
+  </Section>
+
+  <Section id="why-speak" tone="light" labelledby="speak-title">
+    <div class="section__lead">
+      <h2 id="speak-title">Why speak to us first?</h2>
+      <p class="lede">A short conversation helps you choose the right format before you commit.</p>
+    </div>
+    <ul class="ruled ruled--2">
+      <li class="ruled__item"><h3>Understand your options</h3><p>We explain the programs in plain language.</p></li>
+      <li class="ruled__item"><h3>Discuss goals and experience</h3><p>So the plan fits where you are starting from.</p></li>
+      <li class="ruled__item"><h3>Find a suitable format</h3><p>Whether private coaching or a small group.</p></li>
+      <li class="ruled__item"><h3>Ask about pricing and structure</h3><p>Ask before you commit.</p></li>
+    </ul>
+  </Section>
+
+  <FAQ items={faqs} tone="white" />
+
+  <CtaBand
+    headline="One message is enough to begin."
+    primary={{ label: 'Request a Consultation', href: '#enquiry' }}
+    secondary={{ label: `Email ${BRAND.email}`, href: `mailto:${BRAND.email}` }}
+  >
+    You do not need a perfect plan or a perfect schedule. Send us a few details and we will help you take a practical first step
+    toward a more consistent routine.
+  </CtaBand>
+</BaseLayout>

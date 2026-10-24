@@ -1,0 +1,41 @@
+---
+/**
+ * Always-visible FAQ (no accordion): every answer is plain text in the HTML at build time.
+ * The same `items` array feeds the FAQPage JSON-LD, so visible text and markup always match.
+ * The contact email inside an answer is turned into a mailto link without changing the text.
+ */
+import { BRAND } from '../config/site';
+import type { FaqItem } from '../lib/schema';
+interface Props {
+  items: FaqItem[];
+  id?: string;
+  title?: string;
+  intro?: string;
+  tone?: 'light' | 'white' | 'tint';
+}
+const { items, id = 'faq', title = 'Frequently asked questions', intro, tone = 'white' } = Astro.props;
+const EMAIL = BRAND.email;
+---
+<section id={id} class:list={['section', `section--${tone}`]} aria-labelledby={`${id}-title`}>
+  <div class="container faq">
+    <div class="faq__intro">
+      <h2 id={`${id}-title`}>{title}</h2>
+      {intro && <p class="muted">{intro}</p>}
+    </div>
+    <div class="faq__list">
+      {items.map((item) => (
+        <div class="faq__item">
+          <h3>{item.q}</h3>
+          <p>
+            {item.a.split(EMAIL).map((part, i, all) => (
+              <>
+                {part}
+                {i < all.length - 1 && <a href={`mailto:${EMAIL}`}>{EMAIL}</a>}
+              </>
+            ))}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

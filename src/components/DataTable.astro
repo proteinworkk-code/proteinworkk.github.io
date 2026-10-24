@@ -1,0 +1,40 @@
+---
+/**
+ * Accessible comparison table. On wide screens it is a normal table; on small screens each row
+ * becomes a stacked block using the data-label of every cell (no sideways scrolling needed).
+ * A cell is either plain text or { text, href } for a link.
+ */
+type Cell = string | { text: string; href: string };
+interface Props {
+  caption: string;
+  headers: string[];
+  rows: Cell[][];
+}
+const { caption, headers, rows } = Astro.props;
+---
+<div class="table-wrap" role="region" aria-label={caption} tabindex="0">
+  <table class="table">
+    <caption class="visually-hidden">{caption}</caption>
+    <thead>
+      <tr>
+        {headers.map((h) => (
+          <th scope="col">{h || <span class="visually-hidden">Topic</span>}</th>
+        ))}
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((row) => (
+        <tr>
+          {row.map((cell, i) => {
+            const content = typeof cell === 'string' ? cell : <a href={cell.href}>{cell.text}</a>;
+            return i === 0 ? (
+              <th scope="row">{content}</th>
+            ) : (
+              <td data-label={headers[i]}>{content}</td>
+            );
+          })}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

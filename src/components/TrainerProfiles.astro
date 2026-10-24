@@ -1,0 +1,23 @@
+---
+/** Renders nothing unless verified profiles exist in src/data/trainers.ts. */
+import Section from './Section.astro';
+import { trainers } from '../data/trainers';
+const verified = trainers.filter((t) => t.verified);
+---
+{verified.length > 0 && (
+  <Section id="coaches" tone="white" labelledby="coaches-title">
+    <h2 id="coaches-title">Meet your coaches</h2>
+    <div class="people">
+      {verified.map((t) => (
+        <article class="person">
+          {t.photo && <img src={t.photo} alt={t.photoAlt ?? `${t.name}, ${t.role}`} width="160" height="160" loading="lazy" decoding="async" />}
+          <h3>{t.name}</h3>
+          <p class="muted">{t.role}</p>
+          <ul class="checklist">{t.credentials.map((c) => <li>{c}</li>)}</ul>
+          <p>{t.experience}</p>
+          <p>{t.approach}</p>
+        </article>
+      ))}
+    </div>
+  </Section>
+)}

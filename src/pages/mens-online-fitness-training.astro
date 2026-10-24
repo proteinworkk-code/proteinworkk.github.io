@@ -1,0 +1,191 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import QuickAnswer from '../components/QuickAnswer.astro';
+import Section from '../components/Section.astro';
+import DataTable from '../components/DataTable.astro';
+import MedicalNote from '../components/MedicalNote.astro';
+import FAQ from '../components/FAQ.astro';
+import CtaBand from '../components/CtaBand.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import Button from '../components/Button.astro';
+import { ROUTES, crumbsFor } from '../config/routes';
+import { programs, PRICES, GROUP_CAP, enquiryHref } from '../data/programs';
+import { breadcrumbs, faqPage, service, type FaqItem } from '../lib/schema';
+
+const p = programs.mens;
+const priced = p.priceConfirmed;
+
+const faqs: FaqItem[] = [
+  {
+    q: 'Can I build muscle with online group training?',
+    a: 'Yes. The program is built on progressive resistance training, supported by protein and recovery guidance. Muscle gain depends on consistency, nutrition, sleep and individual factors, and results vary.',
+  },
+  {
+    q: 'I am a beginner. Is this too advanced?',
+    a: 'No. Beginners are welcome. Sessions are trainer-guided, and the program builds from fundamentals.',
+  },
+  {
+    q: 'Can this help with fat loss?',
+    a: 'The program supports fat loss and weight management through training, nutrition guidance and sustainable habits. Results vary and are not guaranteed.',
+  },
+  {
+    q: 'Do I need a gym?',
+    a: 'No. Training is delivered online, so you can train at home or anywhere suitable. Tell us what equipment you have when you get in touch.',
+  },
+  { q: 'How many men are in each group?', a: `A maximum of ${GROUP_CAP}.` },
+  {
+    q: 'How much does it cost?',
+    a: priced
+      ? `${p.priceLabel}, with a maximum of ${GROUP_CAP} men per group.`
+      : 'Pricing for the men’s program is being finalised. Send an enquiry and the team will share current pricing and what is included.',
+  },
+  {
+    q: 'Do you recommend supplements?',
+    a: 'We take a food-first approach and do not promote supplements or testosterone boosters as shortcuts or treatments. If you are considering a supplement or have a medical condition, speak to your doctor.',
+  },
+];
+
+const schema = [
+  service({
+    program: p,
+    serviceType: 'Men’s online group fitness training',
+    description: `Men’s online group training from Proteinworkk, focused on strength, muscle development, endurance and conditioning, in groups of up to ${GROUP_CAP} men.`,
+  }),
+  breadcrumbs(crumbsFor(ROUTES.mens)),
+  faqPage(faqs),
+];
+---
+<BaseLayout route={ROUTES.mens} schema={schema} theme="men">
+  <PageHero
+    title="Online Fitness Training for Men: Strength, Muscle and Conditioning, Coached"
+    tag="Men’s online group training"
+    crumbs={crumbsFor(ROUTES.mens)}
+    primary={{ label: 'Start Men’s Training', href: enquiryHref('mens') }}
+    secondary={{ label: 'Compare Programs', href: `${ROUTES.home.path}#programs` }}
+    trust={['Strength and muscle focus', `Max ${GROUP_CAP} members`, ...(priced ? [p.priceLabel] : [])]}
+  >
+    Structured online group training built on progression, not ego. Train in a small group of up to {GROUP_CAP} with a trainer who
+    tracks what matters.
+  </PageHero>
+
+  <QuickAnswer>
+    <strong>Men’s Online Group Training at Proteinworkk</strong> is a structured group program focused on strength, muscle
+    development, endurance and conditioning. Groups have a maximum of {GROUP_CAP} members, a trainer guides the program, and
+    nutrition guidance supports your goals.{priced ? ` It costs ${p.priceLabel}.` : ' Ask the team for current pricing.'}
+  </QuickAnswer>
+
+  <Section id="approach" labelledby="approach-title">
+    <div class="two-col two-col--wide-left">
+      <div>
+        <h2 id="approach-title">Lift well. Train consistently. Track the numbers.</h2>
+        <p>
+          Most men do not lack effort. They lack a plan, and someone who tells them honestly when the plan is not working. This
+          program gives you both: a clear progression, a trainer guiding the work and a small group that keeps you accountable.
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="who-for" tone="white" labelledby="who-title">
+    <div class="two-col two-col--wide-left">
+      <div>
+        <h2 id="who-title">Who is men’s online group training for?</h2>
+        <p>It is for men who want structured strength and conditioning work, from first-time lifters to those stuck at a plateau.</p>
+        <ul class="checklist">
+          <li><strong>Beginners</strong> who want to learn to lift properly and build a base.</li>
+          <li><strong>Intermediate trainees</strong> stuck at a plateau who need structure and progression.</li>
+          <li><strong>Working professionals</strong> who need an efficient, planned routine.</li>
+          <li><strong>Men managing their weight</strong> through training and sensible nutrition.</li>
+          <li><strong>Anyone who trains better in a group</strong> than alone.</li>
+        </ul>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="how-we-train" tone="tint" labelledby="train-title">
+    <div class="section__lead">
+      <h2 id="train-title">How do we train?</h2>
+      <p class="lede">We train strength first, build muscle progressively, add conditioning and mobility, and manage weight sustainably.</p>
+    </div>
+    <DataTable
+      caption="Men’s program training pillars"
+      headers={['Pillar', 'What it means']}
+      rows={[
+        ['Strength first', 'Training is built around foundational movement patterns and gradually increasing loads, so strength improves measurably.'],
+        ['Muscle development', 'Progressive overload, appropriate volume, recovery and enough protein to support the work.'],
+        ['Conditioning and endurance', 'Stamina and heart health that improve performance in training and life.'],
+        ['Mobility and joint care', 'Good movement keeps you training for years, not months.'],
+        ['Sustainable weight management', 'Training, nutrition habits and consistency rather than crash tactics.'],
+      ]}
+    />
+    <h3 style="margin-top:2rem">What we do not do</h3>
+    <ul class="checklist">
+      <li>We do not chase ego lifting. Poor technique stalls progress and raises injury risk.</li>
+      <li>We do not promote crash diets or extreme restriction.</li>
+      <li>We do not sell supplements, testosterone boosters or “hormone-optimizing” products as shortcuts.</li>
+      <li>We do not promise specific results or timelines.</li>
+    </ul>
+  </Section>
+
+  <Section id="nutrition" labelledby="nutrition-title">
+    <div class="two-col two-col--wide-left">
+      <div>
+        <h2 id="nutrition-title">What nutrition support goes with men’s training?</h2>
+        <p>
+          Muscle gain and fat loss both depend on nutrition. We provide practical guidance on protein, balanced meals, portion
+          awareness and habits that fit a working week. Ask the team what nutrition support is included with the program.
+        </p>
+      </div>
+      <MedicalNote />
+    </div>
+  </Section>
+
+  <Section id="group-experience" tone="white" labelledby="group-title">
+    <div class="two-col two-col--wide-left">
+      <div>
+        <h2 id="group-title">What is the group experience like?</h2>
+        <p>
+          In a group of up to {GROUP_CAP} men, you train alongside others with similar goals. The trainer leads the program, and
+          the group adds accountability and a little healthy competition. Group training is not one-to-one coaching. For individual
+          planning, see <a href={programs['one-to-one'].href}>Online One-to-One Personal Training</a>.
+        </p>
+        <p>Ask the team for current details on session format, frequency, duration and platform.</p>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="cost" tone="tint" labelledby="cost-title">
+    <div class="two-col two-col--wide-left">
+      <div>
+        <h2 id="cost-title">How much does the men’s program cost?</h2>
+        <p>
+          {priced
+            ? `Men’s Online Group Training costs ${p.priceLabel}, with a maximum of ${GROUP_CAP} men per group.`
+            : `Men’s program pricing is being finalised. Send an enquiry and the team will share current pricing and what is included. Each group has a maximum of ${GROUP_CAP} men.`}
+        </p>
+        <p>Session counts, session length, frequency and other plan details are confirmed when you enquire.</p>
+        <Button href={enquiryHref('mens')} variant="primary" location="pricing">{priced ? 'Start Men’s Training' : 'Ask About Men’s Program Pricing'}</Button>
+      </div>
+    </div>
+  </Section>
+
+  <FAQ items={faqs} tone="white" />
+
+  <CtaBand
+    headline="Train like it matters. Because it does."
+    primary={{ label: 'Start Men’s Training', href: enquiryHref('mens') }}
+    secondary={{ label: 'Talk to Our Team', href: ROUTES.contact.path }}
+  >
+    Get a plan, a trainer and a group that will keep you honest. Build strength you can measure, one session at a time.
+  </CtaBand>
+
+  <RelatedLinks
+    items={[
+      { href: programs.group.href, text: 'Online group training', desc: `Trainer-guided groups of up to ${GROUP_CAP}.` },
+      { href: programs['one-to-one'].href, text: 'Online one-to-one personal training', desc: `Private coaching for ${PRICES.oneToOneSession.label} or ${PRICES.oneToOneMonth.label}.` },
+      { href: ROUTES.contact.path, text: 'Contact the Proteinworkk team', desc: 'Ask a question or request a consultation.' },
+      { href: ROUTES.about.path, text: 'About Proteinworkk', desc: 'Who we are and how training works.' },
+    ]}
+  />
+</BaseLayout>

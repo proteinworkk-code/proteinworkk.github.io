@@ -1,0 +1,84 @@
+---
+/**
+ * Base layout: <head> metadata (title, description, canonical, Open Graph, Twitter), icons,
+ * self-hosted fonts, JSON-LD, header, footer and the (optional) GA4 loader.
+ */
+import '@fontsource-variable/inter/wght.css';
+import '@fontsource-variable/bricolage-grotesque/wght.css';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import JsonLd from '../components/JsonLd.astro';
+import { BRAND, abs, GA4_ID } from '../config/site';
+import type { Route } from '../config/routes';
+
+interface Props {
+  route: Route;
+  schema?: Record<string, unknown>[];
+  theme?: 'default' | 'women' | 'men';
+}
+const { route, schema = [], theme = 'default' } = Astro.props;
+const canonical = abs(route.path);
+const ogImage = abs(BRAND.ogImagePath);
+---
+<!doctype html>
+<html lang="en-IN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{route.title}</title>
+    <meta name="description" content={route.description} />
+    <link rel="canonical" href={canonical} />
+    {!route.indexable && <meta name="robots" content="noindex, follow" />}
+    <meta name="theme-color" content="#20291B" />
+
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/images/favicon-32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/images/icon-192.png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={BRAND.name} />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="og:title" content={route.title} />
+    <meta property="og:description" content={route.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={BRAND.ogImageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={route.title} />
+    <meta name="twitter:description" content={route.description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={BRAND.ogImageAlt} />
+
+    <script is:inline>document.documentElement.classList.add('js');</script>
+
+    {schema.map((data) => <JsonLd data={data} />)}
+
+    {GA4_ID && (
+      <>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`}></script>
+        <script is:inline define:vars={{ GA4_ID }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          window.gtag = gtag;
+          gtag('js', new Date());
+          gtag('config', GA4_ID);
+        </script>
+      </>
+    )}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <Header />
+    <main id="main" data-theme={theme}>
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      import '../scripts/analytics.ts';
+    </script>
+  </body>
+</html>

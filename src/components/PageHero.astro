@@ -1,0 +1,42 @@
+---
+/**
+ * Hero for inner pages. Default slot = the subheadline (plain text).
+ * `theme` changes only the accent colour so every page still feels like one brand.
+ */
+import Breadcrumbs from './Breadcrumbs.astro';
+import Button from './Button.astro';
+import type { Crumb } from '../config/routes';
+interface Props {
+  title: string;
+  crumbs?: Crumb[];
+  tag?: string;
+  trust?: string[];
+  primary?: { label: string; href: string };
+  secondary?: { label: string; href: string };
+}
+const { title, crumbs = [], tag, trust = [], primary, secondary } = Astro.props;
+---
+<section class="hero hero--inner" aria-labelledby="page-title">
+  <div class="container hero__grid">
+    <div class="hero__copy">
+      {crumbs.length > 1 && <Breadcrumbs items={crumbs} />}
+      {tag && <p class="hero__tag">{tag}</p>}
+      <h1 id="page-title" class="hero__title">{title}</h1>
+      <p class="hero__sub"><slot /></p>
+      {(primary || secondary) && (
+        <div class="hero__actions">
+          {primary && <Button href={primary.href} variant="primary" location="hero">{primary.label}</Button>}
+          {secondary && <Button href={secondary.href} variant="onDark" location="hero">{secondary.label}</Button>}
+        </div>
+      )}
+      {trust.length > 0 && (
+        <ul class="facts">
+          {trust.map((t) => <li>{t}</li>)}
+        </ul>
+      )}
+    </div>
+    <div class="hero__aside" aria-hidden="true">
+      <img src="/images/logo-h512.png" width="582" height="512" alt="" decoding="async" />
+    </div>
+  </div>
+</section>

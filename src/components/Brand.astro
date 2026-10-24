@@ -1,0 +1,27 @@
+---
+/**
+ * Brand lockup: the supplied logo image (transparent PNG, never redrawn or stretched)
+ * next to a text wordmark. The image is decorative because the wordmark text names the brand.
+ */
+interface Props {
+  variant?: 'header' | 'footer';
+  tagline?: boolean;
+}
+const { variant = 'header', tagline = false } = Astro.props;
+const header = variant === 'header';
+---
+<a class:list={['brand', `brand--${variant}`]} href="/">
+  <img
+    class="brand__mark"
+    src={header ? '/images/logo-h44.png' : '/images/logo-h88.png'}
+    srcset={header ? '/images/logo-h88.png 2x' : '/images/logo-h176.png 2x'}
+    width={header ? 50 : 64}
+    height={header ? 44 : 56}
+    alt=""
+    decoding="async"
+  />
+  <span class="brand__text">
+    <span class="brand__word">Proteinworkk</span>
+    {tagline && <span class="brand__tag">Strength within reach.</span>}
+  </span>
+</a>

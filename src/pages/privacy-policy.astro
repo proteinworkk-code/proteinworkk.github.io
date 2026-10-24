@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import { ROUTES, crumbsFor } from '../config/routes';
+import { BRAND } from '../config/site';
+---
+<BaseLayout route={ROUTES.privacy}>
+  <PageHero title="Privacy Policy" crumbs={crumbsFor(ROUTES.privacy)}>
+    How Proteinworkk uses the details you send through the enquiry form.
+  </PageHero>
+
+  <Section tone="light">
+    <p class="notice">
+      <strong>Draft for review.</strong> This policy is a working draft awaiting review and approval by Proteinworkk and its legal
+      adviser. It is not yet final.
+    </p>
+    <div class="prose">
+      <h2>Who we are</h2>
+      <p>{BRAND.description} You can contact us at <a href={`mailto:${BRAND.email}`}>{BRAND.email}</a>.</p>
+
+      <h2>What we collect</h2>
+      <p>
+        When you send the enquiry form we receive the details you enter: your name, email address, optional phone number and city,
+        the program and goal you select, your preferred contact method, and any message you write.
+      </p>
+
+      <h2>How we use it</h2>
+      <p>
+        We use these details only to respond to your enquiry and help you choose a program. We do not use the form to send you
+        unrelated marketing.
+      </p>
+
+      <h2>Who processes it</h2>
+      <p>
+        Enquiries sent through the form are delivered to us by an external form-handling service. If you email us directly, your
+        message goes to our email provider. We do not sell your personal details.
+      </p>
+
+      <h2>Website analytics</h2>
+      <p>
+        If analytics is switched on for this website, it records general activity such as page views and button clicks. We do not
+        send your name, email address, phone number or message text to analytics.
+      </p>
+
+      <h2>Your choices</h2>
+      <p>
+        You can ask us to see, correct or delete the details you have sent us by emailing
+        <a href={`mailto:${BRAND.email}`}>{BRAND.email}</a>.
+      </p>
+
+      <h2>Health information</h2>
+      <p>
+        Please do not include detailed medical information in the enquiry form. Proteinworkk provides fitness coaching and
+        nutrition education, not medical advice, diagnosis or treatment.
+      </p>
+
+      <p class="updated">Draft last updated: {BRAND.lastUpdated}</p>
+    </div>
+  </Section>
+</BaseLayout>

@@ -1,0 +1,169 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import QuickAnswer from '../components/QuickAnswer.astro';
+import Section from '../components/Section.astro';
+import DataTable from '../components/DataTable.astro';
+import CtaBand from '../components/CtaBand.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+import { ROUTES, crumbsFor } from '../config/routes';
+import { BRAND } from '../config/site';
+import { programs, programList, PRICES, GROUP_CAP, enquiryHref } from '../data/programs';
+import { aboutPage, breadcrumbs } from '../lib/schema';
+
+const g = programs['girl-power'];
+const m = programs.mens;
+
+const schema = [aboutPage(ROUTES.about.path, ROUTES.about.description), breadcrumbs(crumbsFor(ROUTES.about))];
+---
+<BaseLayout route={ROUTES.about} schema={schema}>
+  <PageHero
+    title="About Proteinworkk: Strength Within Reach"
+    crumbs={crumbsFor(ROUTES.about)}
+    primary={{ label: 'Explore Training Programs', href: `${ROUTES.home.path}#programs` }}
+    secondary={{ label: 'Contact Our Team', href: ROUTES.contact.path }}
+  >
+    Proteinworkk makes structured fitness coaching easier to reach, with transparent pricing, small groups and honest limits.
+  </PageHero>
+
+  <QuickAnswer label="Quick answer: who is Proteinworkk?">
+    <strong>Proteinworkk</strong> is an online fitness coaching and nutrition support brand based in Bengaluru, Karnataka, India.
+    {BRAND.philosophy} It offers one-to-one and group training for beginners, working professionals, women and men, and all
+    training is delivered online.
+  </QuickAnswer>
+
+  <Section id="at-a-glance" labelledby="glance-title">
+    <div class="section__lead">
+      <h2 id="glance-title">Proteinworkk at a glance</h2>
+      <p class="lede">These are the key facts about Proteinworkk, in the wording we use everywhere on this website.</p>
+    </div>
+    <DataTable
+      caption="Proteinworkk at a glance"
+      headers={['Fact', 'Detail']}
+      rows={[
+        ['What it is', BRAND.description],
+        ['Philosophy', BRAND.philosophy],
+        ['What we offer', 'Online one-to-one personal training, online group training, Girl Power (women-only group training), men’s online group training and nutrition support.'],
+        ['How training is delivered', BRAND.delivery],
+        ['One-to-one pricing', programs['one-to-one'].priceLabel],
+        ['Group pricing', `${PRICES.group.label}, maximum ${GROUP_CAP} members per group.`],
+        ['Girl Power and men’s program', g.priceConfirmed && m.priceConfirmed ? `${g.priceLabel}, maximum ${GROUP_CAP} members per group.` : `Pricing on enquiry, maximum ${GROUP_CAP} members per group.`],
+        ['Who it is for', 'Beginners, working professionals, women seeking a women-only space, and men seeking strength and muscle training.'],
+        ['What it is not', 'Proteinworkk is not a medical provider and does not diagnose, treat or cure any condition.'],
+        ['Contact', { text: BRAND.email, href: `mailto:${BRAND.email}` }],
+      ]}
+    />
+    <p class="updated" style="margin-top:1rem">Last updated: {BRAND.lastUpdated}</p>
+  </Section>
+
+  <Section id="philosophy" tone="white" labelledby="phil-title">
+    <div class="two-col two-col--wide-left">
+      <div>
+        <h2 id="phil-title">What does “Strength within reach” mean?</h2>
+        <p>
+          It means fitness should be accessible to everyone. Proteinworkk starts from the idea that two people with the same goal
+          rarely need the same plan, so your experience, schedule and starting point shape your training.
+        </p>
+        <p>
+          Our coaching rests on five foundations: strength, consistency, endurance, recovery and nutrition. We focus on guidance and
+          accountability, not quick fixes.
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="programs" labelledby="programs-title">
+    <div class="section__lead">
+      <h2 id="programs-title">Which programs does Proteinworkk offer?</h2>
+      <p class="lede">Proteinworkk offers four online programs, plus nutrition support alongside training.</p>
+    </div>
+    <ul class="ruled ruled--2">
+      {programList.map((p) => (
+        <li class="ruled__item">
+          <h3><a href={p.href}>{p.name}</a></h3>
+          <p>{p.audience}. {p.priceLabel}.</p>
+        </li>
+      ))}
+    </ul>
+  </Section>
+
+  <Section id="delivery" tone="tint" labelledby="delivery-title">
+    <div class="two-col">
+      <div>
+        <h2 id="delivery-title">How is training delivered?</h2>
+        <p>
+          {BRAND.delivery} You train at home or in any suitable space while a trainer guides the structure and the plan progresses
+          as you do. A remote trainer cannot physically adjust your position or spot a heavy lift, so online coaching suits people
+          who can train safely in their own space.
+        </p>
+        <p>
+          Group training is not one-to-one coaching: the group follows a shared, structured program, and each group has a maximum
+          of {GROUP_CAP} members.
+        </p>
+      </div>
+      <div>
+        <h3>Who are the programs for?</h3>
+        <ul class="checklist">
+          <li>Beginners who want clear guidance.</li>
+          <li>Working professionals who need a plan that fits a busy schedule.</li>
+          <li>Women seeking a women-only space.</li>
+          <li>Men seeking strength and muscle training.</li>
+        </ul>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="scope" tone="white" labelledby="scope-title">
+    <div class="section__lead">
+      <h2 id="scope-title">What does Proteinworkk provide, and what does it not?</h2>
+      <p class="lede">Proteinworkk provides fitness coaching and nutrition education. It does not provide medical advice, diagnosis or treatment.</p>
+    </div>
+    <div class="two-col">
+      <div>
+        <h3>What we provide</h3>
+        <ul class="checklist">
+          <li>Structured online training with progression.</li>
+          <li>Trainer guidance and accountability.</li>
+          <li>Small groups, capped at {GROUP_CAP} members.</li>
+          <li>Practical nutrition education: protein, balance, portions and habits.</li>
+          <li>Transparent prices for our programs.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>What we do not provide</h3>
+        <ul class="checklist">
+          <li>Medical advice, diagnosis or treatment, including for PCOS, PCOD or thyroid conditions.</li>
+          <li>Any guarantee of results or timelines.</li>
+          <li>Hands-on adjustment, spotting or in-person training.</li>
+          <li>Supplements, testosterone boosters or crash diets as shortcuts.</li>
+          <li>A replacement for hands-on physiotherapy.</li>
+        </ul>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="contact" labelledby="contact-title">
+    <div class="two-col two-col--wide-left">
+      <div>
+        <h2 id="contact-title">How do I contact Proteinworkk?</h2>
+        <p>
+          Email <a href={`mailto:${BRAND.email}`}>{BRAND.email}</a> or use the <a href={enquiryHref('not-sure')}>enquiry form</a>.
+          Proteinworkk is based in {BRAND.locality}, {BRAND.region}, {BRAND.country}.
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <CtaBand
+    headline="Start where you are. We’ll build from there."
+    primary={{ label: 'Get Started with Proteinworkk', href: enquiryHref('not-sure') }}
+    secondary={{ label: 'Contact Our Team', href: ROUTES.contact.path }}
+  >
+    You do not need to be fit to begin. You need a clear plan, a coach who pays attention and a routine you can keep.
+  </CtaBand>
+
+  <RelatedLinks
+    items={programList.map((p) => ({ href: p.href, text: p.name, desc: p.audience + '.' }))}
+    title="Explore the programs"
+  />
+</BaseLayout>
