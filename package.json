@@ -1,0 +1,27 @@
+{
+  "name": "proteinworkk-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Static marketing website for Proteinworkk, an online fitness coaching and nutrition support brand in Bengaluru, India.",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "verify": "node scripts/verify-build.mjs",
+    "check": "npm run build && npm run verify && npm run test:dom",
+    "test:dom": "node tests/dom-tests.mjs"
+  },
+  "engines": {
+    "node": ">=22.22.0"
+  },
+  "dependencies": {
+    "@fontsource-variable/bricolage-grotesque": "^5.3.0",
+    "@fontsource-variable/inter": "^5.3.0",
+    "astro": "^7.4.0"
+  },
+  "devDependencies": {
+    "jsdom": "^30.1.3"
+  }
+}
