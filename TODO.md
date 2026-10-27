@@ -41,7 +41,8 @@ Source: content pack Part 12 and the in-line confirmation notes. Tick items off 
 
 ## Contact details and social
 
-- [ ] Decide whether to publish a phone number, WhatsApp number, office hours, a response-time promise, or a street address. None is shown today. If phone/WhatsApp is added, also add it to `CONTACT_METHODS` and (only if real and visible) to the Organization schema. *Affects: Contact page, footer, form, JSON-LD.*
+- [x] **WhatsApp integration confirmed & deployed**: Configured +91 9831153184 with global floating WhatsApp button, pre-filled welcome message, and privacy-safe analytics.
+- [ ] Decide whether to publish a direct call phone number, office hours, or street address. None is shown today. *Affects: Contact page, footer, form, JSON-LD.*
 - [ ] Provide real social profile URLs and add them to `SOCIAL_LINKS` in `src/config/site.ts` (the footer renders them automatically). Optionally add `sameAs` to the Organization schema. *Affects: footer, JSON-LD.*
 - [ ] Confirm whether the business operates **no physical gym or studio**. The content pack stated this, but it was marked unconfirmed, so the site only says "all training is delivered online". *Affects: About, Contact, FAQs.*
 

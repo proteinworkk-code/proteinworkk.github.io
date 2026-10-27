@@ -47,11 +47,29 @@ export const GA4_ID: string = (() => {
 })();
 
 /**
- * Contact methods the business has CONFIRMED it can support. Only email is confirmed.
- * Add 'Phone call' and/or 'WhatsApp' here once the business confirms (and add the numbers
- * to the contact page deliberately).
+ * WhatsApp business contact details.
+ * Click-to-chat destination uses the clean digits with country code (919831153184).
  */
-export const CONTACT_METHODS: string[] = ['Email'];
+export const WHATSAPP = {
+  numberFormatted: '+91 9831153184',
+  numberDigits: '919831153184',
+  countryCode: '+91',
+  defaultMessage:
+    'Hi Proteinworkk team! I visited your website and would like to know more about your products. Could you please assist me?',
+  /**
+   * Builds the official wa.me click-to-chat URL with optional custom text.
+   */
+  buildUrl(message?: string): string {
+    const text = message ?? this.defaultMessage;
+    return `https://wa.me/${this.numberDigits}?text=${encodeURIComponent(text)}`;
+  },
+} as const;
+
+/**
+ * Contact methods the business has CONFIRMED it can support.
+ */
+export const CONTACT_METHODS: string[] = ['Email', 'WhatsApp'];
 
 /** Social profile URLs. Leave empty until real profiles exist: nothing is rendered for empty values. */
 export const SOCIAL_LINKS: { label: string; href: string }[] = [];
+

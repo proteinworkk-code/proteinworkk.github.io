@@ -1,7 +1,17 @@
-import { JSDOM } from 'jsdom';
 import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 
-const D = new URL('../dist/', import.meta.url).pathname;
+// Node <22.19.0 compatibility fallback for undici decompression in test runner
+try {
+  const z = (await import('node:zlib')).default;
+  if (!z.createZstdDecompress) {
+    z.createZstdDecompress = () => {};
+    z.constants.ZSTD_d_windowLogMax = 23;
+  }
+} catch {}
+
+const { JSDOM } = await import('jsdom');
+const D = fileURLToPath(new URL('../dist/', import.meta.url));
 let pass = 0, failN = 0;
 const ok = (c, m) => { if (c) pass++; else { failN++; console.log('  FAIL:', m); } };
 
@@ -103,6 +113,23 @@ console.log('10. Analytics click events are privacy-safe');
   doc.querySelector('.site-footer a[href^="mailto:"]').click();
   const names = tracked.map((t) => t[1]); ok(names.includes('cta_click') && names.includes('email_click') && names.includes('program_enquiry_click'), 'cta/email/program events: ' + names.join(','));
   ok(!JSON.stringify(tracked).includes('@'), 'no email address in events'); }
+
+console.log('11. WhatsApp floating button integration and analytics');
+{ const { w, doc, tracked } = load('index.html', { url: 'https://proteinworkk.com/', fetchImpl: async () => ({ ok: true }) });
+  const waFab = doc.querySelector('.whatsapp-fab');
+  ok(!!waFab, 'WhatsApp FAB exists in DOM');
+  const href = waFab.getAttribute('href') || '';
+  ok(href.startsWith('https://wa.me/919831153184'), 'destination is +91 9831153184');
+  ok(href.includes(encodeURIComponent('Hi Proteinworkk team! I visited your website and would like to know more about your products. Could you please assist me?')), 'prefilled welcome message is present and encoded');
+  ok(waFab.getAttribute('target') === '_blank', 'opens in new tab');
+  ok((waFab.getAttribute('rel') || '').includes('noopener') && (waFab.getAttribute('rel') || '').includes('noreferrer'), 'has rel="noopener noreferrer"');
+  ok(waFab.getAttribute('aria-label') === 'Chat with Proteinworkk on WhatsApp', 'accessible name set');
+
+  waFab.click();
+  const waEvent = tracked.find((t) => t[1] === 'whatsapp_click');
+  ok(!!waEvent, 'whatsapp_click analytics event fired on click');
+  ok(waEvent && waEvent[2].button_location === 'floating', 'button_location is floating');
+  ok(!JSON.stringify(waEvent).includes('9831153184'), 'no phone number in analytics event payload'); }
 
 console.log(`\n${pass} passed, ${failN} failed`);
 process.exit(failN ? 1 : 0);

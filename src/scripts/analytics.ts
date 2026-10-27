@@ -27,6 +27,15 @@ document.addEventListener('click', (e) => {
     window.pwTrack?.('email_click', { link_location: location });
   }
 
+  if (href.startsWith('https://wa.me/')) {
+    // Deliberately no phone number or message contents in the event.
+    window.pwTrack?.('whatsapp_click', {
+      page_location: window.location.href,
+      page_title: document.title,
+      button_location: location || 'floating',
+    });
+  }
+
   if (link.dataset.cta === 'primary') {
     window.pwTrack?.('cta_click', {
       cta_text: (link.textContent ?? '').trim().slice(0, 80),
