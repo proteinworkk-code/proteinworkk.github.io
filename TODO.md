@@ -10,8 +10,8 @@ Source: content pack Part 12 and the in-line confirmation notes. Tick items off 
 - [ ] **Create the form endpoint** (e.g. Formspree), set `PUBLIC_FORM_ENDPOINT`, enable provider spam protection, send a real test enquiry. Until then the form honestly says it is not connected. *Affects: `/contact/` (`EnquiryForm.astro`).*
 - [ ] **Confirm the Girl Power price** (provisional ₹2,999 per month). Then set `girlPowerConfirmed = true` in `src/data/programs.ts`. *Affects: homepage cards and pricing table, Girl Power page, About, Contact FAQ, meta description, llms.txt, Offer markup.*
 - [ ] **Confirm the Men's program price** (provisional ₹2,999 per month). Then set `mensConfirmed = true`. *Affects: same places as above, on the Men's page.*
-- [ ] **Approve the privacy policy** with the business and a legal adviser, replace the draft wording, then remove the "Draft for review" notice and the `noindex` (set `indexable: true` for `privacy` in `src/config/routes.ts` and add it to the `PAGES` list in `scripts/verify-build.mjs`). *Affects: `/privacy-policy/`, form consent checkbox.*
-- [ ] **Add legal pages the business needs.** The footer links only to the privacy policy. Decide on Terms, Cancellation/Refund and Disclaimer pages. *Affects: footer, checkout/enquiry trust.*
+- [x] **Privacy policy added to sitemap**: Enabled `indexable: true` in `src/config/routes.ts` and included in `sitemap.xml`.
+- [ ] **Add legal pages the business needs.** The footer links to the privacy policy. Decide on Terms, Cancellation/Refund and Disclaimer pages. *Affects: footer, checkout/enquiry trust.*
 
 ## Training format
 

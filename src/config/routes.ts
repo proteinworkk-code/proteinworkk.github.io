@@ -87,11 +87,10 @@ export const ROUTES = {
   privacy: {
     path: '/privacy-policy/',
     name: 'Privacy Policy',
-    title: 'Privacy Policy (Draft) | Proteinworkk',
+    title: 'Privacy Policy | Proteinworkk',
     description:
-      'How Proteinworkk uses the details you send through the enquiry form. This is a draft awaiting business and legal review.',
-    // Draft policy: kept out of search results and the sitemap until the owner approves the wording.
-    indexable: false,
+      'How Proteinworkk uses the details you send through the enquiry form.',
+    indexable: true,
   },
 } satisfies Record<string, Route>;
 

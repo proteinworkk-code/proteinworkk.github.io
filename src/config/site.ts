@@ -25,7 +25,7 @@ export const BRAND = {
   delivery: 'All training is delivered online.',
   lastUpdated: 'October 2026',
   /** ISO date used for sitemap <lastmod>. Change only when page content genuinely changes. */
-  lastModified: '2026-10-19',
+  lastModified: '2026-10-27',
   logoPath: '/images/logo-h512.png',
   ogImagePath: '/images/og-default.png',
   ogImageAlt: 'Proteinworkk logo with the tagline Strength within reach.',

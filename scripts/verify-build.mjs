@@ -69,7 +69,7 @@ const PAGES = {
   '/online-group-training/': { jsonLd: ['Service', 'BreadcrumbList', 'FAQPage'], quick: true, offers: 1 },
   '/girl-power-womens-online-fitness/': { jsonLd: ['Service', 'BreadcrumbList', 'FAQPage'], quick: true, offers: girlConfirmed ? 1 : 0, provisional: !girlConfirmed },
   '/mens-online-fitness-training/': { jsonLd: ['Service', 'BreadcrumbList', 'FAQPage'], quick: true, offers: mensConfirmed ? 1 : 0, provisional: !mensConfirmed },
-  '/privacy-policy/': { jsonLd: [], noindex: true },
+  '/privacy-policy/': { jsonLd: [] },
   '/404/': { jsonLd: [], noindex: true },
 };
 
