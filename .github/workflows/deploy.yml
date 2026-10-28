@@ -20,7 +20,7 @@ jobs:
     env:
       PUBLIC_SITE_URL: ${{ vars.PUBLIC_SITE_URL }}
       PUBLIC_FORM_ENDPOINT: ${{ vars.PUBLIC_FORM_ENDPOINT }}
-      PUBLIC_GA4_ID: ${{ vars.PUBLIC_GA4_ID }}
+      PUBLIC_GA4_ID: ${{ vars.PUBLIC_GA4_ID || 'G-PDHH0XQZK2' }}
     steps:
       - uses: actions/checkout@v4
       - name: Install, build and publish artifact

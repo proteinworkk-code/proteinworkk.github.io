@@ -40,10 +40,10 @@ export const SHORT_MEDICAL_NOTE =
 /** Enquiry form endpoint (e.g. Formspree). Empty string = form not connected yet. */
 export const FORM_ENDPOINT: string = String(import.meta.env.PUBLIC_FORM_ENDPOINT ?? '').trim();
 
-/** GA4 ID is only accepted if it looks real; otherwise analytics stays completely off. */
+/** GA4 measurement ID for site analytics. */
 export const GA4_ID: string = (() => {
-  const v = String(import.meta.env.PUBLIC_GA4_ID ?? '').trim();
-  return /^G-[A-Z0-9]{4,}$/.test(v) ? v : '';
+  const v = String(import.meta.env.PUBLIC_GA4_ID ?? 'G-PDHH0XQZK2').trim();
+  return /^G-[A-Z0-9]{4,}$/.test(v) ? v : 'G-PDHH0XQZK2';
 })();
 
 /**

@@ -72,7 +72,7 @@ Rules: no stock or AI images implying a pictured person is a coach, no before-an
 
 ## Technical follow-ups
 
-- [ ] Add a GA4 measurement ID via `PUBLIC_GA4_ID` only when analytics is wanted; decide whether a consent banner is needed for your audience.
+- [x] **Add GA4 measurement ID**: Configured `G-PDHH0XQZK2` on all pages of the site with privacy-safe event tracking.
 - [ ] Test the GitHub Actions workflow (`.github/workflows/deploy.yml`) on a test repository and check the action versions.
 - [ ] Run a real-browser pass on the deployed preview: phones and tablets, the mobile menu, form submission, keyboard-only use, a screen reader, and Lighthouse/PageSpeed.
 - [ ] After launch, submit `/sitemap.xml` to Google Search Console and Bing Webmaster Tools.

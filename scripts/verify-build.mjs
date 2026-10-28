@@ -241,10 +241,14 @@ for (const m of llms.matchAll(/\]\((https?:\/\/[^)]+)\)/g)) {
 if (!girlConfirmed && /Girl Power[^\n]*(₹|Rs)\s*\d/.test(llms)) fail('llms.txt', 'provisional Girl Power price present');
 if (!mensConfirmed && /Men's[^\n]*(₹|Rs)\s*\d/.test(llms)) fail('llms.txt', "provisional Men's price present");
 
-// Analytics must stay off without an ID
-if (!process.env.PUBLIC_GA4_ID) {
-  for (const file of htmlFiles) {
-    if (readFileSync(file, 'utf8').includes('googletagmanager')) fail(routeOf(file), 'GA4 loader present without PUBLIC_GA4_ID');
+// Google Analytics tag (gtag.js) must be present on all HTML pages
+for (const file of htmlFiles) {
+  const content = readFileSync(file, 'utf8');
+  if (!content.includes('https://www.googletagmanager.com/gtag/js?id=G-PDHH0XQZK2')) {
+    fail(routeOf(file), 'missing Google Analytics gtag.js loader for G-PDHH0XQZK2');
+  }
+  if (!content.includes("gtag('config', 'G-PDHH0XQZK2')")) {
+    fail(routeOf(file), 'missing gtag config for G-PDHH0XQZK2');
   }
 }
 
