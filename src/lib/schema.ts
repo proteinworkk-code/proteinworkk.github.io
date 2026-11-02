@@ -103,3 +103,47 @@ export const aboutPage = (path: string, description: string) => ({
   description,
   about: { '@type': 'Organization', name: BRAND.name, url: abs('/') },
 });
+
+export const collectionPage = (path: string, name: string, description: string) => ({
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name,
+  url: abs(path),
+  description,
+  about: { '@type': 'Organization', name: BRAND.name, url: abs('/') },
+});
+
+export const blogPosting = (opts: {
+  headline: string;
+  description: string;
+  path: string;
+  datePublished: string;
+  dateModified: string;
+  image?: string;
+  authorName?: string;
+}) => ({
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: opts.headline,
+  description: opts.description,
+  url: abs(opts.path),
+  mainEntityOfPage: { '@type': 'WebPage', '@id': abs(opts.path) },
+  image: opts.image ? abs(opts.image) : abs(BRAND.ogImagePath),
+  datePublished: opts.datePublished,
+  dateModified: opts.dateModified,
+  author: {
+    '@type': 'Organization',
+    name: opts.authorName ?? BRAND.name,
+    url: abs('/'),
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: BRAND.name,
+    url: abs('/'),
+    logo: {
+      '@type': 'ImageObject',
+      url: abs(BRAND.logoPath),
+    },
+  },
+});
+

@@ -70,6 +70,8 @@ const PAGES = {
   '/girl-power-womens-online-fitness/': { jsonLd: ['Service', 'BreadcrumbList', 'FAQPage'], quick: true, offers: girlConfirmed ? 1 : 0, provisional: !girlConfirmed },
   '/mens-online-fitness-training/': { jsonLd: ['Service', 'BreadcrumbList', 'FAQPage'], quick: true, offers: mensConfirmed ? 1 : 0, provisional: !mensConfirmed },
   '/privacy-policy/': { jsonLd: [] },
+  '/blog/': { jsonLd: ['CollectionPage', 'BreadcrumbList'], quick: true },
+  '/blog/is-online-personal-training-worth-it/': { jsonLd: ['BlogPosting', 'BreadcrumbList', 'FAQPage'], quick: true },
   '/404/': { jsonLd: [], noindex: true },
 };
 

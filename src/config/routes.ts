@@ -84,6 +84,23 @@ export const ROUTES = {
       'Ask about online personal training, group workouts, Girl Power or nutrition support. Email contact@proteinworkk.com or send an enquiry form.',
     indexable: true,
   },
+  blog: {
+    path: '/blog/',
+    name: 'Blog',
+    nav: 'Blog',
+    title: 'Fitness Blog, Training Guides & Nutrition | Proteinworkk',
+    description:
+      'Evidence-based guides on online personal training, muscle building, fat loss, and sustainable nutrition habits from certified fitness coaches.',
+    indexable: true,
+  },
+  blogWorthIt: {
+    path: '/blog/is-online-personal-training-worth-it/',
+    name: 'Is Online Personal Training Worth It?',
+    title: 'Is Online Personal Training Worth It? Cost, Benefits & Results',
+    description:
+      'Is online personal training worth it? Discover real costs, pros and cons, results for weight loss and muscle building, and how to choose the right coach.',
+    indexable: true,
+  },
   privacy: {
     path: '/privacy-policy/',
     name: 'Privacy Policy',
@@ -106,6 +123,7 @@ export const NAV_ITEMS = [
   ROUTES.group,
   ROUTES.girlPower,
   ROUTES.mens,
+  ROUTES.blog,
   ROUTES.contact,
 ].map((r: Route) => ({ label: r.nav as string, path: r.path }));
 
@@ -118,6 +136,13 @@ export interface Crumb {
 export const crumbsFor = (route: Route): Crumb[] => [
   { name: ROUTES.home.name, path: ROUTES.home.path },
   { name: route.name, path: route.path },
+];
+
+/** Breadcrumb trail for a blog post: Home > Blog > Post. */
+export const blogPostCrumbs = (postRoute: Route): Crumb[] => [
+  { name: ROUTES.home.name, path: ROUTES.home.path },
+  { name: ROUTES.blog.name, path: ROUTES.blog.path },
+  { name: postRoute.name, path: postRoute.path },
 ];
 
 export const canonicalFor = (route: Route): string => abs(route.path);

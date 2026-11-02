@@ -379,6 +379,56 @@ const schema = [organization(), website(), faqPage(faqs)];
   <TrainerProfiles />
   <Testimonials />
 
+  <!-- Blog & Guides Section -->
+  <Section id="blog-guides" tone="tint" labelledby="blog-section-title">
+    <div class="section__lead">
+      <h2 id="blog-section-title">Evidence-Based Fitness & Coaching Guides</h2>
+      <p class="lede">
+        Read our in-depth guides on remote training, progressive overload, and sustainable nutrition to make informed decisions for your health.
+      </p>
+    </div>
+    <div class="blog-grid blog-grid--featured">
+      <article class="blog-card blog-card--featured" aria-labelledby="home-blog-card-title">
+        <div class="blog-card__media">
+          <img
+            src="/images/blog/online-personal-training-worth-it.png"
+            alt="Woman performing plank during online fitness training session"
+            class="blog-card__img"
+            width="800"
+            height="500"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div class="blog-card__body">
+          <div class="blog-card__tags">
+            <span class="tag-badge tag-badge--accent">Featured Guide</span>
+            <span class="tag-badge">Online Personal Training</span>
+          </div>
+          <h3 id="home-blog-card-title" class="blog-card__title">
+            <a href={ROUTES.blogWorthIt.path}>Online Personal Training: Is It Worth It? Benefits, Cost, and Results</a>
+          </h3>
+          <p class="blog-card__excerpt">
+            An honest evaluation of remote coaching: how it works, what it costs in Rupees and Dollars, research on supervision, and what produces lasting fitness results.
+          </p>
+          <div class="blog-card__meta">
+            <span>By Proteinworkk Coaches</span>
+            <span>9 min read</span>
+            <span>November 2026</span>
+          </div>
+          <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+            <Button href={ROUTES.blogWorthIt.path} variant="primary" location="home-blog-card">
+              Read Full Guide
+            </Button>
+            <Button href={ROUTES.blog.path} variant="secondary" location="home-blog-all">
+              View All Blog Articles
+            </Button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </Section>
+
   <!-- Pricing -->
   <Section id="pricing" tone="white" labelledby="pricing-title">
     <div class="section__lead">

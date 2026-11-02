@@ -26,6 +26,8 @@ export const GET: APIRoute = () => {
 
 - [About ${BRAND.name}](${abs(ROUTES.about.path)}): Key facts about the brand.
 - [Contact ${BRAND.name}](${abs(ROUTES.contact.path)}): Email ${BRAND.email} or send an enquiry.
+- [Fitness Blog and Training Guides](${abs(ROUTES.blog.path)}): Evidence-based fitness guides, coaching insights, and nutrition habits.
+- [Is Online Personal Training Worth It?](${abs(ROUTES.blogWorthIt.path)}): Comprehensive guide on online coaching benefits, costs, weight loss and muscle results.
 
 ## Notes
 

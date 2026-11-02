@@ -1,0 +1,156 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../../components/Section.astro';
+import QuickAnswer from '../../components/QuickAnswer.astro';
+import Button from '../../components/Button.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { ROUTES, crumbsFor } from '../../config/routes';
+import { BRAND } from '../../config/site';
+import { collectionPage, breadcrumbs } from '../../lib/schema';
+import { enquiryHref } from '../../data/programs';
+
+const schema = [
+  collectionPage(ROUTES.blog.path, ROUTES.blog.title, ROUTES.blog.description),
+  breadcrumbs(crumbsFor(ROUTES.blog)),
+];
+
+const upcomingArticles = [
+  {
+    title: 'The Science of Progressive Overload: Building Muscle Without Ego Lifting',
+    tag: 'Strength & Hypertrophy',
+    excerpt: 'How to systematically increase stimulus and track measurable strength gains safely at home or in the gym.',
+    readTime: '6 min read',
+    date: 'Coming Soon',
+  },
+  {
+    title: 'Fat Loss vs Weight Loss: Why the Scale Lies and What to Track Instead',
+    tag: 'Weight Management',
+    excerpt: 'Why body composition matters more than scale weight, and how tracking waist measurements and strength reveals true progress.',
+    readTime: '7 min read',
+    date: 'Coming Soon',
+  },
+  {
+    title: 'Practical Nutrition for Busy Professionals: Protein, Balance and Zero Crash Diets',
+    tag: 'Nutrition & Habits',
+    excerpt: 'How to meet daily protein targets with everyday foods and manage energy intake without restrictive meal counting.',
+    readTime: '8 min read',
+    date: 'Coming Soon',
+  },
+  {
+    title: 'Home Workouts vs Gym Memberships: What Equipment You Truly Need',
+    tag: 'Workouts & Gear',
+    excerpt: 'A realistic breakdown of bodyweight, resistance bands, adjustable dumbbells, and when a commercial gym is actually necessary.',
+    readTime: '5 min read',
+    date: 'Coming Soon',
+  },
+  {
+    title: 'Women’s Strength Training Guide: Overcoming Myths and Building Resilient Strength',
+    tag: 'Women’s Fitness',
+    excerpt: 'Why lifting weights will not make you bulky, and how progressive resistance training supports bone density and metabolic health.',
+    readTime: '7 min read',
+    date: 'Coming Soon',
+  },
+];
+---
+
+<BaseLayout route={ROUTES.blog} schema={schema}>
+  <!-- Hero Section -->
+  <header class="blog-hero" aria-labelledby="blog-title">
+    <div class="container">
+      <Breadcrumbs items={crumbsFor(ROUTES.blog)} />
+      <p class="hero__tag">Fitness Guides, Research & Coaching Insights</p>
+      <h1 id="blog-title" class="hero__title">Evidence-Based Fitness & Online Coaching Blog</h1>
+      <p class="hero__sub">
+        Practical, honest guides on online personal training, progressive strength development, fat loss realities, and sustainable nutrition habits from certified coaches.
+      </p>
+    </div>
+  </header>
+
+  <!-- Quick Answer block for AEO -->
+  <QuickAnswer label="Quick answer: what is the Proteinworkk blog?">
+    The Proteinworkk fitness blog provides evidence-based workout guides, nutrition advice, and coaching insights to help you build sustainable habits. Our articles cover online personal training, strength development, fat loss strategies, and diet planning designed around real-life schedules.
+  </QuickAnswer>
+
+  <!-- Featured Blog Post Section -->
+  <Section id="featured-guide" tone="white" labelledby="featured-title">
+    <div class="section__lead">
+      <h2 id="featured-title">Featured Training Guide</h2>
+      <p class="lede">Our comprehensive deep-dive into remote coaching, realistic costs, and what produces lasting fitness results.</p>
+    </div>
+
+    <div class="blog-grid blog-grid--featured">
+      <article class="blog-card blog-card--featured" aria-labelledby="featured-post-title">
+        <div class="blog-card__media">
+          <img
+            src="/images/blog/online-personal-training-worth-it.png"
+            alt="Woman performing a plank exercise during an online personal training session"
+            class="blog-card__img"
+            width="800"
+            height="500"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+        <div class="blog-card__body">
+          <div class="blog-card__tags">
+            <span class="tag-badge tag-badge--accent">Featured Guide</span>
+            <span class="tag-badge">Personal Training</span>
+          </div>
+          <h3 id="featured-post-title" class="blog-card__title">
+            <a href={ROUTES.blogWorthIt.path}>Online Personal Training: Is It Worth It? Benefits, Cost, and Results</a>
+          </h3>
+          <p class="blog-card__excerpt">
+            An honest, in-depth evaluation of remote fitness coaching: how it works, what it costs in Rupees and Dollars, research on supervision, and how to choose the right coach.
+          </p>
+          <div class="blog-card__meta">
+            <span>By Proteinworkk Coaches</span>
+            <span>9 min read</span>
+            <span>November 2026</span>
+          </div>
+          <div style="margin-top: 1.25rem;">
+            <Button href={ROUTES.blogWorthIt.path} variant="primary" location="blog-featured-card">
+              Read Full Guide
+            </Button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </Section>
+
+  <!-- Upcoming Articles Section -->
+  <Section id="upcoming-articles" tone="tint" labelledby="upcoming-title">
+    <div class="section__lead">
+      <h2 id="upcoming-title">Upcoming Coaching Guides</h2>
+      <p class="lede">We publish actionable, myth-free fitness and nutrition articles designed to help you stay consistent.</p>
+    </div>
+
+    <div class="blog-grid">
+      {upcomingArticles.map((article) => (
+        <article class="blog-card blog-card--coming-soon" aria-label={article.title}>
+          <div class="blog-card__body">
+            <div class="blog-card__tags">
+              <span class="tag-badge tag-badge--coming">{article.date}</span>
+              <span class="tag-badge">{article.tag}</span>
+            </div>
+            <h3 class="blog-card__title">{article.title}</h3>
+            <p class="blog-card__excerpt">{article.excerpt}</p>
+            <div class="blog-card__meta">
+              <span>{article.readTime}</span>
+              <span>Publishing Soon</span>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </Section>
+
+  <!-- CTA Band -->
+  <CtaBand
+    headline="Want personalised guidance rather than generic fitness tips?"
+    primary={{ label: 'Explore Our Training Programs', href: enquiryHref('not-sure') }}
+    secondary={{ label: 'Contact Our Coaches', href: ROUTES.contact.path }}
+  >
+    Whether you prefer private one-to-one coaching or small group training, Proteinworkk builds structured workout and nutrition plans around your life and schedule.
+  </CtaBand>
+</BaseLayout>
