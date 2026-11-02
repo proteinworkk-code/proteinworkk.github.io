@@ -2,8 +2,8 @@
  * Programs, prices and group size: the single source for every page, card, table and JSON-LD offer.
  *
  * PRICE CONFIRMATION
- * - Confirmed: one-to-one (₹600 per session, ₹4,999 per month) and online group (₹2,999 per month).
- * - Provisional (NOT shown publicly, NOT in JSON-LD): Girl Power and Men's, ₹2,999 per month.
+ * - Confirmed: one-to-one (₹6,999 / $85 per month, ₹600 / $8 per session), online group (₹3,999 / $49 per month), and nutrition support (₹2,999 / $36 per month).
+ * - Provisional (NOT shown publicly, NOT in JSON-LD): Girl Power and Men's, ₹3,999 per month.
  *   When the owner confirms a price, set the matching `...Confirmed` constant below to true.
  *   The price then appears on the page, in FAQs, in the meta description and in the Offer
  *   markup automatically.
@@ -12,9 +12,10 @@
 export const GROUP_CAP = 12;
 
 export const PRICES = {
-  oneToOneSession: { amount: 600, label: '₹600 per session' },
-  oneToOneMonth: { amount: 4999, label: '₹4,999 per month' },
-  group: { amount: 2999, label: '₹2,999 per month' },
+  oneToOneSession: { amount: 600, label: '₹600 / $8 per session' },
+  oneToOneMonth: { amount: 6999, label: '₹6,999 / $85 per month' },
+  group: { amount: 3999, label: '₹3,999 / $49 per month' },
+  nutrition: { amount: 2999, label: '₹2,999 / $36 per month' },
 } as const;
 
 /** Provisional amount for Girl Power and Men's. Only used once confirmed. */

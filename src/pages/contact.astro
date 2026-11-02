@@ -42,7 +42,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'Do you offer nutrition support?',
-    a: 'Proteinworkk offers nutrition support alongside training, focused on practical guidance and sustainable habits. Ask the team what comes with the program you choose.',
+    a: `Yes. Proteinworkk offers dedicated nutrition coaching (${PRICES.nutrition.label}) as well as practical nutrition support alongside training. We work with clients all across the world from all countries.`,
   },
   {
     q: 'How do I get started?',
@@ -110,7 +110,7 @@ const schema = [
         ['Like structure and training with others', { text: 'Online Group Training', href: programs.group.href }, programs.group.priceLabel],
         ['Prefer a women-only, beginner-friendly space', { text: 'Girl Power', href: g.href }, g.priceLabel],
         ['Want a group focused on strength, muscle and conditioning', { text: 'Men’s Online Group Training', href: m.href }, m.priceLabel],
-        ['Want help with eating habits alongside training', 'Nutrition Support', 'Ask the team'],
+        ['Want help with eating habits alongside training', 'Nutrition Support', PRICES.nutrition.label],
       ]}
     />
   </Section>

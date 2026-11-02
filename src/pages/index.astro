@@ -21,8 +21,8 @@ const faqs: FaqItem[] = [
     a: 'Online personal training is one-to-one fitness coaching delivered over the internet instead of in a gym. A trainer plans your workouts, guides your sessions and tracks your progress remotely, so you can train at home or in any suitable space. At Proteinworkk, it is built around your goals, schedule and experience.',
   },
   {
-    q: 'How much does online personal training cost in India?',
-    a: `At Proteinworkk, one-to-one online personal training costs ${PRICES.oneToOneSession.label} or ${PRICES.oneToOneMonth.label}, and online group training costs ${PRICES.group.label}. Prices across India vary by coach, number of sessions and what is included, so always check what a fee covers. Ask the team to confirm what is included in the plan you are considering.`,
+    q: 'How much does online personal training and coaching cost?',
+    a: `At Proteinworkk, one-to-one online personal training costs ${PRICES.oneToOneMonth.label}, online group classes cost ${PRICES.group.label}, and nutrition support costs ${PRICES.nutrition.label}. We state all pricing clearly in both Indian Rupees (₹) and US Dollars ($). We are working with clients all across the world from all countries, and fees can be settled in either currency.`,
   },
   {
     q: 'Is online personal training effective?',
@@ -41,8 +41,8 @@ const faqs: FaqItem[] = [
     a: 'Yes. Beginners are welcome in every Proteinworkk program. Tell us your experience level when you get in touch and we will help you choose a starting point. If you have an injury or medical condition, please speak to your doctor first.',
   },
   {
-    q: 'Does Proteinworkk offer in-person training in Bangalore?',
-    a: 'No. Proteinworkk is based in Bengaluru, Karnataka, but all training is delivered online. This means you can train from home or any suitable space. If you are outside India, contact the team to check availability and time-zone fit.',
+    q: 'Does Proteinworkk offer in-person training in Bangalore, and can international clients join?',
+    a: 'No in-person training — all coaching is delivered 100% online. We are working with clients all across the world from all countries. Whether you live in India, the USA, the UK, Canada, Australia, the UAE, or anywhere else, our coaching schedules and trainer time slots accommodate your time zone seamlessly.',
   },
   {
     q: 'Is there a women-only group?',
@@ -104,7 +104,7 @@ const schema = [organization(), website(), faqPage(faqs)];
       <div class="hero__copy">
         <h1 id="home-title" class="hero__title">Online Personal Training and Fitness Coaching, Built Around Your Life</h1>
         <p class="hero__sub">
-          Proteinworkk is a Bengaluru-based online coaching brand. Train one-to-one or in a small group of up to {GROUP_CAP},
+          Proteinworkk is an online fitness coaching and nutrition brand working with clients all across the world from all countries. Train one-to-one or in small group classes of up to {GROUP_CAP},
           with structured programs, trainer guidance and practical nutrition support.
         </p>
         <div class="hero__actions">
@@ -112,14 +112,15 @@ const schema = [organization(), website(), faqPage(faqs)];
           <Button href="#programs" variant="onDark" location="hero">Explore Training Programs</Button>
         </div>
         <ul class="facts">
-          <li>Prices from {PRICES.oneToOneSession.label}</li>
-          <li>Groups capped at {GROUP_CAP}</li>
-          <li>Training delivered online</li>
+          <li>Working with clients all across the world from all countries</li>
+          <li>Personal training: {PRICES.oneToOneMonth.label}</li>
+          <li>Group classes: {PRICES.group.label}</li>
+          <li>Nutrition support: {PRICES.nutrition.label}</li>
         </ul>
       </div>
 
       <aside class="finder" aria-labelledby="finder-title">
-        <p class="finder__title" id="finder-title">Four ways to train</p>
+        <p class="finder__title" id="finder-title">Training programs & nutrition</p>
         <ul class="finder__list">
           {programList.map((p) => (
             <li>
@@ -130,16 +131,21 @@ const schema = [organization(), website(), faqPage(faqs)];
               </a>
             </li>
           ))}
+          <li>
+            <a class="finder__item" href={enquiryHref('nutrition')}>
+              <span class="finder__name">Nutrition Support & Guidance</span>
+              <span class="finder__meta">Personalized meal planning and habit coaching</span>
+              <span class="finder__price">{PRICES.nutrition.label}</span>
+            </a>
+          </li>
         </ul>
       </aside>
     </div>
   </section>
 
   <QuickAnswer label="Quick answer: what is Proteinworkk?">
-    <strong>Proteinworkk</strong> is an online fitness coaching and nutrition support brand based in Bengaluru, Karnataka, India.
-    It offers one-to-one online personal training ({PRICES.oneToOneSession.label} or {PRICES.oneToOneMonth.label}) and online group
-    training ({PRICES.group.label}, maximum {GROUP_CAP} members per group), including Girl Power, a women-only program, and a
-    men’s group program. All training is delivered online.
+    <strong>Proteinworkk</strong> is an online fitness coaching and nutrition support brand working with clients all across the world from all countries.
+    It offers one-to-one online personal training ({PRICES.oneToOneMonth.label}), online group classes ({PRICES.group.label}, maximum {GROUP_CAP} members per group), and nutrition support ({PRICES.nutrition.label}). All coaching is delivered online across global time zones.
   </QuickAnswer>
 
   <!-- The Proteinworkk approach -->
@@ -212,7 +218,7 @@ const schema = [organization(), website(), faqPage(faqs)];
         ['Plan', 'A shared, structured program followed by the group', 'A program built for your goals and level'],
         ['Attention', `Shared among a maximum of ${GROUP_CAP} members`, 'Fully focused on you'],
         ['Motivation', 'Community energy and group accountability', 'Direct, individual accountability'],
-        ['Price', PRICES.group.label, `${PRICES.oneToOneSession.label} or ${PRICES.oneToOneMonth.label}`],
+        ['Price', PRICES.group.label, `${PRICES.oneToOneMonth.label} (or ${PRICES.oneToOneSession.label})`],
         ['Best for', 'People who enjoy structure and company', 'People who want an individual plan or private coaching'],
       ]}
     />
@@ -339,8 +345,11 @@ const schema = [organization(), website(), faqPage(faqs)];
           body to adapt. Nutrition provides the material.
         </p>
         <p>
+          Dedicated nutrition coaching is available for <strong>{PRICES.nutrition.label}</strong>. We are working with clients all across the world from all countries, tailoring sustainable, food-first guidance to your local ingredients and lifestyle.
+        </p>
+        <p>
           We take a food-first approach, and we do not promote supplements, testosterone boosters or hormone-related products as
-          treatments or guaranteed solutions. What nutrition support comes with each program is confirmed when you enquire.
+          treatments or guaranteed solutions.
         </p>
         <Button href={enquiryHref('nutrition')} variant="primary" location="nutrition-section">Ask About Nutrition Support</Button>
       </div>
@@ -375,23 +384,22 @@ const schema = [organization(), website(), faqPage(faqs)];
     <div class="section__lead">
       <h2 id="pricing-title">How much does online coaching cost at Proteinworkk?</h2>
       <p class="lede">
-        One-to-one online personal training costs {PRICES.oneToOneSession.label} or {PRICES.oneToOneMonth.label}, and online group
-        training costs {PRICES.group.label}.
+        We are working with clients all across the world from all countries, offering clear and transparent pricing in Indian Rupees (₹) and US Dollars ($).
       </p>
     </div>
     <DataTable
       caption="Proteinworkk programs, prices and group sizes"
-      headers={['Program', 'Price', 'Group size']}
+      headers={['Program', 'Pricing (Rupees & Dollars)', 'Group size / Format']}
       rows={[
-        [{ text: programs['one-to-one'].name, href: programs['one-to-one'].href }, programs['one-to-one'].priceLabel, 'One-to-one'],
-        [{ text: programs.group.name, href: programs.group.href }, programs.group.priceLabel, `Maximum ${GROUP_CAP} members`],
+        [{ text: programs['one-to-one'].name, href: programs['one-to-one'].href }, `${PRICES.oneToOneMonth.label} (or ${PRICES.oneToOneSession.label})`, 'One-to-one private coaching'],
+        [{ text: programs.group.name, href: programs.group.href }, PRICES.group.label, `Maximum ${GROUP_CAP} members per group`],
+        [{ text: 'Nutrition Support', href: enquiryHref('nutrition') }, PRICES.nutrition.label, 'One-to-one nutrition & habit coaching'],
         [{ text: g.name, href: g.href }, g.priceLabel, `Maximum ${GROUP_CAP} women`],
         [{ text: m.name, href: m.href }, m.priceLabel, `Maximum ${GROUP_CAP} men`],
       ]}
     />
     <p style="margin-top:1.25rem">
-      Session counts, session length, schedules and other plan details are confirmed when you enquire. Ask the team before you
-      commit.
+      For online personal training, the price is {PRICES.oneToOneMonth.label}. For group classes, the pricing is {PRICES.group.label}. For nutrition support, the pricing is {PRICES.nutrition.label}. We are working with clients all across the world from all countries with schedules adapted to your local time zone.
     </p>
     <Button href={enquiryHref('not-sure')} variant="primary" location="pricing">Request a Consultation</Button>
   </Section>

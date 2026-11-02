@@ -18,6 +18,7 @@ export const GET: APIRoute = () => {
 
 - [${programs['one-to-one'].name}](${abs(ROUTES.oneToOne.path)}): Private online coaching. ${PRICES.oneToOneSession.label} or ${PRICES.oneToOneMonth.label}.
 - [${programs.group.name}](${abs(ROUTES.group.path)}): Trainer-guided online groups, maximum ${GROUP_CAP} members. ${PRICES.group.label}.
+- Nutrition Support: Practical nutrition education and habit coaching. ${PRICES.nutrition.label}. Working with clients all across the world from all countries.
 - [Girl Power - Women's Online Group Training](${abs(ROUTES.girlPower.path)}): Women-only online group training, maximum ${GROUP_CAP} members.${g.priceConfirmed ? ` ${g.priceLabel}.` : ''}
 - [Men's Online Group Training](${abs(ROUTES.mens.path)}): Online group training for strength and muscle, maximum ${GROUP_CAP} members.${m.priceConfirmed ? ` ${m.priceLabel}.` : ''}
 
