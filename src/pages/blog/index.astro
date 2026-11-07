@@ -24,13 +24,6 @@ const upcomingArticles = [
     date: 'Coming Soon',
   },
   {
-    title: 'Fat Loss vs Weight Loss: Why the Scale Lies and What to Track Instead',
-    tag: 'Weight Management',
-    excerpt: 'Why body composition matters more than scale weight, and how tracking waist measurements and strength reveals true progress.',
-    readTime: '7 min read',
-    date: 'Coming Soon',
-  },
-  {
     title: 'Practical Nutrition for Busy Professionals: Protein, Balance and Zero Crash Diets',
     tag: 'Nutrition & Habits',
     excerpt: 'How to meet daily protein targets with everyday foods and manage energy intake without restrictive meal counting.',
@@ -48,6 +41,13 @@ const upcomingArticles = [
     title: 'Women’s Strength Training Guide: Overcoming Myths and Building Resilient Strength',
     tag: 'Women’s Fitness',
     excerpt: 'Why lifting weights will not make you bulky, and how progressive resistance training supports bone density and metabolic health.',
+    readTime: '7 min read',
+    date: 'Coming Soon',
+  },
+  {
+    title: 'Strength Training After 40: Joint-Friendly Hypertrophy & Longevity',
+    tag: 'Longevity & Health',
+    excerpt: 'Combatting age-related sarcopenia with intelligent exercise selection, progressive loading, and adequate recovery.',
     readTime: '7 min read',
     date: 'Coming Soon',
   },
@@ -76,40 +76,40 @@ const upcomingArticles = [
   <Section id="featured-guide" tone="white" labelledby="featured-title">
     <div class="section__lead">
       <h2 id="featured-title">Featured Training Guide</h2>
-      <p class="lede">Our comprehensive deep-dive into remote coaching, realistic costs, and what produces lasting fitness results.</p>
+      <p class="lede">Our comprehensive deep-dive into weight loss programs, energy balance science, and sustainable habits that actually last.</p>
     </div>
 
     <div class="blog-grid blog-grid--featured">
       <article class="blog-card blog-card--featured" aria-labelledby="featured-post-title">
         <div class="blog-card__media">
           <img
-            src="/images/blog/online-personal-training-worth-it.png"
-            alt="Woman performing a plank exercise during an online personal training session"
+            src="/images/blog/best-weight-loss-programs.jpg"
+            alt="Woman tracking waist measurements alongside healthy nutrition and progressive strength workouts"
             class="blog-card__img"
-            width="800"
-            height="500"
+            width="1024"
+            height="576"
             loading="eager"
             decoding="async"
           />
         </div>
         <div class="blog-card__body">
           <div class="blog-card__tags">
-            <span class="tag-badge tag-badge--accent">Featured Guide</span>
-            <span class="tag-badge">Personal Training</span>
+            <span class="tag-badge tag-badge--accent">Latest Guide</span>
+            <span class="tag-badge">Weight Loss & Fat Loss</span>
           </div>
           <h3 id="featured-post-title" class="blog-card__title">
-            <a href={ROUTES.blogWorthIt.path}>Online Personal Training: Is It Worth It? Benefits, Cost, and Results</a>
+            <a href={ROUTES.blogWeightLoss.path}>Best Weight Loss Programs: Find a Plan That Works</a>
           </h3>
           <p class="blog-card__excerpt">
-            An honest, in-depth evaluation of remote fitness coaching: how it works, what it costs in Rupees and Dollars, research on supervision, and how to choose the right coach.
+            Explore effective weight loss programs designed around your lifestyle, fitness level, and goals. Compare program types, calorie deficits, progressive strength training, and sustainable habits.
           </p>
           <div class="blog-card__meta">
             <span>By Proteinworkk Coaches</span>
-            <span>9 min read</span>
+            <span>14 min read</span>
             <span>November 2026</span>
           </div>
           <div style="margin-top: 1.25rem;">
-            <Button href={ROUTES.blogWorthIt.path} variant="primary" location="blog-featured-card">
+            <Button href={ROUTES.blogWeightLoss.path} variant="primary" location="blog-featured-card">
               Read Full Guide
             </Button>
           </div>
@@ -118,8 +118,90 @@ const upcomingArticles = [
     </div>
   </Section>
 
+  <!-- Published Articles Section -->
+  <Section id="published-guides" tone="tint" labelledby="published-title">
+    <div class="section__lead">
+      <h2 id="published-title">All Fitness & Coaching Guides</h2>
+      <p class="lede">Explore in-depth, myth-free fitness and nutrition articles designed to help you stay consistent.</p>
+    </div>
+
+    <div class="blog-grid">
+      <!-- Card: Best Weight Loss Programs -->
+      <article class="blog-card" aria-labelledby="card-weight-loss-title">
+        <div class="blog-card__media">
+          <img
+            src="/images/blog/best-weight-loss-programs.jpg"
+            alt="Best weight loss programs plan overview"
+            class="blog-card__img"
+            width="800"
+            height="500"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div class="blog-card__body">
+          <div class="blog-card__tags">
+            <span class="tag-badge tag-badge--accent">New</span>
+            <span class="tag-badge">Weight Loss</span>
+          </div>
+          <h3 id="card-weight-loss-title" class="blog-card__title">
+            <a href={ROUTES.blogWeightLoss.path}>Best Weight Loss Programs: Find a Plan That Works</a>
+          </h3>
+          <p class="blog-card__excerpt">
+            An evidence-based evaluation of weight loss programs, energy balance, muscle protection, and an 8-week starting framework.
+          </p>
+          <div class="blog-card__meta">
+            <span>14 min read</span>
+            <span>November 2026</span>
+          </div>
+          <div style="margin-top: 1rem;">
+            <Button href={ROUTES.blogWeightLoss.path} variant="secondary" location="blog-card-weight-loss">
+              Read Guide
+            </Button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card: Is Online Personal Training Worth It? -->
+      <article class="blog-card" aria-labelledby="card-worth-it-title">
+        <div class="blog-card__media">
+          <img
+            src="/images/blog/online-personal-training-worth-it.png"
+            alt="Woman performing a plank exercise during an online personal training session"
+            class="blog-card__img"
+            width="800"
+            height="500"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div class="blog-card__body">
+          <div class="blog-card__tags">
+            <span class="tag-badge">Coaching Guide</span>
+            <span class="tag-badge">Personal Training</span>
+          </div>
+          <h3 id="card-worth-it-title" class="blog-card__title">
+            <a href={ROUTES.blogWorthIt.path}>Online Personal Training: Is It Worth It? Benefits, Cost, and Results</a>
+          </h3>
+          <p class="blog-card__excerpt">
+            An honest, in-depth evaluation of remote fitness coaching: how it works, what it costs in Rupees and Dollars, and how to choose the right coach.
+          </p>
+          <div class="blog-card__meta">
+            <span>9 min read</span>
+            <span>November 2026</span>
+          </div>
+          <div style="margin-top: 1rem;">
+            <Button href={ROUTES.blogWorthIt.path} variant="secondary" location="blog-card-worth-it">
+              Read Guide
+            </Button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </Section>
+
   <!-- Upcoming Articles Section -->
-  <Section id="upcoming-articles" tone="tint" labelledby="upcoming-title">
+  <Section id="upcoming-articles" tone="white" labelledby="upcoming-title">
     <div class="section__lead">
       <h2 id="upcoming-title">Upcoming Coaching Guides</h2>
       <p class="lede">We publish actionable, myth-free fitness and nutrition articles designed to help you stay consistent.</p>

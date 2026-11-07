@@ -101,6 +101,14 @@ export const ROUTES = {
       'Is online personal training worth it? Discover real costs, pros and cons, results for weight loss and muscle building, and how to choose the right coach.',
     indexable: true,
   },
+  blogWeightLoss: {
+    path: '/blog/best-weight-loss-programs/',
+    name: 'Best Weight Loss Programs',
+    title: 'Best Weight Loss Programs: Find a Plan That Works | Proteinworkk',
+    description:
+      'Compare weight loss programs and learn how to choose one that fits your lifestyle, fitness level and goals, with structured workouts and nutrition guidance.',
+    indexable: true,
+  },
   privacy: {
     path: '/privacy-policy/',
     name: 'Privacy Policy',

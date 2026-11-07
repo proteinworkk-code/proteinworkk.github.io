@@ -23,9 +23,9 @@ export const BRAND = {
     'Proteinworkk is an online fitness coaching and nutrition support brand based in Bengaluru, Karnataka, India.',
   philosophy: 'Our philosophy is to make fitness accessible to everyone.',
   delivery: 'All training is delivered online.',
-  lastUpdated: 'October 2026',
+  lastUpdated: 'November 2026',
   /** ISO date used for sitemap <lastmod>. Change only when page content genuinely changes. */
-  lastModified: '2026-11-02',
+  lastModified: '2026-11-07',
   logoPath: '/images/logo-h512.png',
   ogImagePath: '/images/og-default.png',
   ogImageAlt: 'Proteinworkk logo with the tagline Strength within reach.',

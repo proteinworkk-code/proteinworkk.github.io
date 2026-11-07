@@ -121,6 +121,8 @@ export const blogPosting = (opts: {
   dateModified: string;
   image?: string;
   authorName?: string;
+  keywords?: string[];
+  inLanguage?: string;
 }) => ({
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
@@ -131,6 +133,18 @@ export const blogPosting = (opts: {
   image: opts.image ? abs(opts.image) : abs(BRAND.ogImagePath),
   datePublished: opts.datePublished,
   dateModified: opts.dateModified,
+  inLanguage: opts.inLanguage ?? 'en-IN',
+  ...(opts.keywords && opts.keywords.length ? { keywords: opts.keywords.join(', ') } : {}),
+  contentLocation: {
+    '@type': 'Place',
+    name: `${BRAND.locality}, ${BRAND.region}, ${BRAND.country}`,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: BRAND.locality,
+      addressRegion: BRAND.region,
+      addressCountry: BRAND.countryCode,
+    },
+  },
   author: {
     '@type': 'Organization',
     name: opts.authorName ?? BRAND.name,
@@ -143,6 +157,12 @@ export const blogPosting = (opts: {
     logo: {
       '@type': 'ImageObject',
       url: abs(BRAND.logoPath),
+    },
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: BRAND.locality,
+      addressRegion: BRAND.region,
+      addressCountry: BRAND.countryCode,
     },
   },
 });

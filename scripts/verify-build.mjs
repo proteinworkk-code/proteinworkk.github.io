@@ -58,6 +58,8 @@ const fileForPath = (p) => {
 const configSrc = readFileSync('astro.config.mjs', 'utf8');
 const SITE = (process.env.PUBLIC_SITE_URL || (configSrc.match(/'(https?:\/\/[^']+)'\)\.replace/) || [])[1] || 'https://proteinworkk.com').replace(/\/+$/, '');
 const programsSrc = readFileSync('src/data/programs.ts', 'utf8');
+const siteSrc = readFileSync('src/config/site.ts', 'utf8');
+const lastUpdated = (siteSrc.match(/lastUpdated:\s*'([^']+)'/) || [])[1] || 'November 2026';
 const girlConfirmed = /const girlPowerConfirmed = true/.test(programsSrc);
 const mensConfirmed = /const mensConfirmed = true/.test(programsSrc);
 
@@ -72,6 +74,7 @@ const PAGES = {
   '/privacy-policy/': { jsonLd: [] },
   '/blog/': { jsonLd: ['CollectionPage', 'BreadcrumbList'], quick: true },
   '/blog/is-online-personal-training-worth-it/': { jsonLd: ['BlogPosting', 'BreadcrumbList', 'FAQPage'], quick: true },
+  '/blog/best-weight-loss-programs/': { jsonLd: ['BlogPosting', 'BreadcrumbList', 'FAQPage'], quick: true },
   '/404/': { jsonLd: [], noindex: true },
 };
 
@@ -214,7 +217,7 @@ for (const file of htmlFiles) {
       const words = textOf(qa[1]).split(' ').filter(Boolean).length;
       if (words < 35 || words > 75) warn(route, `Quick answer is ${words} words (target about 40-70)`);
     }
-    if (route !== '/privacy-policy/' && !/Last updated: October 2026/.test(text)) fail(route, 'missing "Last updated" line');
+    if (route !== '/privacy-policy/' && !new RegExp(`Last updated: ${lastUpdated}`).test(text)) fail(route, 'missing "Last updated" line');
   }
 }
 
