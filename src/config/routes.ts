@@ -109,6 +109,14 @@ export const ROUTES = {
       'Compare weight loss programs and learn how to choose one that fits your lifestyle, fitness level and goals, with structured workouts and nutrition guidance.',
     indexable: true,
   },
+  blogWomensStrength: {
+    path: '/blog/womens-strength-training-guide/',
+    name: 'Women’s Strength Training Guide',
+    title: 'Women’s Strength Training Guide: Myths, Workouts & Nutrition',
+    description:
+      'Learn how women’s strength training builds muscle, bone health, and lasting confidence. Myths busted, beginner workouts, nutrition tips, and a weekly plan.',
+    indexable: true,
+  },
   privacy: {
     path: '/privacy-policy/',
     name: 'Privacy Policy',

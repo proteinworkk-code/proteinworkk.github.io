@@ -28,6 +28,7 @@ export const GET: APIRoute = () => {
 - [Contact ${BRAND.name}](${abs(ROUTES.contact.path)}): Email ${BRAND.email} or send an enquiry.
 - [Fitness Blog and Training Guides](${abs(ROUTES.blog.path)}): Evidence-based fitness guides, coaching insights, and nutrition habits.
 - [Best Weight Loss Programs: Find a Plan That Works](${abs(ROUTES.blogWeightLoss.path)}): Evidence-based guide comparing weight loss programs, calorie deficits, strength training, and sustainable habits.
+- [Women's Strength Training Guide: Overcoming Myths and Building Resilient Strength](${abs(ROUTES.blogWomensStrength.path)}): Complete evidence-based guide covering weightlifting myths, female physiology, beginner workouts, bone health, and nutrition.
 - [Is Online Personal Training Worth It?](${abs(ROUTES.blogWorthIt.path)}): Comprehensive guide on online coaching benefits, costs, weight loss and muscle results.
 
 ## Notes

@@ -75,6 +75,7 @@ const PAGES = {
   '/blog/': { jsonLd: ['CollectionPage', 'BreadcrumbList'], quick: true },
   '/blog/is-online-personal-training-worth-it/': { jsonLd: ['BlogPosting', 'BreadcrumbList', 'FAQPage'], quick: true },
   '/blog/best-weight-loss-programs/': { jsonLd: ['BlogPosting', 'BreadcrumbList', 'FAQPage'], quick: true },
+  '/blog/womens-strength-training-guide/': { jsonLd: ['BlogPosting', 'BreadcrumbList', 'FAQPage'], quick: true },
   '/404/': { jsonLd: [], noindex: true },
 };
 

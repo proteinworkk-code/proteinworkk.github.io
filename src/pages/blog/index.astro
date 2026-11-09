@@ -38,13 +38,6 @@ const upcomingArticles = [
     date: 'Coming Soon',
   },
   {
-    title: 'Women’s Strength Training Guide: Overcoming Myths and Building Resilient Strength',
-    tag: 'Women’s Fitness',
-    excerpt: 'Why lifting weights will not make you bulky, and how progressive resistance training supports bone density and metabolic health.',
-    readTime: '7 min read',
-    date: 'Coming Soon',
-  },
-  {
     title: 'Strength Training After 40: Joint-Friendly Hypertrophy & Longevity',
     tag: 'Longevity & Health',
     excerpt: 'Combatting age-related sarcopenia with intelligent exercise selection, progressive loading, and adequate recovery.',
@@ -76,15 +69,15 @@ const upcomingArticles = [
   <Section id="featured-guide" tone="white" labelledby="featured-title">
     <div class="section__lead">
       <h2 id="featured-title">Featured Training Guide</h2>
-      <p class="lede">Our comprehensive deep-dive into weight loss programs, energy balance science, and sustainable habits that actually last.</p>
+      <p class="lede">Our comprehensive, myth-free guide to women’s strength training, physiology, beginner weekly workouts, and nutrition.</p>
     </div>
 
     <div class="blog-grid blog-grid--featured">
       <article class="blog-card blog-card--featured" aria-labelledby="featured-post-title">
         <div class="blog-card__media">
           <img
-            src="/images/blog/best-weight-loss-programs.jpg"
-            alt="Woman tracking waist measurements alongside healthy nutrition and progressive strength workouts"
+            src="/images/blog/womens-strength-training-guide.jpg"
+            alt="Women's Strength Training Guide: Overcoming Myths and Building Resilient Strength"
             class="blog-card__img"
             width="1024"
             height="576"
@@ -95,21 +88,21 @@ const upcomingArticles = [
         <div class="blog-card__body">
           <div class="blog-card__tags">
             <span class="tag-badge tag-badge--accent">Latest Guide</span>
-            <span class="tag-badge">Weight Loss & Fat Loss</span>
+            <span class="tag-badge">Women’s Fitness</span>
           </div>
           <h3 id="featured-post-title" class="blog-card__title">
-            <a href={ROUTES.blogWeightLoss.path}>Best Weight Loss Programs: Find a Plan That Works</a>
+            <a href={ROUTES.blogWomensStrength.path}>Women’s Strength Training Guide: Overcoming Myths and Building Resilient Strength</a>
           </h3>
           <p class="blog-card__excerpt">
-            Explore effective weight loss programs designed around your lifestyle, fitness level, and goals. Compare program types, calorie deficits, progressive strength training, and sustainable habits.
+            Learn how progressive resistance training builds lean muscle, bone health, and lasting confidence for women. Explore busted myths, female physiology, beginner routines, and everyday nutrition.
           </p>
           <div class="blog-card__meta">
             <span>By Proteinworkk Coaches</span>
-            <span>14 min read</span>
+            <span>16 min read</span>
             <span>November 2026</span>
           </div>
           <div style="margin-top: 1.25rem;">
-            <Button href={ROUTES.blogWeightLoss.path} variant="primary" location="blog-featured-card">
+            <Button href={ROUTES.blogWomensStrength.path} variant="primary" location="blog-featured-card">
               Read Full Guide
             </Button>
           </div>
@@ -126,6 +119,42 @@ const upcomingArticles = [
     </div>
 
     <div class="blog-grid">
+      <!-- Card: Women's Strength Training Guide -->
+      <article class="blog-card" aria-labelledby="card-womens-strength-title">
+        <div class="blog-card__media">
+          <img
+            src="/images/blog/womens-strength-training-guide.jpg"
+            alt="Women's Strength Training Guide: Overcoming Myths and Building Resilient Strength"
+            class="blog-card__img"
+            width="800"
+            height="500"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div class="blog-card__body">
+          <div class="blog-card__tags">
+            <span class="tag-badge tag-badge--accent">New</span>
+            <span class="tag-badge">Women’s Fitness</span>
+          </div>
+          <h3 id="card-womens-strength-title" class="blog-card__title">
+            <a href={ROUTES.blogWomensStrength.path}>Women’s Strength Training Guide: Overcoming Myths & Building Resilient Strength</a>
+          </h3>
+          <p class="blog-card__excerpt">
+            Why lifting weights will not make you bulky, and how progressive resistance training supports bone density, metabolic health, and real confidence.
+          </p>
+          <div class="blog-card__meta">
+            <span>16 min read</span>
+            <span>November 2026</span>
+          </div>
+          <div style="margin-top: 1rem;">
+            <Button href={ROUTES.blogWomensStrength.path} variant="secondary" location="blog-card-womens-strength">
+              Read Guide
+            </Button>
+          </div>
+        </div>
+      </article>
+
       <!-- Card: Best Weight Loss Programs -->
       <article class="blog-card" aria-labelledby="card-weight-loss-title">
         <div class="blog-card__media">
@@ -141,7 +170,6 @@ const upcomingArticles = [
         </div>
         <div class="blog-card__body">
           <div class="blog-card__tags">
-            <span class="tag-badge tag-badge--accent">New</span>
             <span class="tag-badge">Weight Loss</span>
           </div>
           <h3 id="card-weight-loss-title" class="blog-card__title">

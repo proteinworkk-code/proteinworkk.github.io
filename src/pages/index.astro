@@ -388,6 +388,42 @@ const schema = [organization(), website(), faqPage(faqs)];
       </p>
     </div>
     <div class="blog-grid">
+      <article class="blog-card" aria-labelledby="home-womens-strength-title">
+        <div class="blog-card__media">
+          <img
+            src="/images/blog/womens-strength-training-guide.jpg"
+            alt="Women's Strength Training Guide: Overcoming Myths and Building Resilient Strength"
+            class="blog-card__img"
+            width="800"
+            height="450"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div class="blog-card__body">
+          <div class="blog-card__tags">
+            <span class="tag-badge tag-badge--accent">Latest Guide</span>
+            <span class="tag-badge">Women’s Fitness</span>
+          </div>
+          <h3 id="home-womens-strength-title" class="blog-card__title">
+            <a href={ROUTES.blogWomensStrength.path}>Women’s Strength Training Guide: Overcoming Myths & Building Resilient Strength</a>
+          </h3>
+          <p class="blog-card__excerpt">
+            Why lifting weights will not make you bulky, and how progressive resistance training supports bone density, metabolic health, and lasting confidence.
+          </p>
+          <div class="blog-card__meta">
+            <span>By Proteinworkk Coaches</span>
+            <span>16 min read</span>
+            <span>November 2026</span>
+          </div>
+          <div style="margin-top: 1rem;">
+            <Button href={ROUTES.blogWomensStrength.path} variant="primary" location="home-blog-card-womens-strength">
+              Read Guide
+            </Button>
+          </div>
+        </div>
+      </article>
+
       <article class="blog-card" aria-labelledby="home-weight-loss-title">
         <div class="blog-card__media">
           <img
@@ -402,7 +438,6 @@ const schema = [organization(), website(), faqPage(faqs)];
         </div>
         <div class="blog-card__body">
           <div class="blog-card__tags">
-            <span class="tag-badge tag-badge--accent">Latest Guide</span>
             <span class="tag-badge">Weight Loss</span>
           </div>
           <h3 id="home-weight-loss-title" class="blog-card__title">
@@ -417,7 +452,7 @@ const schema = [organization(), website(), faqPage(faqs)];
             <span>November 2026</span>
           </div>
           <div style="margin-top: 1rem;">
-            <Button href={ROUTES.blogWeightLoss.path} variant="primary" location="home-blog-card-weight-loss">
+            <Button href={ROUTES.blogWeightLoss.path} variant="secondary" location="home-blog-card-weight-loss">
               Read Guide
             </Button>
           </div>
