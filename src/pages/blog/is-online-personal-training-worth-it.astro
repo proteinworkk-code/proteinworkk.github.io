@@ -24,7 +24,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'How much does online personal training cost?',
-    a: `Prices vary widely by coach, location, and what is included. At Proteinworkk, online personal training is ${PRICES.oneToOneMonth.label}, group classes are ${PRICES.group.label}, and nutrition coaching is ${PRICES.nutrition.label}. Compare what is included, not just the price.`,
+    a: `Prices vary widely by coach, location, and what is included. At Proteinworkk, Virtual 1:1 personal training is ${PRICES.oneToOneMonth.label}, Virtual Dual Personal Training is ${PRICES.dualTraining.label}, group classes are ${PRICES.group.label}, and nutrition coaching is ${PRICES.nutrition.label}. Compare what is included, not just the price.`,
   },
   {
     q: 'Is online personal training effective for weight loss?',
@@ -234,7 +234,8 @@ const schema = [
             caption="Cost comparison: Online personal training vs in-person gym coaching"
             headers={['Coaching Format / Market', 'Typical Pricing Range', 'Details & Inclusions']}
             rows={[
-              ['Proteinworkk Online One-to-One', `${PRICES.oneToOneMonth.label} (or ${PRICES.oneToOneSession.label})`, 'Full personal plan, continuous trainer communication, form video analysis, weekly adjustments'],
+              ['Proteinworkk Virtual 1:1 Personal Training', PRICES.oneToOneMonth.label, '3 live sessions/week, personalised exercise plan, weekly progress review, nutrition guidance, trainer accountability'],
+              ['Proteinworkk Virtual Dual Personal Training (2:1)', PRICES.dualTraining.label, '12 sessions — 1 trainer coaching exactly 2 clients together in live sessions'],
               ['Proteinworkk Online Group Classes', PRICES.group.label, `Trainer-guided small group classes capped at max ${GROUP_CAP} members`],
               ['Proteinworkk Dedicated Nutrition', PRICES.nutrition.label, 'Personalized meal plans, protein targets, balanced habit education across global cuisines'],
               ['Metro In-Person Gym Training (India)', '₹15,000 to ₹25,000 / month', 'Commercial metro gym membership fees plus hourly trainer commissions'],
@@ -257,7 +258,7 @@ const schema = [
             rows={[
               ['Convenience', 'Train from home or your chosen gym; 0 commute time', 'Requires travel to a specific gym during traffic hours'],
               ['Scheduling', 'Fully flexible around work, parenting, and travel', 'Strict, pre-booked appointments with cancellation penalties'],
-              ['Monthly Investment', 'High value: full month of support for ₹3,999 - ₹6,999 / $49 - $85', 'Higher cost: ₹15,000 - ₹25,000+ / $300 - $600+ per month'],
+              ['Monthly Investment', 'High value: full month of support for ₹3,999 - ₹7,999 / $49 - $99', 'Higher cost: ₹15,000 - ₹25,000+ / $300 - $600+ per month'],
               ['Direct Supervision', 'Video submissions, async technique reviews, and live video check-ins', 'Trainer stands beside you for immediate real-time adjustments'],
               ['Accountability', 'Daily tracking logs, progress monitoring, and check-in calls', 'Physical appointment you must attend in person'],
               ['Equipment Flexibility', 'Customized to dumbbells, bands, or your local gym', 'Restricted to the machines and weights available in that gym'],

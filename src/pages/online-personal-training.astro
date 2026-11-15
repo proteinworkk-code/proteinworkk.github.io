@@ -17,12 +17,12 @@ const p = programs['one-to-one'];
 
 const faqs: FaqItem[] = [
   {
-    q: 'What does Proteinworkk’s monthly membership include?',
-    a: `The monthly membership costs ${PRICES.oneToOneMonth.label}. Contact the team to confirm what is included for your goals and schedule.`,
+    q: 'What does Proteinworkk’s Virtual 1:1 personal training include?',
+    a: `Virtual 1:1 personal training costs ${PRICES.oneToOneMonth.label}. It includes 3 live sessions per week, a personalised exercise plan, weekly progress review, nutrition guidance, and trainer accountability.`,
   },
   {
-    q: 'Should I pay per session or monthly?',
-    a: `Pay per session (${PRICES.oneToOneSession.label.replace(' per session', '')}) for occasional or flexible coaching. Choose monthly (${PRICES.oneToOneMonth.label.replace(' per month', '')}) if you want ongoing structure and accountability. The team can help you decide based on your goals and schedule.`,
+    q: 'What is Virtual Dual Personal Training (2:1)?',
+    a: `Virtual Dual Personal Training (2:1) costs ${PRICES.dualTraining.label}. One trainer coaches exactly two clients together in the same live session, providing structured programming and real-time guidance.`,
   },
   {
     q: 'Is online personal training as good as training in a gym?',
@@ -62,7 +62,7 @@ const schema = [
     program: p,
     serviceType: 'Online personal training',
     description:
-      'One-to-one online personal training delivered online by Proteinworkk, with a plan built around your goals, trainer guidance and accountability.',
+      'Virtual 1:1 and dual personal training delivered online by Proteinworkk, with 3 live sessions per week, custom exercise plan, nutrition guidance, and trainer accountability.',
   }),
   breadcrumbs(crumbsFor(ROUTES.oneToOne)),
   faqPage(faqs),
@@ -74,16 +74,14 @@ const schema = [
     crumbs={crumbsFor(ROUTES.oneToOne)}
     primary={{ label: 'Choose Personal Training', href: enquiryHref('one-to-one') }}
     secondary={{ label: 'Talk to Our Team First', href: enquiryHref('not-sure') }}
-    trust={[PRICES.oneToOneSession.label, PRICES.oneToOneMonth.label, 'Fully online']}
+    trust={[PRICES.oneToOneMonth.label, PRICES.dualTraining.label, 'Fully online']}
   >
     One-to-one coaching from Proteinworkk in Bengaluru: a trainer who knows your goals, plans your progression and keeps you
     consistent, wherever you train.
   </PageHero>
 
   <QuickAnswer>
-    <strong>Online one-to-one personal training at Proteinworkk</strong> is private coaching delivered online. A trainer builds a
-    plan around your goals, guides your sessions and tracks your progress. It costs {PRICES.oneToOneSession.label} or
-    {PRICES.oneToOneMonth.label}, and there is no need to travel to a gym.
+    <strong>Online personal training at Proteinworkk</strong> is private, live coaching delivered online. Virtual 1:1 personal training costs {PRICES.oneToOneMonth.label} and includes 3 live sessions per week, a personalised exercise plan, weekly progress review, nutrition guidance and trainer accountability. We also offer <strong>Virtual Dual Personal Training (2:1)</strong> at {PRICES.dualTraining.label} for 12 sessions where one trainer coaches exactly two clients together live.
   </QuickAnswer>
 
   <Section id="what-is" labelledby="what-title">
@@ -209,19 +207,24 @@ const schema = [
     <div class="section__lead">
       <h2 id="cost-title">How much does online personal training cost at Proteinworkk?</h2>
       <p class="lede">
-        One-to-one online personal training costs {PRICES.oneToOneSession.label} or {PRICES.oneToOneMonth.label}. Choose
-        pay-per-session if you want flexibility or want to try coaching, and choose monthly if you want ongoing structure and
-        accountability.
+        Virtual 1:1 personal training costs {PRICES.oneToOneMonth.label}, and Virtual Dual Personal Training (2:1) costs {PRICES.dualTraining.label}.
       </p>
     </div>
     <DataTable
-      caption="One-to-one personal training pricing options"
-      headers={['Option', 'Price', 'Best for']}
+      caption="Online personal training pricing options"
+      headers={['Option', 'Price', 'Inclusions & Format']}
       rows={[
-        ['Pay per session', PRICES.oneToOneSession.label, 'Trying one-to-one coaching or flexible needs'],
-        ['Monthly membership', PRICES.oneToOneMonth.label, 'Consistent, ongoing coaching with a structured plan'],
+        ['Virtual 1:1 personal training', PRICES.oneToOneMonth.label, '3 live sessions per week, personalised exercise plan, weekly progress review, nutrition guidance, trainer accountability'],
+        ['Virtual Dual Personal Training (2:1)', PRICES.dualTraining.label, '12 sessions — one trainer coaching exactly two clients together in the same live session'],
       ]}
     />
+    <div id="dual-training" style="margin-top:2rem; padding: 1.5rem; background: var(--olive-100); border-radius: var(--radius); border: 1px solid var(--line);">
+      <h3 style="margin-top:0;">Virtual Dual Personal Training (2:1) — 12 sessions: {PRICES.dualTraining.label}</h3>
+      <p>
+        Train with a partner, friend, or colleague! In Virtual Dual Personal Training (2:1), one trainer coaches exactly two clients together in the same live session. Both participants receive individualized movement corrections, joint accountability, and structured exercise progression at a high-value dual package rate.
+      </p>
+      <Button href={enquiryHref('dual-training')} variant="primary" location="dual-pricing">Choose Dual Training</Button>
+    </div>
     <p style="margin-top:1.25rem">
       Session length, scheduling and exactly what each option includes are confirmed when you enquire. Ask the team before you commit.
     </p>

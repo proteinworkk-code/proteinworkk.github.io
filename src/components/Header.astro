@@ -5,6 +5,11 @@ import { NAV_ITEMS } from '../config/routes';
 
 const current = Astro.url.pathname;
 const isCurrent = (p: string) => (p === '/' ? current === '/' : current.startsWith(p));
+const isChildActive = (children?: { path: string }[]) =>
+  children?.some((child) => {
+    const basePath = child.path.split('#')[0].split('?')[0];
+    return isCurrent(basePath);
+  });
 ---
 <header class="site-header">
   <div class="container site-header__inner">
@@ -16,9 +21,46 @@ const isCurrent = (p: string) => (p === '/' ? current === '/' : current.startsWi
     <nav id="site-nav" class="nav" aria-label="Main navigation">
       <ul class="nav__list">
         {NAV_ITEMS.map((item) => (
-          <li>
-            <a class="nav__link" href={item.path} aria-current={isCurrent(item.path) ? 'page' : undefined}>{item.label}</a>
-          </li>
+          item.children ? (
+            <li class="nav__item nav__item--dropdown">
+              <button
+                class="nav__link nav__dropdown-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-haspopup="true"
+                aria-current={isChildActive(item.children) ? 'page' : undefined}
+              >
+                <span>{item.label}</span>
+                <svg class="nav__chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <ul class="nav__dropdown" aria-label="Training Services">
+                {item.children.map((sub) => (
+                  <li class="nav__dropdown-item">
+                    <a
+                      class="nav__sublink"
+                      href={sub.path}
+                      aria-current={isCurrent(sub.path.split('#')[0].split('?')[0]) ? 'page' : undefined}
+                    >
+                      <span class="nav__sublink-title">{sub.label}</span>
+                      {sub.desc && <span class="nav__sublink-desc">{sub.desc}</span>}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ) : (
+            <li class="nav__item">
+              <a
+                class="nav__link"
+                href={item.path}
+                aria-current={item.path && isCurrent(item.path) ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          )
         ))}
       </ul>
       <div class="nav__cta">

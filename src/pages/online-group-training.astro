@@ -115,7 +115,7 @@ const schema = [
         ['Plan', 'A shared, structured program followed by the group', 'A program built for your goals and level'],
         ['Attention', `Shared among a maximum of ${GROUP_CAP} members`, 'Fully focused on you'],
         ['Motivation', 'Community energy and group accountability', 'Direct, individual accountability'],
-        ['Price', PRICES.group.label, `${PRICES.oneToOneSession.label} or ${PRICES.oneToOneMonth.label}`],
+        ['Price', PRICES.group.label, `${PRICES.oneToOneMonth.label} (Virtual 1:1) or ${PRICES.dualTraining.label} (Dual 2:1)`],
         ['Best for', 'People who enjoy structure and company', 'People who want an individual plan or private coaching'],
       ]}
     />
@@ -187,7 +187,7 @@ const schema = [
 
   <RelatedLinks
     items={[
-      { href: programs['one-to-one'].href, text: 'Online one-to-one personal training', desc: `Private coaching for ${PRICES.oneToOneSession.label} or ${PRICES.oneToOneMonth.label}.` },
+      { href: programs['one-to-one'].href, text: 'Online personal training', desc: `Virtual 1:1 coaching for ${PRICES.oneToOneMonth.label}.` },
       { href: programs['girl-power'].href, text: 'Girl Power women’s online training', desc: 'A women-only, beginner-friendly group.' },
       { href: programs.mens.href, text: 'Men’s online group training', desc: 'Strength, muscle and conditioning in a group.' },
       { href: ROUTES.contact.path, text: 'Contact the Proteinworkk team', desc: 'Ask a question or request a consultation.' },

@@ -22,7 +22,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: 'How much does online personal training and coaching cost?',
-    a: `At Proteinworkk, one-to-one online personal training costs ${PRICES.oneToOneMonth.label}, online group classes cost ${PRICES.group.label}, and nutrition support costs ${PRICES.nutrition.label}. We state all pricing clearly in both Indian Rupees (₹) and US Dollars ($). We are working with clients all across the world from all countries, and fees can be settled in either currency.`,
+    a: `At Proteinworkk, Virtual 1:1 personal training costs ${PRICES.oneToOneMonth.label} (including 3 live sessions per week, personalised exercise plan, weekly progress review, nutrition guidance, and trainer accountability), Virtual Dual Personal Training (2:1) is ${PRICES.dualTraining.label} for 12 sessions, online group classes cost ${PRICES.group.label}, and nutrition support costs ${PRICES.nutrition.label}. We state all pricing clearly in both Indian Rupees (₹) and US Dollars ($). We are working with clients all across the world from all countries, and fees can be settled in either currency.`,
   },
   {
     q: 'Is online personal training effective?',
@@ -113,7 +113,8 @@ const schema = [organization(), website(), faqPage(faqs)];
         </div>
         <ul class="facts">
           <li>Working with clients all across the world from all countries</li>
-          <li>Personal training: {PRICES.oneToOneMonth.label}</li>
+          <li>Virtual 1:1: {PRICES.oneToOneMonth.label}</li>
+          <li>Dual (2:1): {PRICES.dualTraining.label}</li>
           <li>Group classes: {PRICES.group.label}</li>
           <li>Nutrition support: {PRICES.nutrition.label}</li>
         </ul>
@@ -145,7 +146,7 @@ const schema = [organization(), website(), faqPage(faqs)];
 
   <QuickAnswer label="Quick answer: what is Proteinworkk?">
     <strong>Proteinworkk</strong> is an online fitness coaching and nutrition support brand working with clients all across the world from all countries.
-    It offers one-to-one online personal training ({PRICES.oneToOneMonth.label}), online group classes ({PRICES.group.label}, maximum {GROUP_CAP} members per group), and nutrition support ({PRICES.nutrition.label}). All coaching is delivered online across global time zones.
+    It offers Virtual 1:1 personal training ({PRICES.oneToOneMonth.label}), Virtual Dual Personal Training ({PRICES.dualTraining.label}), online group classes ({PRICES.group.label}, maximum {GROUP_CAP} members per group), and nutrition support ({PRICES.nutrition.label}). All coaching is delivered online across global time zones.
   </QuickAnswer>
 
   <!-- The Proteinworkk approach -->
@@ -218,7 +219,7 @@ const schema = [organization(), website(), faqPage(faqs)];
         ['Plan', 'A shared, structured program followed by the group', 'A program built for your goals and level'],
         ['Attention', `Shared among a maximum of ${GROUP_CAP} members`, 'Fully focused on you'],
         ['Motivation', 'Community energy and group accountability', 'Direct, individual accountability'],
-        ['Price', PRICES.group.label, `${PRICES.oneToOneMonth.label} (or ${PRICES.oneToOneSession.label})`],
+        ['Price', PRICES.group.label, `${PRICES.oneToOneMonth.label} (or ${PRICES.dualTraining.label} for Dual 2:1)`],
         ['Best for', 'People who enjoy structure and company', 'People who want an individual plan or private coaching'],
       ]}
     />
@@ -514,7 +515,8 @@ const schema = [organization(), website(), faqPage(faqs)];
       caption="Proteinworkk programs, prices and group sizes"
       headers={['Program', 'Pricing (Rupees & Dollars)', 'Group size / Format']}
       rows={[
-        [{ text: programs['one-to-one'].name, href: programs['one-to-one'].href }, `${PRICES.oneToOneMonth.label} (or ${PRICES.oneToOneSession.label})`, 'One-to-one private coaching'],
+        [{ text: 'Virtual 1:1 Personal Training', href: programs['one-to-one'].href }, PRICES.oneToOneMonth.label, 'Virtual 1:1 private coaching (3 live sessions/week, personalised plan, reviews & nutrition)'],
+        [{ text: 'Virtual Dual Personal Training (2:1)', href: `${programs['one-to-one'].href}#dual-training` }, PRICES.dualTraining.label, '12 sessions — 1 trainer coaching exactly 2 clients together in live sessions'],
         [{ text: programs.group.name, href: programs.group.href }, PRICES.group.label, `Maximum ${GROUP_CAP} members per group`],
         [{ text: 'Nutrition Support', href: enquiryHref('nutrition') }, PRICES.nutrition.label, 'One-to-one nutrition & habit coaching'],
         [{ text: g.name, href: g.href }, g.priceLabel, `Maximum ${GROUP_CAP} women`],
@@ -522,7 +524,7 @@ const schema = [organization(), website(), faqPage(faqs)];
       ]}
     />
     <p style="margin-top:1.25rem">
-      For online personal training, the price is {PRICES.oneToOneMonth.label}. For group classes, the pricing is {PRICES.group.label}. For nutrition support, the pricing is {PRICES.nutrition.label}. We are working with clients all across the world from all countries with schedules adapted to your local time zone.
+      For Virtual 1:1 personal training, the price is {PRICES.oneToOneMonth.label}. For Virtual Dual Personal Training (2:1), pricing is {PRICES.dualTraining.label}. For group classes, the pricing is {PRICES.group.label}. For nutrition support, the pricing is {PRICES.nutrition.label}. We are working with clients all across the world from all countries with schedules adapted to your local time zone.
     </p>
     <Button href={enquiryHref('not-sure')} variant="primary" location="pricing">Request a Consultation</Button>
   </Section>

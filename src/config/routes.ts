@@ -4,7 +4,7 @@
  * structured data stay consistent. Paths match the content pack (Part 9) exactly.
  */
 import { BRAND, abs } from './site';
-import { programs, PRICES, GROUP_CAP } from '../data/programs';
+import { programs, PRICES, GROUP_CAP, enquiryHref } from '../data/programs';
 
 export interface Route {
   path: string;
@@ -27,7 +27,7 @@ export const ROUTES = {
     name: 'Home',
     nav: 'Home',
     title: 'Online Personal Training & Fitness Coaching | Proteinworkk',
-    description: `Online personal training from ₹${PRICES.oneToOneSession.amount} a session and group training from ₹${PRICES.group.amount.toLocaleString('en-IN')} a month. Bengaluru-based coaching, small groups, nutrition support.`,
+    description: `Online personal training from ₹${PRICES.oneToOneMonth.amount.toLocaleString('en-IN')} a month and group training from ₹${PRICES.group.amount.toLocaleString('en-IN')} a month. Bengaluru-based coaching, small groups, nutrition support.`,
     indexable: true,
   },
   about: {
@@ -44,7 +44,7 @@ export const ROUTES = {
     name: 'Online Personal Training',
     nav: 'One-to-One Training',
     title: 'Online Personal Training in India | Proteinworkk',
-    description: `One-to-one online personal training from Bengaluru: a personal plan, trainer guidance and accountability. ${PRICES.oneToOneSession.label} or ${PRICES.oneToOneMonth.label}.`,
+    description: `Virtual 1:1 online personal training: 3 live sessions/week, custom plan and accountability for ${PRICES.oneToOneMonth.label}. Virtual dual training available.`,
     indexable: true,
   },
   group: {
@@ -131,17 +131,38 @@ export type RouteKey = keyof typeof ROUTES;
 
 export const routeList: Route[] = Object.values(ROUTES);
 
-/** Main navigation, in display order. */
-export const NAV_ITEMS = [
-  ROUTES.home,
-  ROUTES.about,
-  ROUTES.oneToOne,
-  ROUTES.group,
-  ROUTES.girlPower,
-  ROUTES.mens,
-  ROUTES.blog,
-  ROUTES.contact,
-].map((r: Route) => ({ label: r.nav as string, path: r.path }));
+export interface SubNavItem {
+  label: string;
+  path: string;
+  desc?: string;
+}
+
+export interface NavItem {
+  label: string;
+  path?: string;
+  children?: SubNavItem[];
+}
+
+export const TRAINING_SERVICES: SubNavItem[] = [
+  { label: 'Virtual 1:1 Personal Training', path: ROUTES.oneToOne.path, desc: '3 live sessions/week, custom plan & 1:1 coaching' },
+  { label: 'Virtual Dual Training (2:1)', path: `${ROUTES.oneToOne.path}#dual-training`, desc: '1 trainer coaching 2 clients together live' },
+  { label: 'Online Group Training', path: ROUTES.group.path, desc: `Small groups capped at ${GROUP_CAP} members` },
+  { label: 'Girl Power (Women’s Training)', path: ROUTES.girlPower.path, desc: 'Women-only online group training & strength' },
+  { label: 'Men’s Online Training', path: ROUTES.mens.path, desc: 'Hypertrophy, strength & conditioning for men' },
+  { label: 'Nutrition Support', path: enquiryHref('nutrition'), desc: 'Personalized meal planning and habit guidance' },
+];
+
+/** Main navigation, in display order with Training dropdown. */
+export const NAV_ITEMS: NavItem[] = [
+  { label: ROUTES.home.nav as string, path: ROUTES.home.path },
+  { label: ROUTES.about.nav as string, path: ROUTES.about.path },
+  {
+    label: 'Training',
+    children: TRAINING_SERVICES,
+  },
+  { label: ROUTES.blog.nav as string, path: ROUTES.blog.path },
+  { label: ROUTES.contact.nav as string, path: ROUTES.contact.path },
+];
 
 export interface Crumb {
   name: string;

@@ -2,7 +2,7 @@
  * Programs, prices and group size: the single source for every page, card, table and JSON-LD offer.
  *
  * PRICE CONFIRMATION
- * - Confirmed: one-to-one (₹6,999 / $85 per month, ₹600 / $8 per session), online group (₹3,999 / $49 per month), and nutrition support (₹2,999 / $36 per month).
+ * - Confirmed: Virtual 1:1 (₹7,999 / $99 per month), Virtual Dual (₹11,999 / $600 for 12 sessions), online group (₹3,999 / $49 per month), and nutrition support (₹2,999 / $36 per month).
  * - Provisional (NOT shown publicly, NOT in JSON-LD): Girl Power and Men's, ₹3,999 per month.
  *   When the owner confirms a price, set the matching `...Confirmed` constant below to true.
  *   The price then appears on the page, in FAQs, in the meta description and in the Offer
@@ -12,8 +12,8 @@
 export const GROUP_CAP = 12;
 
 export const PRICES = {
-  oneToOneSession: { amount: 600, label: '₹600 / $8 per session' },
-  oneToOneMonth: { amount: 6999, label: '₹6,999 / $85 per month' },
+  oneToOneMonth: { amount: 7999, label: '₹7,999 / $99 per month' },
+  dualTraining: { amount: 11999, label: '₹11,999 / $600 for 12 sessions' },
   group: { amount: 3999, label: '₹3,999 / $49 per month' },
   nutrition: { amount: 2999, label: '₹2,999 / $36 per month' },
 } as const;
@@ -51,23 +51,25 @@ const mensConfirmed = false; // provisional until the owner approves
 export const programs: Record<ProgramId, Program> = {
   'one-to-one': {
     id: 'one-to-one',
-    name: 'Online One-to-One Personal Training',
-    short: 'One-to-One Personal Training',
+    name: 'Virtual 1:1 & Dual Personal Training',
+    short: 'Virtual 1:1 Personal Training',
     href: '/online-personal-training/',
     audience: 'Individual planning and a trainer’s full attention',
-    format: 'One-to-one, delivered online',
+    format: 'Virtual 1:1 or Dual (2:1), delivered online',
     summary:
-      'Private coaching built around your goals, experience and schedule. Your trainer plans your progression, monitors your consistency and adjusts the program as you improve.',
+      'Private online coaching built around your goals, schedule and experience. Choose dedicated Virtual 1:1 coaching or Virtual Dual Personal Training (2:1) coached live by a certified trainer.',
     benefits: [
-      'A plan built around your goals, experience and schedule',
-      'Your trainer plans progression and tracks consistency',
-      'Practical nutrition guidance as part of how we coach',
+      '3 live sessions per week',
+      'Personalised exercise plan',
+      'Weekly progress review',
+      'Nutrition guidance',
+      'Trainer accountability',
     ],
     priceConfirmed: true,
-    priceLabel: `${PRICES.oneToOneSession.label} or ${PRICES.oneToOneMonth.label}`,
+    priceLabel: `${PRICES.oneToOneMonth.label} (Virtual 1:1) or ${PRICES.dualTraining.label} (Dual 2:1)`,
     offers: [
-      { name: 'Per session', amount: PRICES.oneToOneSession.amount },
-      { name: 'Monthly membership', amount: PRICES.oneToOneMonth.amount },
+      { name: 'Virtual 1:1 Personal Training', amount: PRICES.oneToOneMonth.amount },
+      { name: 'Virtual Dual Personal Training (2:1)', amount: PRICES.dualTraining.amount },
     ],
     cta: 'Choose Personal Training',
     tone: 'one',
@@ -142,7 +144,8 @@ export const programList: Program[] = [
 
 /** Enquiry-form program options (values double as the ?program= query parameter). */
 export const FORM_PROGRAMS: { value: string; label: string }[] = [
-  { value: 'one-to-one', label: 'One-to-One Personal Training' },
+  { value: 'one-to-one', label: 'Virtual 1:1 Personal Training' },
+  { value: 'dual-training', label: 'Virtual Dual Personal Training (2:1)' },
   { value: 'group', label: 'Online Group Training' },
   { value: 'girl-power', label: 'Girl Power Women’s Training' },
   { value: 'mens', label: 'Men’s Online Group Training' },
