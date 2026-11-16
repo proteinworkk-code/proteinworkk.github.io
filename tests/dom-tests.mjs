@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 // Node <22.19.0 compatibility fallback for undici decompression in test runner
@@ -18,8 +18,19 @@ const ok = (c, m) => { if (c) pass++; else { failN++; console.log('  FAIL:', m);
 function load(page, { url = 'https://proteinworkk.com/contact/', endpoint, fetchImpl } = {}) {
   let html = readFileSync(D + page, 'utf8');
   if (endpoint) html = html.replace('<form id="enquiry-form"', `<form data-endpoint="${endpoint}" id="enquiry-form"`).replace(/(<form[^>]*?) data-endpoint="[^"]*"(?=[^>]*data-endpoint)/, '$1');
-  const modules = [...html.matchAll(/<script type="module">([\s\S]*?)<\/script>/g)].map((m) => m[1]);
-  html = html.replace(/<script type="module">[\s\S]*?<\/script>/g, '');
+  const modules = [];
+  const scriptTags = [...html.matchAll(/<script type="module"(?:\s+src="([^"]+)")?>([\s\S]*?)<\/script>/g)];
+  for (const m of scriptTags) {
+    if (m[1]) {
+      const srcPath = m[1].replace(/^\//, '');
+      if (existsSync(D + srcPath)) {
+        modules.push(readFileSync(D + srcPath, 'utf8'));
+      }
+    } else if (m[2]) {
+      modules.push(m[2]);
+    }
+  }
+  html = html.replace(/<script type="module"[\s\S]*?<\/script>/g, '');
   const dom = new JSDOM(html, { url, runScripts: 'outside-only', pretendToBeVisual: true });
   const w = dom.window;
   w.HTMLElement.prototype.scrollIntoView = () => {};
@@ -130,6 +141,61 @@ console.log('11. WhatsApp floating button integration and analytics');
   ok(!!waEvent, 'whatsapp_click analytics event fired on click');
   ok(waEvent && waEvent[2].button_location === 'floating', 'button_location is floating');
   ok(!JSON.stringify(waEvent).includes('9831153184'), 'no phone number in analytics event payload'); }
+
+console.log('12. BMI Calculator interactivity, formulas, ranges and validation');
+{
+  const { w, doc } = load('bmi-calculator/index.html', { url: 'https://proteinworkk.com/bmi-calculator/', fetchImpl: async () => ({ ok: true }) });
+
+  // 12.1 Check initial state
+  const out = doc.getElementById('out');
+  const ph = doc.getElementById('ph');
+  ok(out.hidden === true, 'BMI output hidden on initial load');
+  ok(ph.hidden === false, 'BMI placeholder visible on initial load');
+
+  // 12.2 Test Metric Calculation: 70 kg, 165 cm
+  doc.getElementById('kg').value = '70';
+  doc.getElementById('cm').value = '165';
+  doc.getElementById('f').dispatchEvent(new w.Event('submit', { cancelable: true, bubbles: true }));
+
+  ok(out.hidden === false, 'BMI output displayed after valid calculation');
+  ok(doc.getElementById('v').textContent === '25.7', 'Calculated BMI is 25.7 (70kg, 165cm)');
+  ok(/Indian Obesity Threshold/i.test(doc.getElementById('c').textContent), 'Indian classification flags 25.7 as Indian Obesity Threshold');
+
+  // 12.3 Test switching classification to International (WHO)
+  const siRadio = doc.getElementById('si');
+  siRadio.checked = true;
+  siRadio.dispatchEvent(new w.Event('change', { bubbles: true }));
+
+  ok(doc.getElementById('v').textContent === '25.7', 'BMI remains 25.7 after classification switch');
+  ok(/Overweight/i.test(doc.getElementById('c').textContent), 'WHO classification flags 25.7 as Overweight');
+
+  // 12.4 Test Imperial Calculation: 154 lb, 5 ft 5 in
+  const uiRadio = doc.getElementById('ui');
+  uiRadio.checked = true;
+  uiRadio.dispatchEvent(new w.Event('change', { bubbles: true }));
+
+  ok(doc.getElementById('metric-fields').hidden === true, 'Metric fields hidden in imperial mode');
+  ok(doc.getElementById('imp-fields').hidden === false, 'Imperial fields visible in imperial mode');
+
+  doc.getElementById('lb').value = '154';
+  doc.getElementById('ft').value = '5';
+  doc.getElementById('in').value = '5';
+  doc.getElementById('f').dispatchEvent(new w.Event('submit', { cancelable: true, bubbles: true }));
+
+  ok(doc.getElementById('v').textContent === '25.6', 'Imperial calculated BMI is 25.6');
+
+  // 12.5 Test Validation Errors
+  doc.getElementById('lb').value = '';
+  doc.getElementById('f').dispatchEvent(new w.Event('submit', { cancelable: true, bubbles: true }));
+  ok(doc.getElementById('err').textContent.length > 5, 'Shows error message when imperial weight is missing');
+  ok(doc.getElementById('out').hidden === true, 'Hides output on invalid input');
+
+  // 12.6 Test Reset
+  doc.getElementById('rs').click();
+  ok(doc.getElementById('err').textContent === '', 'Error cleared after reset');
+  ok(doc.getElementById('out').hidden === true, 'Output hidden after reset');
+  ok(doc.getElementById('ph').hidden === false, 'Placeholder shown after reset');
+}
 
 console.log(`\n${pass} passed, ${failN} failed`);
 process.exit(failN ? 1 : 0);

@@ -117,6 +117,15 @@ export const ROUTES = {
       'Learn how women’s strength training builds muscle, bone health, and lasting confidence. Myths busted, beginner workouts, nutrition tips, and a weekly plan.',
     indexable: true,
   },
+  bmiCalculator: {
+    path: '/bmi-calculator/',
+    name: 'BMI Calculator',
+    nav: 'BMI Calculator',
+    title: 'BMI Calculator for Adults: Calculate Your BMI | Proteinworkk',
+    description:
+      'Calculate your BMI using your height and weight. Understand BMI categories, Indian healthy BMI ranges and how BMI relates to fitness and nutrition.',
+    indexable: true,
+  },
   privacy: {
     path: '/privacy-policy/',
     name: 'Privacy Policy',
@@ -150,6 +159,7 @@ export const TRAINING_SERVICES: SubNavItem[] = [
   { label: 'Girl Power (Women’s Training)', path: ROUTES.girlPower.path, desc: 'Women-only online group training & strength' },
   { label: 'Men’s Online Training', path: ROUTES.mens.path, desc: 'Hypertrophy, strength & conditioning for men' },
   { label: 'Nutrition Support', path: enquiryHref('nutrition'), desc: 'Personalized meal planning and habit guidance' },
+  { label: 'BMI Calculator (Free Tool)', path: ROUTES.bmiCalculator.path, desc: 'Calculate BMI with Indian & WHO reference ranges' },
 ];
 
 /** Main navigation, in display order with Training dropdown. */
@@ -160,6 +170,7 @@ export const NAV_ITEMS: NavItem[] = [
     label: 'Training',
     children: TRAINING_SERVICES,
   },
+  { label: ROUTES.bmiCalculator.nav as string, path: ROUTES.bmiCalculator.path },
   { label: ROUTES.blog.nav as string, path: ROUTES.blog.path },
   { label: ROUTES.contact.nav as string, path: ROUTES.contact.path },
 ];

@@ -113,6 +113,28 @@ export const collectionPage = (path: string, name: string, description: string) 
   about: { '@type': 'Organization', name: BRAND.name, url: abs('/') },
 });
 
+export const webPage = (opts: {
+  path: string;
+  name: string;
+  description: string;
+  dateModified?: string;
+}) => ({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${abs(opts.path)}#webpage`,
+  url: abs(opts.path),
+  name: opts.name,
+  description: opts.description,
+  inLanguage: 'en-IN',
+  isPartOf: {
+    '@type': 'WebSite',
+    '@id': `${abs('/')}#website`,
+    name: BRAND.name,
+    url: abs('/'),
+  },
+  ...(opts.dateModified ? { dateModified: opts.dateModified } : {}),
+});
+
 export const blogPosting = (opts: {
   headline: string;
   description: string;

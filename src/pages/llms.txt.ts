@@ -26,6 +26,7 @@ export const GET: APIRoute = () => {
 ## About and contact
 
 - [About ${BRAND.name}](${abs(ROUTES.about.path)}): Key facts about the brand.
+- [BMI Calculator for Adults: Calculate Your Body Mass Index](${abs(ROUTES.bmiCalculator.path)}): Free evidence-based BMI tool with Indian adult consensus ranges (18.5–22.9 kg/m²) and WHO international classifications.
 - [Contact ${BRAND.name}](${abs(ROUTES.contact.path)}): Email ${BRAND.email} or send an enquiry.
 - [Fitness Blog and Training Guides](${abs(ROUTES.blog.path)}): Evidence-based fitness guides, coaching insights, and nutrition habits.
 - [Best Weight Loss Programs: Find a Plan That Works](${abs(ROUTES.blogWeightLoss.path)}): Evidence-based guide comparing weight loss programs, calorie deficits, strength training, and sustainable habits.

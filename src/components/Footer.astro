@@ -20,6 +20,7 @@ const year = new Date().getFullYear();
         <h2 class="footer__title">Programs</h2>
         <ul>
           {programList.map((p) => <li><a href={p.href}>{p.name}</a></li>)}
+          <li><a href={ROUTES.bmiCalculator.path}>BMI Calculator (Free Tool)</a></li>
         </ul>
       </nav>
       <nav class="footer__col" aria-label="Company">
@@ -27,6 +28,7 @@ const year = new Date().getFullYear();
         <ul>
           <li><a href={ROUTES.home.path}>Home</a></li>
           <li><a href={ROUTES.about.path}>About Proteinworkk</a></li>
+          <li><a href={ROUTES.bmiCalculator.path}>BMI Calculator</a></li>
           <li><a href={ROUTES.blog.path}>Fitness Blog & Guides</a></li>
           <li><a href={ROUTES.contact.path}>Contact Us</a></li>
           <li><a href={ROUTES.privacy.path}>Privacy Policy</a></li>

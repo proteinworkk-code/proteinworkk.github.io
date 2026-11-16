@@ -1,0 +1,1407 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Button from '../components/Button.astro';
+import QuickAnswer from '../components/QuickAnswer.astro';
+import { ROUTES, crumbsFor } from '../config/routes';
+import { BRAND, WHATSAPP } from '../config/site';
+import { webPage, breadcrumbs, faqPage, type FaqItem } from '../lib/schema';
+
+const faqs: FaqItem[] = [
+  {
+    q: 'What is BMI?',
+    a: 'BMI is Body Mass Index, a number found by dividing weight in kilograms by height in metres squared. It is a screening tool that compares weight with height.',
+  },
+  {
+    q: 'How do I calculate BMI?',
+    a: 'Divide your weight in kilograms by your height in metres squared. For 70 kg at 1.65 m, that is 70 ÷ 2.7225 = 25.7. Use the calculator above for instant results.',
+  },
+  {
+    q: 'What is a healthy BMI for adults?',
+    a: 'Internationally, 18.5–24.9 is considered a healthy weight range for adults. Indian screening ranges use 18.5–22.9. Either is a screening band, not a verdict on your health.',
+  },
+  {
+    q: 'What is the normal BMI range for Indian adults?',
+    a: '18.5–22.9 is the reference range for Indian adults. A BMI of 23–24.9 indicates increased risk, and 25 or above is the Indian obesity threshold in the 2009 consensus.',
+  },
+  {
+    q: 'Is BMI different for men and women?',
+    a: 'No, the formula and categories are the same. Men and women differ on average in body composition, so the same BMI can mean different fat and muscle levels.',
+  },
+  {
+    q: 'Can muscular people have a high BMI?',
+    a: 'Yes. Muscle is dense and heavy, so strength-trained people can have a high BMI with low body fat. Waist size and body-fat percentage give better context.',
+  },
+  {
+    q: 'Does BMI measure body fat?',
+    a: 'No, BMI does not directly measure body fat. It uses only weight and height, so it cannot separate fat from muscle or bone.',
+  },
+  {
+    q: 'Is BMI an accurate measure of health?',
+    a: 'Not on its own. BMI is a useful screening number, but health depends on many factors, including waist size, fitness, blood tests, sleep and medical history.',
+  },
+  {
+    q: 'What is the difference between BMI and body fat percentage?',
+    a: 'BMI compares weight with height, while body-fat percentage estimates how much of your weight is fat. Body-fat percentage is more specific but harder to measure accurately.',
+  },
+  {
+    q: 'Can children use an adult BMI calculator?',
+    a: 'No. Children and teenagers need BMI-for-age assessment, which compares them with others of the same age and sex. Ask a paediatrician or doctor.',
+  },
+  {
+    q: 'Can pregnant women use BMI calculators?',
+    a: 'Not for assessing weight during pregnancy. Pregnancy requires separate assessment by a qualified healthcare professional.',
+  },
+  {
+    q: 'How often should I calculate my BMI?',
+    a: 'Every few weeks to months is enough for most adults. Weight naturally fluctuates daily, so frequent checks add noise rather than information.',
+  },
+  {
+    q: 'What other measurements should I track?',
+    a: 'Waist circumference, waist-to-height ratio, waist-to-hip ratio and body-fat percentage, along with strength, endurance and energy levels.',
+  },
+  {
+    q: 'Can exercise change BMI?',
+    a: 'It can, but not always. Exercise may change weight, but strength training can build muscle while BMI stays similar, so body composition and waist size may show progress that BMI misses.',
+  },
+  {
+    q: 'Does Proteinworkk provide online personal training?',
+    a: 'Yes. Proteinworkk offers virtual 1:1 and dual (2:1) personal training, online group programmes and nutrition support, delivered online from Bengaluru, India.',
+  },
+  {
+    q: 'How can I get started with Proteinworkk?',
+    a: `Explore the programmes, then contact Proteinworkk to discuss your goals and the option that suits you. You can also email ${BRAND.email}.`,
+  },
+];
+
+const schema = [
+  webPage({
+    path: ROUTES.bmiCalculator.path,
+    name: 'BMI Calculator for Adults – Calculate Your Body Mass Index',
+    description: ROUTES.bmiCalculator.description,
+    dateModified: '2026-11-16',
+  }),
+  breadcrumbs(crumbsFor(ROUTES.bmiCalculator)),
+  faqPage(faqs),
+];
+---
+
+<BaseLayout route={ROUTES.bmiCalculator} schema={schema}>
+  <!-- Hero Section with Attached Visual Asset -->
+  <section class="hero hero--bmi" aria-labelledby="bmi-hero-title">
+    <div class="container hero__grid">
+      <div class="hero__copy">
+        <Breadcrumbs items={crumbsFor(ROUTES.bmiCalculator)} />
+        <p class="hero__tag">Free Evidence-Based Health Tool</p>
+        <h1 id="bmi-hero-title" class="hero__title">BMI Calculator for Adults</h1>
+        <p class="hero__sub">
+          Calculate your BMI instantly using your height and weight. Understand your result with Indian adult consensus ranges (18.5–22.9 kg/m²) and WHO international classifications.
+        </p>
+        <div class="hero__actions">
+          <Button href="#calculator" variant="primary" location="hero">Calculate Your BMI</Button>
+          <Button href={ROUTES.contact.path} variant="onDark" location="hero">Consult a Fitness Coach</Button>
+        </div>
+        <ul class="facts">
+          <li>100% Free &amp; Private (Calculated locally in your browser)</li>
+          <li>Indian Adult Consensus (18.5–22.9) &amp; WHO Standards</li>
+          <li>Dual Metric (kg, cm) &amp; Imperial (lb, ft, in) Units</li>
+        </ul>
+      </div>
+
+      <div class="hero__media-wrapper">
+        <figure class="hero__figure">
+          <img
+            src="/images/bmi-calculator-hero.jpg"
+            alt="Proteinworkk BMI Calculator showing healthy Indian BMI gauge with shaker bottle, scale, towel and measuring tape"
+            width="1024"
+            height="682"
+            loading="eager"
+            decoding="async"
+            class="hero__figure-img"
+          />
+          <figcaption class="hero__figure-caption">
+            Proteinworkk Healthy BMI Tracker · Bengaluru, India
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Answer block for AEO / AI Engines -->
+  <QuickAnswer label="Quick answer: What is Body Mass Index (BMI)?">
+    <strong>BMI (Body Mass Index)</strong> is a screening measure calculated as weight in kilograms divided by height in metres squared (kg/m²). It shows whether weight is proportionate to height. For Indian adults, 18.5–22.9 is the reference range and 23 or above signals increased risk. BMI is not a diagnosis and does not measure body fat directly.
+  </QuickAnswer>
+
+  <!-- Interactive Calculator Section -->
+  <section id="calculator" class="section section--light" aria-labelledby="calc-title">
+    <div class="container">
+      <div class="section__lead">
+        <h2 id="calc-title">BMI calculator for adults</h2>
+        <p class="lede">
+          Select your preferred units and classification reference below to see where your body mass index sits.
+        </p>
+      </div>
+
+      <div class="calc-grid">
+        <!-- Form Panel -->
+        <form class="calc-card" id="f" novalidate aria-label="BMI calculator">
+          <fieldset class="calc-group">
+            <legend class="calc-legend">Measurement units</legend>
+            <div class="seg" role="radiogroup" aria-label="Units">
+              <input type="radio" name="u" id="um" value="m" checked />
+              <label for="um">Metric (kg, cm)</label>
+              <input type="radio" name="u" id="ui" value="i" />
+              <label for="ui">Imperial (lb, ft, in)</label>
+            </div>
+          </fieldset>
+
+          <fieldset class="calc-group">
+            <legend class="calc-legend">Classification standard</legend>
+            <div class="seg" role="radiogroup" aria-label="Classification">
+              <input type="radio" name="s" id="sn" value="in" checked />
+              <label for="sn">Indian adult ranges</label>
+              <input type="radio" name="s" id="si" value="int" />
+              <label for="si">International (WHO)</label>
+            </div>
+          </fieldset>
+
+          <!-- Metric Inputs -->
+          <div id="metric-fields" class="fields-stack">
+            <div class="f">
+              <label for="kg">Weight (kg)</label>
+              <input id="kg" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 68" />
+              <span class="field-hint">Range: 20 – 300 kg</span>
+            </div>
+            <div class="f">
+              <label for="cm">Height (cm)</label>
+              <input id="cm" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 165" />
+              <span class="field-hint">Range: 100 – 250 cm</span>
+            </div>
+          </div>
+
+          <!-- Imperial Inputs -->
+          <div id="imp-fields" class="fields-stack" hidden>
+            <div class="f">
+              <label for="lb">Weight (lb)</label>
+              <input id="lb" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 150" />
+              <span class="field-hint">Range: 44 – 660 lb</span>
+            </div>
+            <div class="f-row">
+              <div class="f">
+                <label for="ft">Height (ft)</label>
+                <input id="ft" type="text" inputmode="numeric" autocomplete="off" placeholder="5" />
+              </div>
+              <div class="f">
+                <label for="in">Height (in)</label>
+                <input id="in" type="text" inputmode="decimal" autocomplete="off" placeholder="5" />
+              </div>
+            </div>
+            <span class="field-hint">Range: 3 ft 4 in – 8 ft 2 in</span>
+          </div>
+
+          <p class="err-box" id="err" role="alert" aria-live="assertive"></p>
+
+          <div class="calc-actions">
+            <button class="btn btn--primary" type="submit" id="btn-calc">Calculate BMI</button>
+            <button class="btn btn--secondary" type="button" id="rs">Reset</button>
+          </div>
+
+          <p class="calc-note">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            Calculated in your browser. Your height and weight are never sent or stored.
+          </p>
+        </form>
+
+        <!-- Result Panel -->
+        <div class="calc-card calc-card--res" id="res" aria-live="polite">
+          <div id="ph" class="res-placeholder">
+            <div class="res-icon" aria-hidden="true">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--forest)" stroke-width="1.75">
+                <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
+                <line x1="16" y1="8" x2="2" y2="22"></line>
+                <line x1="17.5" y1="15" x2="9" y2="15"></line>
+              </svg>
+            </div>
+            <h3>Your Result Awaits</h3>
+            <p>Enter your height and weight to see your BMI, your category and where you sit on the scale.</p>
+          </div>
+
+          <div id="out" class="res-output" hidden>
+            <div class="res-top">
+              <div>
+                <span class="res-label">Your Body Mass Index</span>
+                <div class="res-score">
+                  <span class="val" id="v">--</span>
+                  <span class="val-unit">kg/m²</span>
+                </div>
+              </div>
+              <div class="badge-wrapper">
+                <span class="cat-badge" id="c">Normal</span>
+              </div>
+            </div>
+
+            <!-- Visual Bar Scale -->
+            <div class="bar-container">
+              <div class="bar" id="b" aria-hidden="true"></div>
+              <div class="sc" id="sc" aria-hidden="true"></div>
+            </div>
+
+            <div class="ideal-box" id="ideal-box">
+              <span class="ideal-title">Target Reference Weight:</span>
+              <span id="ideal-text">--</span>
+            </div>
+
+            <div class="res-explanation">
+              <p id="ex" class="ex-text"></p>
+              <p id="how" class="how-text"></p>
+            </div>
+
+            <!-- Contextual WhatsApp consultation button -->
+            <div class="res-cta">
+              <a
+                class="btn btn--wa-card"
+                id="wa-cta-btn"
+                href={WHATSAPP.buildUrl('Hi Proteinworkk! I used your BMI calculator and would like to discuss my results and training goals.')}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.16 12.04 20.16C10.66 20.16 9.3 19.8 8.1 19.09L7.81 18.92L4.7 19.74L5.53 16.71L5.34 16.41C4.55 15.15 4.14 13.56 4.14 11.92C4.14 7.38 7.84 3.67 12.05 3.67ZM8.82 7.03C8.63 7.03 8.32 7.1 8.06 7.39C7.8 7.67 7.06 8.37 7.06 9.79C7.06 11.21 8.1 12.58 8.24 12.78C8.39 12.97 10.28 15.89 13.18 17.14C13.87 17.44 14.41 17.62 14.83 17.75C15.52 17.97 16.15 17.94 16.65 17.87C17.2 17.79 18.35 17.18 18.59 16.5C18.83 15.82 18.83 15.24 18.76 15.12C18.69 15 18.5 14.93 18.21 14.79C17.92 14.65 16.5 13.95 16.24 13.85C15.98 13.76 15.79 13.71 15.6 14C15.41 14.29 14.87 14.93 14.7 15.12C14.54 15.31 14.37 15.34 14.08 15.19C13.79 15.05 12.86 14.74 11.75 13.75C10.89 12.98 10.31 12.03 10.14 11.74C9.97 11.45 10.12 11.3 10.27 11.15C10.4 11.02 10.56 10.81 10.71 10.64C10.86 10.47 10.91 10.35 11.01 10.15C11.11 9.95 11.06 9.79 10.98 9.64C10.91 9.5 10.34 8.09 10.1 7.51C9.87 6.95 9.63 7.03 9.46 7.02C9.3 7.02 9.11 7.03 8.82 7.03Z"/>
+                </svg>
+                <span>Discuss Your BMI on WhatsApp</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="res-disclaimer">
+            <p class="fine">
+              For adults aged 18 and over. This is a screening tool, not a medical diagnosis. It does not apply to children, teenagers or pregnancy.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Educational Deep Dive -->
+  <section class="section section--white" aria-labelledby="what-is-bmi">
+    <div class="container article-layout">
+      <div class="article-main">
+        <article class="article-body">
+          <h2 id="what-is-bmi">What is BMI?</h2>
+          <p>
+            BMI is a number that compares your weight with your height. It is calculated by dividing weight in kilograms by height in metres squared. Because it needs only a scale and a tape measure, health professionals, researchers and fitness coaches use it as a fast first look at weight relative to height.
+          </p>
+          <p>
+            BMI describes a population better than a person. It tells you roughly where your weight sits for your height, but it cannot tell you how much of that weight is muscle, fat or bone, or where fat is stored.
+          </p>
+
+          <h2 id="how-calculated">How is BMI calculated?</h2>
+          <p>
+            <strong>BMI = weight (kg) ÷ height (m)².</strong> Convert centimetres to metres first (165 cm = 1.65 m), square the height, then divide your weight by it. Round to one decimal place.
+          </p>
+          <div class="example-box">
+            <p><strong>Example 1 (metric):</strong> 70 kg at 165 cm. Height squared is 1.65 × 1.65 = 2.7225. BMI = 70 ÷ 2.7225 = <strong>25.7</strong>.</p>
+            <p><strong>Example 2 (metric):</strong> 58 kg at 172 cm. Height squared is 1.72 × 1.72 = 2.9584. BMI = 58 ÷ 2.9584 = <strong>19.6</strong>.</p>
+            <p><strong>Imperial:</strong> convert first. Pounds × 0.4536 = kilograms; total inches × 0.0254 = metres. For 154 lb at 5 ft 5 in: 154 × 0.4536 = 69.9 kg; 65 in × 0.0254 = 1.651 m; BMI = 69.9 ÷ 2.726 = <strong>25.6</strong>. The formula is the same for Indian and international ranges. Only the cut-offs differ.</p>
+          </div>
+
+          <h2 id="categories">What are the BMI categories and healthy BMI ranges?</h2>
+          <p>
+            A healthy BMI depends on which reference you use. Indian adult screening ranges are lower than international ones because South Asian populations tend to develop metabolic risk at lower BMI levels. Never read a result against the wrong column.
+          </p>
+
+          <!-- Table: BMI Categories -->
+          <div class="table-container">
+            <table class="data-table">
+              <caption class="fine">BMI chart for adults (kg/m²)</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Category</th>
+                  <th scope="col">Indian adult ranges</th>
+                  <th scope="col">International (WHO) ranges</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Underweight</td>
+                  <td>Below 18.5</td>
+                  <td>Below 18.5</td>
+                </tr>
+                <tr>
+                  <td>Reference / healthy weight</td>
+                  <td>18.5–22.9</td>
+                  <td>18.5–24.9</td>
+                </tr>
+                <tr>
+                  <td>Overweight / increased risk</td>
+                  <td>23–24.9</td>
+                  <td>25–29.9</td>
+                </tr>
+                <tr>
+                  <td>Obesity threshold</td>
+                  <td>25 and above</td>
+                  <td>30 and above</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            The Indian ranges come from a 2009 expert consensus statement published in the Journal of the Association of Physicians of India. In January 2025 Indian specialists proposed a revised definition of obesity that adds waist circumference, waist-to-height ratio and health impact to BMI. Treat 23–24.9 as a signal to look further, such as measuring your waist, rather than as a confirmed diagnosis. A category describes a screening band, not your health.
+          </p>
+
+          <h2 id="importance">Why is BMI important?</h2>
+          <p>
+            BMI matters because it is a simple, repeatable starting point. It supports initial fitness assessments, general health screening and weight management conversations. Tracked over months, it shows trends. It also helps a coach decide which further measurements to take. It is one part of an assessment, never the whole of it.
+          </p>
+
+          <h2 id="benefits">What are the benefits of using a BMI calculator?</h2>
+          <p>
+            A BMI calculator is free, instant and private. It gives you a common language with doctors and coaches, a baseline before starting a programme, and a quick way to notice a drift in either direction. It works best for adults who are not highly muscular, as one input alongside waist size, energy, strength and how you feel.
+          </p>
+
+          <h2 id="limitations">What are the limitations of BMI?</h2>
+          <p>
+            BMI cannot tell muscle from fat, so it can overstate fatness in muscular people and understate it in people with low muscle mass. It does not measure body-fat percentage, abdominal fat, strength or cardiovascular fitness.
+          </p>
+          <p>
+            Age also matters, because muscle tends to decline and body fat can rise with age without a change in BMI. Adult categories must not be applied to children and teenagers, who need BMI-for-age assessment, and pregnancy needs separate assessment. People with medical conditions should ask a qualified clinician to interpret their numbers.
+          </p>
+
+          <h2 id="bmi-vs-bodyfat">BMI vs body fat percentage: what is the difference?</h2>
+          <p>
+            BMI compares weight with height, while body-fat percentage estimates how much of your weight is fat. Body fat is more informative but needs more equipment and skill to measure well.
+          </p>
+
+          <!-- Table: BMI vs Body Fat -->
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th scope="col">Feature</th>
+                  <th scope="col">BMI</th>
+                  <th scope="col">Body-fat percentage</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Measures</td>
+                  <td>Weight relative to height</td>
+                  <td>Share of weight that is fat</td>
+                </tr>
+                <tr>
+                  <td>Tools</td>
+                  <td>Scale and height measure</td>
+                  <td>Skinfold callipers, bioimpedance or scans</td>
+                </tr>
+                <tr>
+                  <td>Muscle vs fat</td>
+                  <td>Cannot separate</td>
+                  <td>Estimates the split</td>
+                </tr>
+                <tr>
+                  <td>Accuracy</td>
+                  <td>Consistent but coarse</td>
+                  <td>Varies by method and conditions</td>
+                </tr>
+                <tr>
+                  <td>Best use</td>
+                  <td>Screening and trends</td>
+                  <td>Body-composition tracking</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2 id="other-measurements">What other measurements should you track?</h2>
+          <p>
+            <strong>Waist circumference</strong> reflects abdominal fat. Indian guidance uses 80 cm or more for women and 90 cm or more for men as the abdominal-obesity threshold. <strong>Waist-to-height ratio</strong> divides waist by height, and a ratio above 0.5 is commonly flagged. <strong>Waist-to-hip ratio</strong> compares waist with hip size. <strong>Body-fat percentage</strong> adds composition. <strong>Strength and endurance</strong>, such as push-ups, a loaded carry or a timed walk, show what your body can do. Together these give a fuller picture than any single number.
+          </p>
+
+          <h2 id="men-and-women">Is BMI different for men and women?</h2>
+          <p>
+            No, the formula and adult categories are the same for men and women. However, men and women differ on average in body composition and fat distribution, so the same BMI can reflect different amounts of fat and muscle. There is no officially recognised “ideal BMI” for each sex, so use waist size and other measures too.
+          </p>
+
+          <h2 id="fitness-training">How does BMI relate to fitness training?</h2>
+          <p>
+            For a coach, BMI is an intake data point, not a goal. Strength training builds muscle and can leave BMI unchanged while body composition improves. Endurance work builds stamina, and recovery lets the body adapt. Sustainable habits, such as consistent sessions, enough sleep and manageable progression, matter more than chasing a BMI figure. Fitness coaches use BMI to inform planning, not to diagnose obesity or any medical condition.
+          </p>
+
+          <h2 id="nutrition">How does BMI relate to nutrition?</h2>
+          <p>
+            Nutrition supports training, recovery and general wellbeing. Balanced meals, adequate protein and enough total energy help you train, recover and adapt, and food choices influence body weight over time. Individual needs vary with age, activity, health and culture. For medical conditions, or any need for a therapeutic diet, consult a registered dietitian or doctor. Proteinworkk offers nutrition education and support, not medical nutrition therapy.
+          </p>
+        </article>
+      </div>
+
+      <!-- Quick Navigation Sidebar -->
+      <aside class="article-sidebar" aria-label="Table of Contents">
+        <div class="sidebar-box">
+          <p class="sidebar-box__title">On this page</p>
+          <nav class="sidebar-toc">
+            <ul>
+              <li><a href="#calculator">BMI Calculator Tool</a></li>
+              <li><a href="#what-is-bmi">What is BMI?</a></li>
+              <li><a href="#how-calculated">How is BMI calculated?</a></li>
+              <li><a href="#categories">Healthy BMI categories &amp; chart</a></li>
+              <li><a href="#limitations">Limitations of BMI</a></li>
+              <li><a href="#bmi-vs-bodyfat">BMI vs Body Fat %</a></li>
+              <li><a href="#other-measurements">Other key body metrics</a></li>
+              <li><a href="#fitness-training">BMI &amp; Strength Training</a></li>
+              <li><a href="#about-proteinworkk">About Proteinworkk</a></li>
+              <li><a href="#faq">Frequently Asked Questions</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="sidebar-box sidebar-box--cta">
+          <p class="sidebar-box__title">Need personal guidance?</p>
+          <p class="fine">
+            Get structured coaching from certified trainers tailored to your body type, schedule, and goals.
+          </p>
+          <Button href={ROUTES.contact.path} variant="primary" location="sidebar">Get Started</Button>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- About Proteinworkk & Programs Section -->
+  <section id="about-proteinworkk" class="section section--tint" aria-labelledby="about-pw-title">
+    <div class="container">
+      <div class="section__lead">
+        <h2 id="about-pw-title">About Proteinworkk</h2>
+        <p class="lede">
+          <strong>Proteinworkk is an online fitness coaching and nutrition support brand based in Bengaluru, Karnataka, India.</strong> Coaching is delivered online and works with clients across countries. The tagline is “Strength within reach.” The approach rests on five ideas: strength builds capability, consistency makes progress repeatable, endurance supports everyday stamina, recovery allows the body to adapt, and nutrition supports training and general wellbeing. Learn more <a href={ROUTES.about.path}>about Proteinworkk</a>.
+        </p>
+        <h3 style="margin-top: 1.5rem;">How can Proteinworkk support your fitness journey?</h3>
+        <p>
+          Online coaching suits people who want structure, accountability and flexibility without travelling to a gym studio. It may help beginners building routines and experienced trainees who want guidance. Results vary from person to person and are not guaranteed.
+        </p>
+      </div>
+
+      <div class="program-grid">
+        <div class="card program-card">
+          <h3>Virtual 1:1 and 2:1 training</h3>
+          <p>Personalised sessions for one person or two training together. See <a href={ROUTES.oneToOne.path}>online personal training</a>.</p>
+        </div>
+        <div class="card program-card">
+          <h3>Online group training</h3>
+          <p>Coach-led sessions with a community. See <a href={ROUTES.group.path}>online group training</a>.</p>
+        </div>
+        <div class="card program-card">
+          <h3>Girl Power</h3>
+          <p>Women’s online group training. See <a href={ROUTES.girlPower.path}>Girl Power</a>.</p>
+        </div>
+        <div class="card program-card">
+          <h3>Men’s online group training</h3>
+          <p>Structured group coaching for men. See <a href={ROUTES.mens.path}>men’s online training</a>.</p>
+        </div>
+        <div class="card program-card">
+          <h3>Nutrition support</h3>
+          <p>Guidance on balanced eating to support training. <a href={ROUTES.contact.path}>Ask about nutrition support</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="section section--dark" aria-labelledby="cta-banner-title">
+    <div class="container">
+      <div class="cta-banner-inner">
+        <h2 id="cta-banner-title">Your Fitness Journey Starts With Understanding Your Body.</h2>
+        <p>
+          Your BMI is only one part of your fitness journey. Build strength, improve consistency and work towards your goals with structured online coaching from Proteinworkk.
+        </p>
+        <div class="cta-banner-buttons">
+          <Button href={ROUTES.oneToOne.path} variant="primary" location="cta-band">Explore Our Training Programs</Button>
+          <Button href={ROUTES.contact.path} variant="onDark" location="cta-band">Contact Proteinworkk</Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="section section--light" aria-labelledby="faq-title">
+    <div class="container faq-section">
+      <div class="faq__intro">
+        <h2 id="faq-title">Frequently asked questions</h2>
+        <p class="muted">Clear, evidence-based answers to common questions about BMI, body composition and online coaching.</p>
+      </div>
+
+      <div class="faq__list">
+        {faqs.map((f) => (
+          <details class="faq__details">
+            <summary class="faq__summary">
+              <h3>{f.q}</h3>
+            </summary>
+            <div class="faq__answer">
+              <p>{f.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Medical Disclaimer & Sources Section -->
+  <section class="section section--white" aria-labelledby="disclaimer-title">
+    <div class="container">
+      <div class="disclaimer-box">
+        <h2 id="disclaimer-title">Medical disclaimer and sources</h2>
+        <p>
+          BMI is a screening tool, not a diagnosis, and this calculator does not replace medical advice. Children and teenagers require BMI-for-age assessment, and pregnancy requires separate assessment. If you have a medical condition, consult a qualified healthcare professional. Proteinworkk provides fitness coaching and nutrition education, not medical diagnosis or treatment.
+        </p>
+        <p class="fine">
+          Last reviewed November 2026. Sources: international ranges from the World Health Organization; Indian ranges from the 2009 Consensus Statement for Asian Indians (Misra et al., JAPI); <a href="https://pubmed.ncbi.nlm.nih.gov/39814628/" rel="noopener" target="_blank">Revised definition of obesity in Asian Indians living in India</a> (Diabetes &amp; Metabolic Syndrome, 2025). Read more on our <a href={ROUTES.blog.path}>blog</a> or return to the <a href={ROUTES.home.path}>homepage</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Hero Media Layout */
+  .hero--bmi {
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+
+  .hero__media-wrapper {
+    position: relative;
+  }
+
+  .hero__figure {
+    margin: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(248, 248, 241, 0.05);
+  }
+
+  .hero__figure-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  .hero__figure-caption {
+    padding: 0.6rem 1rem;
+    font-size: 0.82rem;
+    color: rgba(248, 248, 241, 0.7);
+    background: rgba(13, 20, 11, 0.75);
+    text-align: right;
+  }
+
+  /* Calculator Layout */
+  .calc-grid {
+    display: grid;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    grid-template-columns: 1fr;
+    margin-top: 2rem;
+  }
+
+  @media (min-width: 860px) {
+    .calc-grid {
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+    }
+  }
+
+  .calc-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    box-shadow: 0 8px 24px rgba(32, 41, 27, 0.06);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .calc-group {
+    border: 0;
+    padding: 0;
+    margin: 0 0 1.25rem;
+  }
+
+  .calc-legend {
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    color: var(--forest);
+  }
+
+  /* Segmented Radios */
+  .seg {
+    display: inline-flex;
+    border: 1.5px solid var(--line);
+    border-radius: 999px;
+    background: var(--paper);
+    padding: 3px;
+    gap: 3px;
+    max-width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .seg input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .seg label {
+    padding: 8px 18px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--muted);
+    transition: all 0.15s ease;
+  }
+
+  .seg input:checked + label {
+    background: var(--forest);
+    color: var(--paper);
+    box-shadow: 0 2px 6px rgba(32, 41, 27, 0.2);
+  }
+
+  .seg input:focus-visible + label {
+    outline: 3px solid var(--orange);
+    outline-offset: 2px;
+  }
+
+  /* Fields */
+  .fields-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .f {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .f label {
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--ink);
+  }
+
+  .f input {
+    font: inherit;
+    font-size: 1.05rem;
+    padding: 10px 14px;
+    border: 1.5px solid var(--line-strong);
+    border-radius: 12px;
+    width: 100%;
+    background: var(--white);
+    color: var(--ink);
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+
+  .f input:focus {
+    border-color: var(--forest);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(32, 41, 27, 0.15);
+  }
+
+  .f-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .field-hint {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .err-box {
+    color: #b3261e;
+    font-size: 0.88rem;
+    font-weight: 600;
+    min-height: 1.4em;
+    margin: 0.25rem 0 0.75rem;
+  }
+
+  .calc-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .calc-note {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.84rem;
+    color: var(--muted);
+    margin-top: 1.25rem;
+    margin-bottom: 0;
+  }
+
+  /* Result Card */
+  .calc-card--res {
+    justify-content: space-between;
+    background: var(--paper);
+    border: 1.5px solid var(--line);
+  }
+
+  .res-placeholder {
+    text-align: center;
+    padding: 2.5rem 1rem;
+    margin: auto;
+  }
+
+  .res-icon {
+    display: inline-flex;
+    padding: 1rem;
+    border-radius: 50%;
+    background: rgba(32, 41, 27, 0.06);
+    margin-bottom: 1rem;
+  }
+
+  .res-placeholder h3 {
+    margin-bottom: 0.5rem;
+  }
+
+  .res-placeholder p {
+    color: var(--muted);
+    max-width: 38ch;
+    margin-inline: auto;
+  }
+
+  .res-output {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .res-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .res-label {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .res-score {
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+  }
+
+  .val {
+    font-family: var(--font-head);
+    font-size: clamp(3rem, 6vw, 4rem);
+    font-weight: 800;
+    line-height: 1;
+    color: var(--forest);
+  }
+
+  .val-unit {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--muted);
+  }
+
+  .cat-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .cat-badge--underweight {
+    background: #e0f2fe;
+    color: #0369a1;
+  }
+
+  .cat-badge--normal {
+    background: #dcfce7;
+    color: #15803d;
+  }
+
+  .cat-badge--overweight {
+    background: #fef3c7;
+    color: #b45309;
+  }
+
+  .cat-badge--obesity {
+    background: #fee2e2;
+    color: #b91c1c;
+  }
+
+  /* Visual Bar */
+  .bar-container {
+    margin: 0.5rem 0;
+  }
+
+  .bar {
+    display: flex;
+    height: 14px;
+    border-radius: 999px;
+    overflow: hidden;
+    position: relative;
+    background: #e2e8f0;
+  }
+
+  :global(.bar span) {
+    display: block;
+    height: 100%;
+  }
+
+  :global(.s0) { background: #38bdf8; }
+  :global(.s1) { background: #22c55e; }
+  :global(.s2) { background: #f59e0b; }
+  :global(.s3) { background: #ef4444; }
+
+  :global(.mk) {
+    position: absolute;
+    top: -5px;
+    width: 6px;
+    height: 24px;
+    background: var(--forest);
+    border: 1.5px solid var(--white);
+    border-radius: 3px;
+    transform: translateX(-50%);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition: left 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .sc {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+
+  .ideal-box {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 0.92rem;
+    color: var(--ink);
+  }
+
+  .ideal-title {
+    font-weight: 700;
+    color: var(--forest);
+    margin-right: 4px;
+  }
+
+  .ex-text {
+    font-size: 0.98rem;
+    line-height: 1.55;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+  }
+
+  .how-text {
+    font-size: 0.84rem;
+    color: var(--muted);
+    font-family: monospace;
+    background: rgba(32, 41, 27, 0.04);
+    padding: 6px 10px;
+    border-radius: 8px;
+    margin: 0;
+  }
+
+  .res-cta {
+    margin-top: 0.5rem;
+  }
+
+  .btn--wa-card {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    background: #25d366;
+    color: #0b2e1a;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 12px 18px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: background 0.15s ease, transform 0.1s ease;
+  }
+
+  .btn--wa-card:hover {
+    background: #20ba5a;
+    transform: translateY(-1px);
+    color: #0b2e1a;
+  }
+
+  .res-disclaimer {
+    border-top: 1px solid var(--line);
+    padding-top: 1rem;
+    margin-top: 1.25rem;
+  }
+
+  .fine {
+    font-size: 0.84rem;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  /* Educational Article Body */
+  .example-box {
+    background: var(--paper);
+    border-left: 4px solid var(--olive-700);
+    padding: 1.25rem 1.5rem;
+    border-radius: 0 14px 14px 0;
+    margin: 1.5rem 0;
+  }
+
+  .example-box p:last-child {
+    margin-bottom: 0;
+  }
+
+  .table-container {
+    overflow-x: auto;
+    margin: 1.5rem 0 2rem;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--white);
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .data-table th {
+    background: var(--forest);
+    color: var(--paper);
+    font-weight: 600;
+  }
+
+  .data-table tr:last-child td {
+    border-bottom: 0;
+  }
+
+  /* Sidebar */
+  .sidebar-box--cta {
+    background: var(--paper);
+    border-color: var(--forest);
+  }
+
+  /* Program Cards */
+  .program-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+
+  .program-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .program-card h3 {
+    font-size: 1.15rem;
+    color: var(--forest);
+    margin-bottom: 0.5rem;
+  }
+
+  .program-card p {
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin-bottom: 0;
+  }
+
+  /* CTA Banner Inner */
+  .cta-banner-inner {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 0;
+  }
+
+  .cta-banner-inner h2 {
+    color: var(--paper);
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    margin-bottom: 1rem;
+  }
+
+  .cta-banner-inner p {
+    color: rgba(248, 248, 241, 0.85);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    margin-inline: auto;
+  }
+
+  .cta-banner-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* FAQ Accordions */
+  .faq-section {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .faq__details {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .faq__details[open] {
+    border-color: var(--forest);
+    box-shadow: 0 4px 14px rgba(32, 41, 27, 0.05);
+  }
+
+  .faq__summary {
+    padding: 1.1rem 1.25rem;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .faq__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__summary h3 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 650;
+    color: var(--forest);
+  }
+
+  .faq__summary::after {
+    content: '+';
+    font-size: 1.4rem;
+    line-height: 1;
+    font-weight: 400;
+    color: var(--forest);
+    transition: transform 0.2s ease;
+    margin-left: 1rem;
+  }
+
+  .faq__details[open] .faq__summary::after {
+    content: '−';
+  }
+
+  .faq__answer {
+    padding: 0 1.25rem 1.25rem;
+    border-top: 1px solid var(--line);
+    padding-top: 1rem;
+  }
+
+  .faq__answer p {
+    margin: 0;
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  /* Disclaimer Box */
+  .disclaimer-box {
+    max-width: 860px;
+    margin: 0 auto;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 2rem;
+  }
+
+  .disclaimer-box h2 {
+    font-size: 1.35rem;
+    margin-bottom: 0.75rem;
+  }
+</style>
+
+<script>
+  (function () {
+    const $ = (i: string) => document.getElementById(i);
+    const U = () => (document.querySelector('[name=u]:checked') as HTMLInputElement).value;
+    const S = () => (document.querySelector('[name=s]:checked') as HTMLInputElement).value;
+
+    const MIN = 12;
+    const MAX = 40;
+
+    interface ScaleBand {
+      min: number;
+      max: number;
+      cls: string;
+    }
+
+    const SCALE: Record<string, ScaleBand[]> = {
+      in: [
+        { min: MIN, max: 18.5, cls: 's0' },
+        { min: 18.5, max: 23, cls: 's1' },
+        { min: 23, max: 25, cls: 's2' },
+        { min: 25, max: MAX, cls: 's3' },
+      ],
+      int: [
+        { min: MIN, max: 18.5, cls: 's0' },
+        { min: 18.5, max: 25, cls: 's1' },
+        { min: 25, max: 30, cls: 's2' },
+        { min: 30, max: MAX, cls: 's3' },
+      ],
+    };
+
+    function cat(b: number, s: string): { label: string; text: string; badgeCls: string } {
+      if (b < 18.5) {
+        return {
+          label: 'Underweight (< 18.5)',
+          text: 'A BMI below 18.5 is below the reference range. It can have many causes, so it is worth discussing with a doctor or dietitian, especially if it is unexpected.',
+          badgeCls: 'cat-badge--underweight',
+        };
+      }
+      if (s === 'in') {
+        if (b < 23) {
+          return {
+            label: 'Healthy Weight (18.5 – 22.9)',
+            text: 'Your BMI falls in the reference range for Indian adults. Waist size, strength and energy still matter for a full picture.',
+            badgeCls: 'cat-badge--normal',
+          };
+        }
+        if (b < 25) {
+          return {
+            label: 'Increased Risk (23.0 – 24.9)',
+            text: 'This band signals increased risk for Indian adults. It is not a diagnosis. Measuring your waist and discussing it with a doctor or certified coach is a sensible next step.',
+            badgeCls: 'cat-badge--overweight',
+          };
+        }
+        return {
+          label: 'Indian Obesity Threshold (≥ 25.0)',
+          text: 'This is at or above the 2009 Indian BMI threshold. BMI alone cannot diagnose anything, so check your waist and speak to a healthcare professional for proper assessment.',
+          badgeCls: 'cat-badge--obesity',
+        };
+      } else {
+        if (b < 25) {
+          return {
+            label: 'Healthy Weight (18.5 – 24.9)',
+            text: 'Your BMI falls in the conventional healthy range. Waist size, strength and fitness still add useful context.',
+            badgeCls: 'cat-badge--normal',
+          };
+        }
+        if (b < 30) {
+          return {
+            label: 'Overweight Range (25.0 – 29.9)',
+            text: 'This is the conventional overweight band. Muscle mass can raise BMI, so look at waist size and other measures before drawing conclusions.',
+            badgeCls: 'cat-badge--overweight',
+          };
+        }
+        return {
+          label: 'Obesity Range (≥ 30.0)',
+          text: 'This is in the conventional obesity band. BMI is a screening result, not a diagnosis. Please speak to a healthcare professional for proper assessment.',
+          badgeCls: 'cat-badge--obesity',
+        };
+      }
+    }
+
+    function renderBar(s: string) {
+      let h = '';
+      SCALE[s].forEach((x) => {
+        const widthPct = ((x.max - x.min) / (MAX - MIN)) * 100;
+        h += `<span class="${x.cls}" style="width:${widthPct}%"></span>`;
+      });
+      const bEl = $('b');
+      if (bEl) bEl.innerHTML = `${h}<i class="mk" id="mk" style="left:0"></i>`;
+
+      const scEl = $('sc');
+      if (scEl) {
+        const ticks = s === 'in' ? ['18.5', '23.0', '25.0'] : ['18.5', '25.0', '30.0'];
+        scEl.innerHTML = ticks.map((t) => `<span>${t}</span>`).join('');
+      }
+    }
+
+    function num(id: string): number {
+      const el = $(id) as HTMLInputElement;
+      if (!el) return NaN;
+      const v = el.value.trim();
+      return v === '' ? NaN : Number(v);
+    }
+
+    function show(m: { kg: number; meters: number }, b: number, s: string) {
+      const c = cat(b, s);
+      const ph = $('ph');
+      const out = $('out');
+      if (ph) ph.hidden = true;
+      if (out) out.hidden = false;
+
+      const vEl = $('v');
+      const cEl = $('c');
+      const exEl = $('ex');
+      const howEl = $('how');
+
+      if (vEl) vEl.textContent = b.toFixed(1);
+      if (cEl) {
+        cEl.textContent = c.label;
+        cEl.className = `cat-badge ${c.badgeCls}`;
+      }
+      if (exEl) exEl.textContent = c.text;
+      if (howEl) {
+        howEl.textContent = `Calculation: ${m.kg.toFixed(1)} kg ÷ (${m.meters.toFixed(3)} m)² = ${b.toFixed(1)} kg/m². Standard: ${s === 'in' ? 'Indian adult consensus.' : 'International (WHO).'}`;
+      }
+
+      // Calculate target healthy weight range
+      const minHealthyBmi = 18.5;
+      const maxHealthyBmi = s === 'in' ? 22.9 : 24.9;
+      const minKg = minHealthyBmi * (m.meters * m.meters);
+      const maxKg = maxHealthyBmi * (m.meters * m.meters);
+
+      const idealText = $('ideal-text');
+      if (idealText) {
+        if (U() === 'm') {
+          idealText.textContent = `${minKg.toFixed(1)} kg – ${maxKg.toFixed(1)} kg (${s === 'in' ? 'Indian consensus' : 'WHO standard'})`;
+        } else {
+          const minLb = minKg / 0.45359237;
+          const maxLb = maxKg / 0.45359237;
+          idealText.textContent = `${minLb.toFixed(0)} lb – ${maxLb.toFixed(0)} lb (${s === 'in' ? 'Indian consensus' : 'WHO standard'})`;
+        }
+      }
+
+      // Update WhatsApp link text
+      const waBtn = $('wa-cta-btn') as HTMLAnchorElement;
+      if (waBtn) {
+        const msg = `Hi Proteinworkk! I calculated my BMI as ${b.toFixed(1)} (${c.label}) on your website and would like to learn more about coaching options.`;
+        waBtn.href = `https://wa.me/919831153184?text=${encodeURIComponent(msg)}`;
+      }
+
+      renderBar(s);
+      const p = Math.min(100, Math.max(0, ((b - MIN) / (MAX - MIN)) * 100));
+      requestAnimationFrame(() => {
+        const mk = $('mk');
+        if (mk) mk.style.left = `${p}%`;
+      });
+    }
+
+    function calc(e?: Event) {
+      if (e) e.preventDefault();
+      let kg = 0;
+      let meters = 0;
+      let err = '';
+
+      if (U() === 'm') {
+        kg = num('kg');
+        meters = num('cm') / 100;
+        if (isNaN(kg) || isNaN(meters)) err = 'Enter both weight (kg) and height (cm).';
+        else if (kg <= 0 || meters <= 0) err = 'Values must be greater than zero.';
+        else if (kg < 20 || kg > 300) err = 'Weight should be between 20 and 300 kg.';
+        else if (meters < 1 || meters > 2.5) err = 'Height should be between 100 and 250 cm.';
+      } else {
+        const lb = num('lb');
+        const ft = num('ft');
+        const innEl = $('in') as HTMLInputElement;
+        const innVal = innEl && innEl.value.trim() === '' ? 0 : num('in');
+
+        if (isNaN(lb) || isNaN(ft) || isNaN(innVal)) err = 'Enter weight, feet and inches (inches can be 0).';
+        else if (lb <= 0 || ft <= 0 || innVal < 0) err = 'Values must be positive.';
+        else if (innVal >= 12) err = 'Inches should be less than 12.';
+        else {
+          kg = lb * 0.45359237;
+          meters = (ft * 12 + innVal) * 0.0254;
+          if (kg < 20 || kg > 300) err = 'Weight should be between 44 and 660 lb.';
+          else if (meters < 1 || meters > 2.5) err = 'Height should be between 3 ft 4 in and 8 ft 2 in.';
+        }
+      }
+
+      const errEl = $('err');
+      if (errEl) errEl.textContent = err;
+
+      if (err) {
+        const out = $('out');
+        const ph = $('ph');
+        if (out) out.hidden = true;
+        if (ph) ph.hidden = false;
+        return;
+      }
+
+      show({ kg, meters }, kg / (meters * meters), S());
+    }
+
+    function reset() {
+      const f = $('f') as HTMLFormElement;
+      if (f) f.reset();
+      const err = $('err');
+      if (err) err.textContent = '';
+      const out = $('out');
+      const ph = $('ph');
+      if (out) out.hidden = true;
+      if (ph) ph.hidden = false;
+      toggle();
+    }
+
+    function toggle() {
+      const isImp = U() === 'i';
+      const mFields = $('metric-fields');
+      const iFields = $('imp-fields');
+      if (mFields) mFields.hidden = isImp;
+      if (iFields) iFields.hidden = !isImp;
+      const err = $('err');
+      if (err) err.textContent = '';
+    }
+
+    const form = $('f');
+    if (form) form.addEventListener('submit', calc);
+    const rsBtn = $('rs');
+    if (rsBtn) rsBtn.addEventListener('click', reset);
+
+    document.querySelectorAll('[name=u]').forEach((r) => {
+      r.addEventListener('change', () => {
+        toggle();
+        const out = $('out');
+        const ph = $('ph');
+        if (out) out.hidden = true;
+        if (ph) ph.hidden = false;
+      });
+    });
+
+    document.querySelectorAll('[name=s]').forEach((r) => {
+      r.addEventListener('change', () => {
+        const out = $('out');
+        if (out && !out.hidden) calc();
+      });
+    });
+  })();
+</script>
